@@ -16,11 +16,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //Hello!
-
-        //Hello again..
-
-        //One more time!
         launch(args);
     }
 }
