@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenu implements Initializable {
+public class MainMenuApptSchedule implements Initializable {
     Stage stage;
     Parent scene;
     public ToggleGroup viewByTgl;
