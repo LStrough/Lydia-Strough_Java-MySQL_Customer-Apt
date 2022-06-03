@@ -42,8 +42,8 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="2.0" layoutY="382.0" prefHeight="26.0" prefWidth="1100.0" spacing="100.0">
                            <children>
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionContactSchedule" prefHeight="26.0" prefWidth="150.0" text="Contact Schedule" />
-                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionReturnToMain" prefHeight="26.0" prefWidth="150.0" text="Cancel" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionContactSchedule" prefHeight="26.0" prefWidth="190.0" text="Contact Schedule Reports" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionReturnToMain" prefHeight="26.0" prefWidth="190.0" text="Cancel" />
                               <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="160.0" spacing="15.0">
                                  <children>
                                     <Label fx:id="totalCustomersLbl" text="Total Customers: " />
@@ -69,7 +69,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Label layoutX="68.0" layoutY="30.0" prefHeight="24.0" prefWidth="261.0" text="Reports (Customer Appointments)">
+            <Label layoutX="68.0" layoutY="30.0" prefHeight="24.0" prefWidth="261.0" text="Reports">
                <font>
                   <Font size="18.0" />
                </font>
