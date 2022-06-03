@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,75 +12,73 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="520.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportCustomerAppointments">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportCustomerAppointments">
    <children>
-      <AnchorPane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="1200.0">
+      <AnchorPane layoutX="1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1200.0">
          <children>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1200.0">
+            <AnchorPane layoutX="50.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="1100.0">
                <children>
-                  <AnchorPane layoutX="50.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="1100.0">
+                  <AnchorPane prefHeight="426.0" prefWidth="1104.0" style="-fx-border-color: black; -fx-border-radius: 10;">
                      <children>
-                        <AnchorPane prefHeight="418.0" prefWidth="1104.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+                        <HBox alignment="CENTER" layoutX="22.0" layoutY="14.0" prefHeight="26.0" prefWidth="1060.0" spacing="100.0">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
                            <children>
-                              <HBox alignment="CENTER" layoutX="22.0" layoutY="14.0" prefHeight="26.0" prefWidth="1060.0" spacing="100.0">
+                              <RadioButton mnemonicParsing="false" onAction="#onActionViewByType" text="View by Type">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="viewByTgl" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" onAction="#onActionViewByMonth" text="View by Month" toggleGroup="$viewByTgl" />
+                              <RadioButton mnemonicParsing="false" onAction="#onActionViewByCountry" selected="true" text="View by Country" toggleGroup="$viewByTgl" />
+                              <HBox alignment="CENTER" prefHeight="26.0" prefWidth="260.0" spacing="15.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" onAction="#onActionViewByType" text="View by Type">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="viewByTgl" />
-                                       </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton mnemonicParsing="false" onAction="#onActionViewByMonth" text="View by Month" toggleGroup="$viewByTgl" />
-                                    <RadioButton mnemonicParsing="false" onAction="#onActionViewByCountry" selected="true" text="View by Country" toggleGroup="$viewByTgl" />
-                                    <HBox alignment="CENTER" prefHeight="26.0" prefWidth="260.0" spacing="15.0">
-                                       <children>
-                                          <Label fx:id="viewByLbl" text="Country" />
-                                          <ComboBox fx:id="viewByComboBx" prefWidth="200.0" />
-                                       </children>
-                                    </HBox>
+                                    <Label fx:id="viewByLbl" text="Country" />
+                                    <ComboBox fx:id="viewByComboBx" prefWidth="200.0" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" layoutX="2.0" layoutY="377.0" prefHeight="26.0" prefWidth="1100.0" spacing="100.0">
-                                 <children>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionContactSchedule" prefHeight="26.0" prefWidth="150.0" text="Contact Schedule" />
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionReturnToMain" prefHeight="26.0" prefWidth="150.0" text="Cancel" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="160.0" spacing="15.0">
-                                       <children>
-                                          <Label fx:id="totalCustomersLbl" text="Total Customers: " />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                              <TableView fx:id="customerTableView" layoutX="22.0" layoutY="54.0" prefHeight="310.0" prefWidth="1060.0">
-                                 <columns>
-                                    <TableColumn fx:id="customerIdCol" prefWidth="100.0" text="Customer ID" />
-                                    <TableColumn fx:id="customerNameCol" prefWidth="120.0" text="Customer Name" />
-                                    <TableColumn fx:id="addressCol" prefWidth="120.0" text="Address" />
-                                    <TableColumn fx:id="postalCodeCol" prefWidth="100.0" text="Postal Code" />
-                                    <TableColumn fx:id="phoneNumCol" prefWidth="100.0" text="Phone Number" />
-                                    <TableColumn fx:id="createdDateCol" prefWidth="100.0" text="Created Date" />
-                                    <TableColumn fx:id="createdByCol" prefWidth="100.0" text="Created By" />
-                                    <TableColumn fx:id="lastUpdateCol" prefWidth="100.0" text="Last Update" />
-                                    <TableColumn fx:id="lastUpdatedByCol" prefWidth="100.0" text="Last Updated By" />
-                                    <TableColumn fx:id="stateProvinceCol" prefWidth="120.0" text="State / Province" />
-                                 </columns>
-                              </TableView>
                            </children>
-                        </AnchorPane>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="2.0" layoutY="382.0" prefHeight="26.0" prefWidth="1100.0" spacing="100.0">
+                           <children>
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionContactSchedule" prefHeight="26.0" prefWidth="150.0" text="Contact Schedule" />
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionReturnToMain" prefHeight="26.0" prefWidth="150.0" text="Cancel" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="160.0" spacing="15.0">
+                                 <children>
+                                    <Label fx:id="totalCustomersLbl" text="Total Customers: " />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="customerTableView" layoutX="22.0" layoutY="58.0" prefHeight="310.0" prefWidth="1060.0">
+                           <columns>
+                              <TableColumn fx:id="customerIdCol" prefWidth="100.0" text="Customer ID" />
+                              <TableColumn fx:id="customerNameCol" prefWidth="120.0" text="Customer Name" />
+                              <TableColumn fx:id="addressCol" prefWidth="120.0" text="Address" />
+                              <TableColumn fx:id="postalCodeCol" prefWidth="100.0" text="Postal Code" />
+                              <TableColumn fx:id="phoneNumCol" prefWidth="100.0" text="Phone Number" />
+                              <TableColumn fx:id="createdDateCol" prefWidth="100.0" text="Created Date" />
+                              <TableColumn fx:id="createdByCol" prefWidth="100.0" text="Created By" />
+                              <TableColumn fx:id="lastUpdateCol" prefWidth="100.0" text="Last Update" />
+                              <TableColumn fx:id="lastUpdatedByCol" prefWidth="100.0" text="Last Updated By" />
+                              <TableColumn fx:id="stateProvinceCol" prefWidth="120.0" text="State / Province" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="68.0" layoutY="30.0" prefHeight="24.0" prefWidth="265.0" text="Reports (Customer Appointments)">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="TOP_RIGHT" layoutX="259.0" layoutY="29.0" prefHeight="24.0" prefWidth="865.0" spacing="60.0">
-                     <children>
-                        <Button contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionLogout" prefHeight="26.0" prefWidth="150.0" text="Logout" />
-                     </children>
-                  </HBox>
                </children>
             </AnchorPane>
+            <Label layoutX="68.0" layoutY="30.0" prefHeight="24.0" prefWidth="261.0" text="Reports (Customer Appointments)">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="TOP_RIGHT" layoutX="259.0" layoutY="29.0" prefHeight="24.0" prefWidth="865.0" spacing="60.0">
+               <children>
+                  <Button contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionLogout" prefHeight="26.0" prefWidth="150.0" text="Logout" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>
