@@ -67,7 +67,7 @@ public class MainCustomers implements Initializable {
         System.out.println("Reports Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportsCustomerAppointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportCustomerAppointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReportsContactSchedule implements Initializable {
+public class ReportContactSchedule implements Initializable {
     Stage stage;
     Parent scene;
     public ComboBox contactComboBx;
@@ -34,7 +34,7 @@ public class ReportsContactSchedule implements Initializable {
         System.out.println("Customer Appointments Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportsCustomerAppointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportCustomerAppointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

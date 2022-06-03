@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReportsCustomerAppointments implements Initializable {
+public class ReportCustomerAppointments implements Initializable {
     Stage stage;
     Parent scene;
     public ToggleGroup viewByTgl;
@@ -53,7 +53,7 @@ public class ReportsCustomerAppointments implements Initializable {
         System.out.println("Contact Schedule Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportsContactSchedule.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportContactSchedule.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
