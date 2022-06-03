@@ -40,7 +40,7 @@ public class AddCustomer implements Initializable {
         System.out.println("Cancel Button clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/CustomerRecords.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

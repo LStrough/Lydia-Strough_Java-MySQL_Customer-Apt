@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CustomerRecords implements Initializable {
+public class MainCustomers implements Initializable {
     Stage stage;
     Parent scene;
     public TextField searchCustomer;
@@ -58,7 +58,7 @@ public class CustomerRecords implements Initializable {
         System.out.println("Appointments Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenuApptSchedule.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

@@ -62,7 +62,7 @@ public class ReportsCustomerAppointments implements Initializable {
         System.out.println("Cancel Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenuApptSchedule.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
