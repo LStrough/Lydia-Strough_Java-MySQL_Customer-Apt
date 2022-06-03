@@ -10,7 +10,7 @@ public abstract class JDBC {
     private static final String location = "//localhost/";
     private static final String databaseName = "client_schedule";
     private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER";
-    private static final String driver = /*driver location*/;
+    private static final String driver = "com.mysql.jdbc.Driver";
     private static final String userName = "sqlUser";
     private static final String password = "Passw0rd!";
     public static Connection connection;
