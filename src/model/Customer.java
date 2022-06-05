@@ -13,6 +13,7 @@ public class Customer {
     private String createdBy;
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
+    //divisionName
 
     Customer(int customerId, String customerName, String address, String postalCode, String phone,
              LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {

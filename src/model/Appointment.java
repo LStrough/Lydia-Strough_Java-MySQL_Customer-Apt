@@ -15,4 +15,7 @@ public class Appointment {
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
+    //customerId
+    //userId
+    //contactId
 }
