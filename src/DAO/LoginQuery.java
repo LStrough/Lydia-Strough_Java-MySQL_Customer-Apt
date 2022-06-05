@@ -15,7 +15,7 @@ public class LoginQuery {
    public static User loginQuery(String userName, String password) {
        try {
            stmt = connection.createStatement();
-           String sql = "SELECT * FROM USERS WHERE User_Name=?, AND Password=?";
+           String sql = "SELECT * FROM users WHERE User_Name=? AND Password=?";
            PreparedStatement ps = connection.prepareStatement(sql);
            ps.setString(1, userName);
            ps.setString(2, password);
@@ -28,7 +28,7 @@ public class LoginQuery {
                password = result.getString("Password");
                userResult = new User(userId, userName, password);
            }
-           JDBC.closeConnection();
+          // JDBC.closeConnection();
            return userResult;
        }catch(Exception e){
            System.out.println("Error: " + e.getMessage());

@@ -23,7 +23,7 @@ public class Login implements Initializable {
     public PasswordField passwordTxt;
     public ComboBox languageComboBx;
     public Label userTimeZoneLbl;
-    User userResult = null;
+   // User userResult = null;
 
     public void onActionLogIn(ActionEvent actionEvent) throws IOException {
         System.out.println("Login Button clicked!");
@@ -31,7 +31,8 @@ public class Login implements Initializable {
         try{
             String userName = usernameTxt.getText();
             String password = String.valueOf(passwordTxt.getText());
-            loginQuery(userName, password);
+            //loginQuery(userName, password);
+            User userResult = loginQuery(userName, password);
 
             if (userResult != null){
                 stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
