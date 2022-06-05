@@ -1,6 +1,5 @@
 package controller;
 
-import DAO.UserDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,15 +21,13 @@ public class Login implements Initializable {
     public PasswordField passwordTxt;
     public ComboBox languageComboBx;
     public Label userTimeZoneLbl;
-   // User userResult = null;
 
-    public void onActionLogIn(ActionEvent actionEvent) throws IOException {
+    public void onActionLogIn(ActionEvent actionEvent) {
         System.out.println("Login Button clicked!");
 
         try{
             String userName = usernameTxt.getText();
             String password = String.valueOf(passwordTxt.getText());
-            //loginQuery(userName, password);
             User userResult = loginQuery(userName, password);
 
             if (userResult != null){
