@@ -53,16 +53,12 @@
                         </HBox>
                         <TableView fx:id="customerTableView" layoutX="22.0" layoutY="58.0" prefHeight="310.0" prefWidth="1060.0">
                            <columns>
-                              <TableColumn fx:id="customerIdCol" prefWidth="100.0" text="Customer ID" />
-                              <TableColumn fx:id="customerNameCol" prefWidth="120.0" text="Customer Name" />
-                              <TableColumn fx:id="addressCol" prefWidth="120.0" text="Address" />
-                              <TableColumn fx:id="postalCodeCol" prefWidth="100.0" text="Postal Code" />
-                              <TableColumn fx:id="phoneNumCol" prefWidth="100.0" text="Phone Number" />
-                              <TableColumn fx:id="createdDateCol" prefWidth="100.0" text="Created Date" />
-                              <TableColumn fx:id="createdByCol" prefWidth="100.0" text="Created By" />
-                              <TableColumn fx:id="lastUpdateCol" prefWidth="100.0" text="Last Update" />
-                              <TableColumn fx:id="lastUpdatedByCol" prefWidth="100.0" text="Last Updated By" />
-                              <TableColumn fx:id="stateProvinceCol" prefWidth="120.0" text="State / Province" />
+                              <TableColumn fx:id="customerIdCol" prefWidth="150.0" text="Customer ID" />
+                              <TableColumn fx:id="customerNameCol" prefWidth="200.0" text="Customer Name" />
+                              <TableColumn fx:id="addressCol" prefWidth="200.0" text="Address" />
+                              <TableColumn fx:id="postalCodeCol" prefWidth="150.0" text="Postal Code" />
+                              <TableColumn fx:id="phoneNumCol" prefWidth="200.0" text="Phone Number" />
+                              <TableColumn fx:id="stateProvinceCol" prefWidth="160.0" text="State / Province" />
                            </columns>
                         </TableView>
                      </children>

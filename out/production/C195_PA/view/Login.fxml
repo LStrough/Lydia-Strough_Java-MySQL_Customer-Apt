@@ -27,11 +27,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Username" />
-                        <Label text="Password" GridPane.rowIndex="1" />
+                        <Label fx:id="usernameLbl" text="Username" />
+                        <Label fx:id="passwordLbl" text="Password" GridPane.rowIndex="1" />
                         <TextField fx:id="usernameTxt" GridPane.columnIndex="1" />
                         <Label fx:id="userTimeZoneLbl" text="Country/Division" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Time Zone" GridPane.rowIndex="2" />
+                        <Label fx:id="timeZoneLbl" text="Time Zone" GridPane.rowIndex="2" />
                         <PasswordField fx:id="passwordTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
@@ -39,8 +39,8 @@
             </AnchorPane>
             <HBox alignment="CENTER" layoutY="174.0" prefHeight="26.0" prefWidth="390.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onActionResetUserPass" prefHeight="26.0" prefWidth="100.0" text="Reset" />
-                  <Button mnemonicParsing="false" onAction="#onActionLogIn" prefHeight="26.0" prefWidth="100.0" text="Login" />
+                  <Button fx:id="resetBttn" mnemonicParsing="false" onAction="#onActionResetUserPass" prefHeight="26.0" prefWidth="100.0" text="Reset" />
+                  <Button fx:id="loginBttn" mnemonicParsing="false" onAction="#onActionLogIn" prefHeight="26.0" prefWidth="100.0" text="Login" />
                </children>
             </HBox>
          </children>
