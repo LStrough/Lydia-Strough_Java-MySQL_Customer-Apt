@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Customer {
@@ -13,10 +12,10 @@ public class Customer {
     private String createdBy;
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
-    //divisionName
+    private int divisionId;                                                             //extends division?
 
     public Customer(int customerId, String customerName, String address, String postalCode, String phone,
-             LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
+             LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
@@ -26,6 +25,7 @@ public class Customer {
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
+        this.divisionId = divisionId;
     }
 
     public int getCustomerId() {
@@ -98,5 +98,13 @@ public class Customer {
 
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    public int getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
     }
 }
