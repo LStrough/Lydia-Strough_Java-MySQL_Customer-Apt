@@ -15,7 +15,7 @@ public class Customer {
     private String lastUpdatedBy;
     //divisionName
 
-    Customer(int customerId, String customerName, String address, String postalCode, String phone,
+    public Customer(int customerId, String customerName, String address, String postalCode, String phone,
              LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.customerId = customerId;
         this.customerName = customerName;

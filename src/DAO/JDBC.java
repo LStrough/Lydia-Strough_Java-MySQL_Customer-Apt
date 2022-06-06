@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public abstract class JDBC {
-
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
     private static final String location = "//localhost/";
@@ -30,7 +29,7 @@ public abstract class JDBC {
             connection.close();
             System.out.println("Connection Closed!");
         }catch(Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            //do nothing
         }
     }
 }

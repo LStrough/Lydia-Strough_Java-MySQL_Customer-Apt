@@ -4,7 +4,7 @@ public class Contact {
     private int contactId;
     private String contactName;
 
-    Contact(int contactId, String contactName) {
+    public Contact(int contactId, String contactName) {
         this.contactId = contactId;
         this.contactName = contactName;
     }

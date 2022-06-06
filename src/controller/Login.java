@@ -1,5 +1,7 @@
 package controller;
 
+import comboBox.Language;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,6 +37,7 @@ public class Login implements Initializable {
                 scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
+                // JDBC.closeConnection();                                                    //necessary?
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -55,5 +58,13 @@ public class Login implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Login: I am initialized!");
+
+        ObservableList<Language> languages = Language.getLanguages();
+        languageComboBx.setItems(languages);
+
+        if(languages.size() == 0) {
+            languages.add(new Language("English"));
+            languages.add(new Language("Français"));
+        }
     }
 }
