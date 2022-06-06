@@ -1,8 +1,6 @@
 package controller;
 
 import DAO.JDBC;
-import comboBox.Language;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +20,6 @@ public class Login implements Initializable {
     Parent scene;
     public TextField usernameTxt;
     public PasswordField passwordTxt;
-    public ComboBox languageComboBx;
     public Label userTimeZoneLbl;
 
     public void onActionLogIn(ActionEvent actionEvent) {
@@ -59,13 +56,5 @@ public class Login implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Login: I am initialized!");
-
-        ObservableList<Language> languages = Language.getLanguages();
-        languageComboBx.setItems(languages);
-
-        if(languages.size() == 0) {                                             //delete
-            languages.add(new Language("English"));
-            languages.add(new Language("Français"));
-        }
     }
 }
