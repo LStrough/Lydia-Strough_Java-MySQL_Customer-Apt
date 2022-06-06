@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.User;
 
-public class UserDaoImpl {                                                  //CRUD (implements UserDao)
+public class UserDaoImpl implements UserDao{                                                  //CRUD (implements UserDao)
     ObservableList<User> users = FXCollections.observableArrayList();
 
     public ObservableList<User> getAllUsers(){

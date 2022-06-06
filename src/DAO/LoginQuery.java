@@ -23,7 +23,6 @@ public class LoginQuery {
                password = result.getString("Password");
                userResult = new User(userId, userName, password);
            }
-          // JDBC.closeConnection();                                                    //necessary?
            return userResult;
        }catch(Exception e){
            System.out.println("Error: " + e.getMessage());

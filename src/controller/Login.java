@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.JDBC;
 import comboBox.Language;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class Login implements Initializable {
                 scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
-                // JDBC.closeConnection();                                                    //necessary?
+                JDBC.closeConnection();
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -62,7 +63,7 @@ public class Login implements Initializable {
         ObservableList<Language> languages = Language.getLanguages();
         languageComboBx.setItems(languages);
 
-        if(languages.size() == 0) {
+        if(languages.size() == 0) {                                             //delete
             languages.add(new Language("English"));
             languages.add(new Language("Français"));
         }
