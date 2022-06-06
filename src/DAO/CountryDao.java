@@ -1,4 +1,4 @@
 package DAO;
 
-public class CountryDao {
+interface CountryDao {
 }
