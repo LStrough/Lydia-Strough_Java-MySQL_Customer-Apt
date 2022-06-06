@@ -3,11 +3,12 @@ package model;
 public class FirstLevelDivision {
     private int divisionId;
     private String divisionName;
-    //countryId
+    private int countryId;                                                        //extends country?
 
-    public FirstLevelDivision(int divisionId, String divisionName) {
+    public FirstLevelDivision(int divisionId, String divisionName, int countryId) {
         this.divisionId = divisionId;
         this.divisionName = divisionName;
+        this.countryId = countryId;
     }
 
     public int getDivisionId() {
@@ -24,5 +25,13 @@ public class FirstLevelDivision {
 
     public void setDivisionName(String divisionName) {
         this.divisionName = divisionName;
+    }
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 }
