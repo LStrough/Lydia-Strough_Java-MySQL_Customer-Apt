@@ -25,6 +25,8 @@ public class AddAppointment implements Initializable {
     public ComboBox userIdComboBx;
     public DatePicker startDatePicker;
     public DatePicker endDatePicker;
+    public ComboBox startTimeComboBx;
+    public ComboBox endTimeComboBx;
     public Label aptTitleE;
     public Label aptDescriptionE;
     public Label aptLocationE;
