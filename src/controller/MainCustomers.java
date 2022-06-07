@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 public class MainCustomers implements Initializable {
@@ -79,5 +80,7 @@ public class MainCustomers implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Customer Records: I am initialized!");
+
+        userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
     }
 }

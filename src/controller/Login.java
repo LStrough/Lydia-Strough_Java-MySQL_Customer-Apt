@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import model.User;
 
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -73,6 +74,8 @@ public class Login implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Login: I am initialized!");
 
+        userTimeZoneLbl.setText(String.valueOf(ZoneId.systemDefault()));                //TimeZone init()
+
         try {
             if (Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("bundle/language_fr", Locale.getDefault());
@@ -80,7 +83,6 @@ public class Login implements Initializable {
                 usernameLbl.setText(rb.getString("Username"));
                 passwordLbl.setText(rb.getString("Password"));
                 timeZoneLbl.setText(rb.getString("TimeZone"));
-                //userTimeZoneLbl.setText();
                 resetBttn.setText(rb.getString("Reset"));
                 loginBttn.setText(rb.getString("Login"));
             }
