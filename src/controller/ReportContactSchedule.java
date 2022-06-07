@@ -5,14 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReportContactSchedule implements Initializable {
@@ -50,6 +48,16 @@ public class ReportContactSchedule implements Initializable {
 
     public void onActionLogout(ActionEvent actionEvent) {
         System.out.println("Logout Button Clicked!");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Do you wish to Exit the program?");
+        alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if ((result.isPresent() && result.get() == ButtonType.OK)) {
+            System.exit(0);
+        }
     }
 
     @Override
