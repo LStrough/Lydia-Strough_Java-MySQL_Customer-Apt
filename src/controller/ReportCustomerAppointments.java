@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReportCustomerAppointments implements Initializable {
@@ -69,6 +70,16 @@ public class ReportCustomerAppointments implements Initializable {
 
     public void onActionLogout(ActionEvent actionEvent) {
         System.out.println("Logout Button Clicked!");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Do you wish to Exit the program?");
+        alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if ((result.isPresent() && result.get() == ButtonType.OK)) {
+            System.exit(0);
+        }
     }
 
     @Override
