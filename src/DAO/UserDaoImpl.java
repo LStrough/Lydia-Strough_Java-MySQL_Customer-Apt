@@ -12,6 +12,7 @@ import static DAO.JDBC.connection;
 public class UserDaoImpl implements UserDao{
     ObservableList<User> users = FXCollections.observableArrayList();
 
+    @Override
     public ObservableList<User> getAllUsers(){
         try{
             String sql = "SELECT * FROM users";
@@ -31,25 +32,46 @@ public class UserDaoImpl implements UserDao{
         return users;
     }
 
+    @Override
     public User getUser(int userId) {
-        return users.get(userId);
+        try{
+            String sql = "SELECT * FROM users WHERE User_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+
+            ResultSet result = ps.executeQuery();
+            User userResult = null;
+            if(result.next()) {
+                userId = result.getInt("User_ID");
+                String userName = result.getString("User_Name");
+                String password = result.getString("Password");
+                userResult = new User(userId, userName, password);
+            }
+            return userResult;
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
     }
 
+    @Override
     public void updateUser(int index, User newUser) {
         users.set(index, newUser);
     }
 
+    @Override
     public boolean deleteUser(User selectedUser) {
         return users.remove(selectedUser);
     }
 
+    @Override
     public void addUser(User user){
         users.add(user);
     }
 
     @Override
     public void display() {
-        System.out.println("User Dao Impl: display");
+        System.out.println("User Dao Impl: Display");                                   //Call with Malcolm
     }
 
 

@@ -1,50 +1,20 @@
 package model;
 
 public class Customer {
-    private int customerId;
-    private String customerName;
-    private String address;
-    private String postalCode;
-    private String phone,country,division;
-    private int divisionId,countrtId;
-    //country
-    //divisionName
+    private int customerId, divisionId, countryId;
+    private String customerName, address, postalCode, phone, countryName, divisionName;
 
-
-    public Customer(int customerId, String customerName, String address, String postalCode, String phone, String country, String division, int divisionId, int countrtId) {
+    public Customer(int customerId, int divisionId, int countryId, String customerName, String address, String postalCode,
+                    String phone, String countryName, String divisionName) {
         this.customerId = customerId;
+        this.divisionId = divisionId;
+        this.countryId = countryId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
-        this.country = country;
-        this.division = division;
-        this.divisionId = divisionId;
-        this.countrtId = countrtId;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDivision() {
-        return division;
-    }
-
-    public void setDivision(String division) {
-        this.division = division;
-    }
-
-    public int getCountrtId() {
-        return countrtId;
-    }
-
-    public void setCountrtId(int countrtId) {
-        this.countrtId = countrtId;
+        this.countryName = countryName;
+        this.divisionName = divisionName;
     }
 
     public int getCustomerId() {
@@ -53,6 +23,22 @@ public class Customer {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public int getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 
     public String getCustomerName() {
@@ -87,11 +73,19 @@ public class Customer {
         this.phone = phone;
     }
 
-    public int getDivisionId() {
-        return divisionId;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getDivisionName() {
+        return divisionName;
+    }
+
+    public void setDivisionName(String divisionName) {
+        this.divisionName = divisionName;
     }
 }
