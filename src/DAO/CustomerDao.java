@@ -9,4 +9,6 @@ public interface CustomerDao {
     public void updateCustomer(int index, Customer newCustomer);
     public boolean deleteCustomer(Customer selectedCustomer);
     public void addCustomer(Customer customer);
+    public Customer lookUpCustomer(int customerId);
+    public ObservableList<Customer>lookUpCustomer(String customerName);
 }

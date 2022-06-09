@@ -11,6 +11,7 @@ import static DAO.JDBC.connection;
 
 public class CustomerDaoImpl implements CustomerDao{
     ObservableList<Customer> customers = FXCollections.observableArrayList();
+    public boolean customerFound;
 
     @Override
     public ObservableList<Customer> getAllCustomers() {
@@ -87,4 +88,34 @@ public class CustomerDaoImpl implements CustomerDao{
     public void addCustomer(Customer customer) {
         customers.add(customer);
     }
+
+    @Override
+    public Customer lookUpCustomer(int customerId) {
+        customerFound = false;
+        for(Customer customer : customers){
+            if(customer.getCustomerId() == customerId){
+                customerFound = true;
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ObservableList<Customer> lookUpCustomer(String customerName) {
+        ObservableList<Customer> filteredCustomers = FXCollections.observableArrayList();
+        customerFound = false;
+
+        for(Customer customer : customers) {
+            if(customer.getCustomerName().toLowerCase().contains(customerName.toLowerCase())){
+                filteredCustomers.add(customer);
+            }
+        }
+        if(filteredCustomers.isEmpty()) {
+            return customers;
+        }
+        customerFound = true;
+        return filteredCustomers;
+    }
+
 }

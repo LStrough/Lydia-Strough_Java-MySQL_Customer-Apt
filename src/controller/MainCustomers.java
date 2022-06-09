@@ -3,6 +3,7 @@ package controller;
 import DAO.CustomerDao;
 import DAO.CustomerDaoImpl;
 import DAO.JDBC;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,6 +34,29 @@ public class MainCustomers implements Initializable {
     public Label userTimeZoneLbl;
 
     public void onActionSearchCustomer(ActionEvent actionEvent) {
+        JDBC.openConnection();
+        CustomerDao customerDao = new CustomerDaoImpl();
+        customerTableView.setItems(customerDao.getAllCustomers());
+
+        try{
+            int customerId = Integer.parseInt(searchCustomer.getText());
+            Customer customer = customerDao.lookUpCustomer(customerId);
+            customerTableView.getSelectionModel().select(customer);
+            customerTableView.scrollTo(customer);
+            customerTableView.requestFocus();
+        }catch(NumberFormatException e) {
+            String customerName = searchCustomer.getText();
+            ObservableList<Customer> customers = customerDao.lookUpCustomer(customerName);
+            customerTableView.setItems(customers);
+        } catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        if(!((CustomerDaoImpl) customerDao).customerFound){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No item was found.");
+            alert.showAndWait();
+        }
     }
 
     public void onActionAddCustomer(ActionEvent actionEvent) throws IOException {
