@@ -1,4 +1,4 @@
 package DAO;
 
-interface AppointmentDao {
+public interface AppointmentDao {
 }

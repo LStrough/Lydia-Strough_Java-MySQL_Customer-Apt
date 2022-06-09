@@ -1,4 +1,4 @@
 package DAO;
 
-interface ContactDao {
+public interface ContactDao {
 }
