@@ -1,12 +1,15 @@
 package controller;
 
+import DAO.CustomerDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,10 +27,6 @@ public class MainCustomers implements Initializable {
     public TableColumn addressCol;
     public TableColumn postalCodeCol;
     public TableColumn phoneNumCol;
-    public TableColumn createdDateCol;
-    public TableColumn createdByCol;
-    public TableColumn lastUpdateCol;
-    public TableColumn lastUpdatedByCol;
     public TableColumn stateProvinceCol;
     public Label userTimeZoneLbl;
 
@@ -93,5 +92,22 @@ public class MainCustomers implements Initializable {
         System.out.println("Customer Records: I am initialized!");
 
         userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
+
+        /*
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneNumCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        stateProvinceCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));     //how to convert id to name
+
+        try{
+            Customers.addAll(CustomerDaoImpl.getAllCustomers());      //lambda
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        customerTableView.setItems(Customers);
+        //Using lambda for efficient selection of tableview
+         */
     }
 }
