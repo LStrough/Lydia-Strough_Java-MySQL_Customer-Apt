@@ -1,6 +1,10 @@
 package main;
 
 import DAO.JDBC;
+import DAO.UserDao;
+import DAO.UserDaoImpl;
+import DAO.UserDaoImplv2;
+import helper.UserCRUD;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -21,6 +25,15 @@ public class Main extends Application {
         //Locale.setDefault(new Locale("fr"));
 
         JDBC.openConnection();
+        UserDao userDao = new UserDaoImpl();
+        UserDao userDaov2 = new UserDaoImplv2();
+        userDao.display();
+        userDaov2.display();
+
+        UserCRUD.getAllUsers();
+
+
+
         launch(args);
         JDBC.closeConnection();
     }

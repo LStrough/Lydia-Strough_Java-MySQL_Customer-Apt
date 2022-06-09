@@ -1,4 +1,4 @@
-package DAO;
+package helper;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +9,11 @@ import java.sql.ResultSet;
 
 import static DAO.JDBC.connection;
 
-public class UserDaoImpl implements UserDao{
-    ObservableList<User> users = FXCollections.observableArrayList();
+public class UserCRUD {
 
-    public ObservableList<User> getAllUsers(){
+    public static ObservableList<User> getAllUsers(){
+        ObservableList<User> users = FXCollections.observableArrayList();
+
         try{
             String sql = "SELECT * FROM users";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -31,26 +32,11 @@ public class UserDaoImpl implements UserDao{
         return users;
     }
 
-    public User getUser(int userId) {
-        return users.get(userId);
+    public static void display(){
+        System.out.println("CRUD");
     }
 
-    public void updateUser(int index, User newUser) {
-        users.set(index, newUser);
+    public static void displayV2(){
+        System.out.println("CRUD");
     }
-
-    public boolean deleteUser(User selectedUser) {
-        return users.remove(selectedUser);
-    }
-
-    public void addUser(User user){
-        users.add(user);
-    }
-
-    @Override
-    public void display() {
-        System.out.println("User Dao Impl: display");
-    }
-
-
 }
