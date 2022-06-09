@@ -33,7 +33,7 @@ public class Main extends Application {
                                                                 //@Override toString()
                                                                 // create toString() in model.User class and format text how you want!
 
-        System.out.println(userDao.getUser(1));
+        System.out.println(userDao.getAllUsers());
 
         launch(args);
         JDBC.closeConnection();
