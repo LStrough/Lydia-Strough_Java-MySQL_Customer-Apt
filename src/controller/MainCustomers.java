@@ -99,15 +99,14 @@ public class MainCustomers implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneNumCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        stateProvinceCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));     //how to convert id to name
+        stateProvinceCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));     //how to convert id to name?
 
         try{
-            Customers.addAll(CustomerDaoImpl.getAllCustomers());      //lambda
+                                                                                                //what?
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
-        customerTableView.setItems(Customers);
-        //Using lambda for efficient selection of tableview
+        customerTableView.setItems();                                                           //to List?
          */
     }
 }
