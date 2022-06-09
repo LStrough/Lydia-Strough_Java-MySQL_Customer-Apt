@@ -9,6 +9,5 @@ public interface UserDao {
     public void updateUser(int index, User newUser);
     public boolean deleteUser(User selectedUser);
     public void addUser(User user);
-
-    public void display();
+    public void display();                                          //call with Malcolm
 }

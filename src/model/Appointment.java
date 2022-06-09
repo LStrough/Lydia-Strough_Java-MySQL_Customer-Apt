@@ -4,23 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Appointment {
-    private int appointmentId;
-    private String title;
-    private String description;
-    private String location;
-    private String type;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private int customerId;
-    private int userId;
-    private int contactId;
+    private int appointmentId, customerId, userId, contactId;
+    private String title, description, location, type;
+    private LocalDate startDate, endDate;
+    private LocalTime startTime, endTime;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type,
-                       LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime, int customerId,
-                       int userId, int contactId) {
+    public Appointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
+                       String location, String type, LocalDate startDate, LocalDate endDate, LocalTime startTime,
+                       LocalTime endTime) {
         this.appointmentId = appointmentId;
+        this.customerId = customerId;
+        this.userId = userId;
+        this.contactId = contactId;
         this.title = title;
         this.description = description;
         this.location = location;
@@ -29,9 +24,6 @@ public class Appointment {
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.customerId = customerId;
-        this.userId = userId;
-        this.contactId = contactId;
     }
 
     public int getAppointmentId() {
@@ -40,6 +32,30 @@ public class Appointment {
 
     public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 
     public String getTitle() {
@@ -104,29 +120,5 @@ public class Appointment {
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getContactId() {
-        return contactId;
-    }
-
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
     }
 }

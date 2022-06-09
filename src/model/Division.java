@@ -1,14 +1,14 @@
 package model;
 
 public class Division {
-    private int divisionId;
-    private String divisionName;
-    private int countryId;
+    private int divisionId, countryId;
+    private String divisionName, countryName;
 
-    public Division(int divisionId, String divisionName, int countryId) {
+    public Division(int divisionId, int countryId, String divisionName, String countryName) {
         this.divisionId = divisionId;
-        this.divisionName = divisionName;
         this.countryId = countryId;
+        this.divisionName = divisionName;
+        this.countryName = countryName;
     }
 
     public int getDivisionId() {
@@ -19,6 +19,14 @@ public class Division {
         this.divisionId = divisionId;
     }
 
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
     public String getDivisionName() {
         return divisionName;
     }
@@ -27,11 +35,11 @@ public class Division {
         this.divisionName = divisionName;
     }
 
-    public int getCountryId() {
-        return countryId;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 }
