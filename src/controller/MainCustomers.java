@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.CustomerDao;
 import DAO.CustomerDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -93,7 +94,6 @@ public class MainCustomers implements Initializable {
 
         userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
 
-        /*
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -101,12 +101,7 @@ public class MainCustomers implements Initializable {
         phoneNumCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         stateProvinceCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
 
-        try{
-                                                                                                //what?
-        }catch(Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
-        customerTableView.setItems();                                                           //to List?
-         */
+        CustomerDao customerDao = new CustomerDaoImpl();
+        customerTableView.setItems(customerDao.getAllCustomers());
     }
 }
