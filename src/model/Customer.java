@@ -88,4 +88,10 @@ public class Customer {
     public void setDivisionName(String divisionName) {
         this.divisionName = divisionName;
     }
+
+    @Override
+    public String toString() {
+        return ("Customer: " + Integer.toString(customerId) + " | " + customerName + " | " + address +
+                " | " + postalCode + " | " + phone + " | " +  divisionName);
+    }
 }

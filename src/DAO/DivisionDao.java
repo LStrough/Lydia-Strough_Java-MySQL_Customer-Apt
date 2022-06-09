@@ -1,4 +1,4 @@
 package DAO;
 
-interface DivisionDao {
+public interface DivisionDao {
 }
