@@ -93,6 +93,7 @@
                   <ComboBox fx:id="contactIdComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <ComboBox fx:id="customerIdComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ComboBox fx:id="userIdComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                </children>
             </GridPane>
             <Button layoutX="632.0" layoutY="534.0" mnemonicParsing="false" onAction="#onActionUpdateApt" prefHeight="26.0" prefWidth="70.0" text="Save" />
@@ -128,6 +129,7 @@
                      </font>
                   </Label>
                   <DatePicker fx:id="endDatePicker" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="endTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane layoutX="493.0" layoutY="145.0" prefHeight="266.0" prefWidth="284.0" vgap="15.0">

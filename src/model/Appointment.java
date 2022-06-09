@@ -13,9 +13,9 @@ public class Appointment {
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private int customerId;                                                     //customer
-    private int userId;                                                         //user
-    private int contactId;                                                      //contact
+    private int customerId;
+    private int userId;
+    private int contactId;
 
     public Appointment(int appointmentId, String title, String description, String location, String type,
                        LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime, int customerId,
