@@ -2,6 +2,7 @@ package controller;
 
 import DAO.CustomerDao;
 import DAO.CustomerDaoImpl;
+import DAO.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -101,6 +102,7 @@ public class MainCustomers implements Initializable {
         phoneNumCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         stateProvinceCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
 
+        JDBC.openConnection();
         CustomerDao customerDao = new CustomerDaoImpl();
         customerTableView.setItems(customerDao.getAllCustomers());
     }
