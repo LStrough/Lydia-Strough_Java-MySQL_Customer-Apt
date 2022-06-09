@@ -29,7 +29,11 @@ public class Main extends Application {
          */
 
         UserDao userDao = new UserDaoImpl();
-        userDao.getUser(1);
+        //userDao.getUser(1);                                   //returns: class name @ hashcode (pointer reference in memory of object)
+                                                                //@Override toString()
+                                                                // create toString() in model.User class and format text how you want!
+
+        System.out.println(userDao.getUser(1));
 
         launch(args);
         JDBC.closeConnection();
