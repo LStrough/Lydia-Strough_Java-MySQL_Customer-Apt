@@ -68,11 +68,4 @@ public class UserDaoImpl implements UserDao{
     public void addUser(User user){
         users.add(user);
     }
-
-    @Override
-    public void display() {
-        System.out.println("User Dao Impl: Display");                                   //Call with Malcolm
-    }
-
-
 }
