@@ -20,16 +20,16 @@ public class Main extends Application {
     public static void main(String[] args) {
         //Locale.setDefault(new Locale("fr"));
         JDBC.openConnection();
-        //launch(args);
-        //JDBC.closeConnection();
+        launch(args);
+        JDBC.closeConnection();
 
-        CountryDao countryDao = new CountryDaoImpl();
-        System.out.println(countryDao.getAllCountries());
-        System.out.println(countryDao.getCountry(1));
+        //CountryDao countryDao = new CountryDaoImpl();
+        //System.out.println(countryDao.getAllCountries());
+        //System.out.println(countryDao.getCountry(1));
 
-        DivisionDao divisionDao = new DivisionDaoImpl();
-        System.out.println(divisionDao.getAllDivisions());
-        System.out.println(divisionDao.getDivision(1));
-        System.out.println(divisionDao.getDivisionsByCountry(3));
+        //DivisionDao divisionDao = new DivisionDaoImpl();
+        //System.out.println(divisionDao.getAllDivisions());
+        //System.out.println(divisionDao.getDivision(27));
+        //System.out.println(divisionDao.getDivisionsByCountry(2));
     }
 }

@@ -38,7 +38,8 @@ public class DivisionDaoImpl implements DivisionDao{
     @Override
     public Division getDivision(int divisionId) {
         try{
-            String sql = "SELECT * FROM first_level_divisions WHERE Division_ID=?";
+            String sql = "SELECT * FROM first_level_divisions, countries WHERE first_level_divisions.Country_ID " +
+                    "= countries.Country_ID AND Division_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, divisionId);
 
@@ -59,7 +60,7 @@ public class DivisionDaoImpl implements DivisionDao{
     }
 
     @Override
-    public Division getDivisionsByCountry(int countryId) {
+    public ObservableList<Division> getDivisionsByCountry(int countryId) {
          try{
             String sql = "SELECT * FROM first_level_divisions, countries WHERE first_level_divisions.Country_ID " +
                     "= countries.Country_ID AND first_level_divisions.Country_ID=?";
@@ -78,7 +79,7 @@ public class DivisionDaoImpl implements DivisionDao{
         } catch (Exception e) {
              System.out.println("Error: " + e.getMessage());
          }
-        return (Division) divisionsByCountry;
+        return divisionsByCountry;
     }
 
     @Override

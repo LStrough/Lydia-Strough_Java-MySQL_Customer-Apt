@@ -1,8 +1,6 @@
 package controller;
 
-import DAO.CountryDao;
-import DAO.CountryDaoImpl;
-import DAO.JDBC;
+import DAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -60,6 +58,8 @@ public class AddCustomer implements Initializable {
 
         JDBC.openConnection();
         CountryDao countryDao = new CountryDaoImpl();
+        DivisionDao divisionDao = new DivisionDaoImpl();
         customerCountryComboBx.setItems(countryDao.getAllCountries());
+        //customerDivisionComboBx.setItems(divisionDao.getAllDivisions());  //if(country object select){getDivisionByCountry(countryId)}
     }
 }
