@@ -48,10 +48,7 @@ public class MainCustomers implements Initializable {
             String customerName = searchCustomer.getText();
             ObservableList<Customer> customers = customerDao.lookUpCustomer(customerName);
             customerTableView.setItems(customers);
-        } catch(Exception e){
-            System.out.println("Error: " + e.getMessage());
         }
-
         if(!((CustomerDaoImpl) customerDao).customerFound){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("No item was found.");
