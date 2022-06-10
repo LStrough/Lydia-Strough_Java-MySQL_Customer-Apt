@@ -8,5 +8,5 @@ public interface UserDao {
     public User getUser(int userId);
     public void updateUser(int index, User newUser);
     public boolean deleteUser(User selectedUser);
-    public void addUser(User user);
+    public int addUser(String userName, String password);
 }

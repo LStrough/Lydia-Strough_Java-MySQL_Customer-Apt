@@ -66,7 +66,23 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void addUser(User user){
-        //mySQL add to database!
+    public int addUser(String userName, String password) {
+        int rowsAffected = 0;
+        try {
+            String sql = "INSERT INTO users (User_Name, Password) VALUES(?,?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("User: Insert Successful!");
+            } else {
+                System.out.println("User: Insert Failed!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rowsAffected;
     }
 }

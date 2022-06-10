@@ -23,13 +23,8 @@ public class Main extends Application {
         launch(args);
         JDBC.closeConnection();
 
-        //CountryDao countryDao = new CountryDaoImpl();
-        //System.out.println(countryDao.getAllCountries());
-        //System.out.println(countryDao.getCountry(1));
-
-        //DivisionDao divisionDao = new DivisionDaoImpl();
-        //System.out.println(divisionDao.getAllDivisions());
-        //System.out.println(divisionDao.getDivision(27));
-        //System.out.println(divisionDao.getDivisionsByCountry(2));
+        JDBC.openConnection();
+        UserDao userDao = new UserDaoImpl();
+        userDao.addUser("lydia", "lydia");
     }
 }
