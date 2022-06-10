@@ -22,11 +22,5 @@ public class Main extends Application {
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
-
-        CountryDao countryDao = new CountryDaoImpl();
-        System.out.println(countryDao.getAllCountries());
-        System.out.println(countryDao.getCountry(1));
-        System.out.println(countryDao.getCountry(2));
-        System.out.println(countryDao.getCountry(3));
     }
 }

@@ -42,4 +42,9 @@ public class Division {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
+
+    @Override
+    public String toString() {
+        return ("Division: " + divisionId + " " + divisionName + " | Country: " + countryId + " " + countryName);
+    }
 }
