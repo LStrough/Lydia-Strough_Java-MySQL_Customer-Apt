@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
@@ -42,10 +43,18 @@ public class AddAppointment implements Initializable {
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button clicked!");
 
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("All changes will be forgotten, do you wish to continue?");
+        alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @Override
