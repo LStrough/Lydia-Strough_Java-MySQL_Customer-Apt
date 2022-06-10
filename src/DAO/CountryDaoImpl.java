@@ -54,19 +54,17 @@ public class CountryDaoImpl implements CountryDao{
 
     @Override
     public void updateCountry(int index, Country newCountry) {
-        countries.set(index, newCountry);
         //mySQL update database!
     }
 
     @Override
     public boolean deleteCountry(Country selectedCountry) {
-        return countries.remove(selectedCountry);
+        return false;
         //mySQL delete from database!
     }
 
     @Override
     public void addCountry(Country country) {
-        countries.add(country);
         //mySQL add to database!
     }
 }

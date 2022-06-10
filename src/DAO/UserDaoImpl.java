@@ -56,16 +56,17 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void updateUser(int index, User newUser) {
-        users.set(index, newUser);
+        //mySQL update database!
     }
 
     @Override
     public boolean deleteUser(User selectedUser) {
-        return users.remove(selectedUser);
+        //mySQL delete from database!
+        return false;
     }
 
     @Override
     public void addUser(User user){
-        users.add(user);
+        //mySQL add to database!
     }
 }

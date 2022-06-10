@@ -76,19 +76,17 @@ public class CustomerDaoImpl implements CustomerDao{
 
     @Override
     public void updateCustomer(int index, Customer newCustomer) {
-        customers.set(index, newCustomer);
         //mySQL update database!
     }
 
     @Override
     public boolean deleteCustomer(Customer selectedCustomer) {
-        return customers.remove(selectedCustomer);
+        return false;
         //mySQL delete from database!
     }
 
     @Override
     public void addCustomer(Customer customer) {
-        customers.add(customer);
         //mySQL add to database!
     }
 
