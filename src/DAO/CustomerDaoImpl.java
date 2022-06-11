@@ -190,9 +190,23 @@ public class CustomerDaoImpl implements CustomerDao{
     }
 
     @Override
-    public int deleteCustomer(int customerId, String customerName) {
+    public int deleteCustomer(int customerId, String customerName) {     //check that customerAppointments .isEmpty()
         int rowsAffected = 0;
-        //check that customerAppointments .isEmpty()
+        try {
+            String sql = "DELETE FROM customers WHERE Customer_ID=? AND Customer_Name=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, customerId);
+            ps.setString(2, customerName);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Customer " + customerId + " " + customerName + " was successfully deleted!");
+            } else {
+                System.out.println("Customer DELETE failed!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
         return rowsAffected;
     }
 
