@@ -55,14 +55,68 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void updateUser(int index, User newUser) {
-        //mySQL update database!
+    public int updateUserPass(String userName, String newPassword, String currentPassword) {
+        int rowsAffected = 0;
+        try {
+            String sql = "UPDATE users SET Password=? WHERE User_Name=? AND Password=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, newPassword);
+            ps.setString(2, userName);
+            ps.setString(3, currentPassword);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println(userName + " Password UPDATE was successful!");
+            } else {
+                System.out.println(userName + " Password UPDATE Failed!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rowsAffected;
     }
 
     @Override
-    public boolean deleteUser(User selectedUser) {
-        //mySQL delete from database!
-        return false;
+    public int updateUserName(String currentUserName, String newUserName, String password) {
+        int rowsAffected = 0;
+        try {
+            String sql = "UPDATE users SET User_Name=? WHERE User_Name=? AND Password=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, newUserName);
+            ps.setString(2, currentUserName);
+            ps.setString(3, password);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println(currentUserName + "Username UPDATE was successful!");
+                System.out.println("New Username is: " + newUserName);
+            } else {
+                System.out.println(currentUserName + " Username UPDATE Failed!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rowsAffected;
+    }
+
+    @Override
+    public int deleteUser(int userId) {
+        int rowsAffected = 0;
+        try {
+            String sql = "DELETE FROM users WHERE User_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("User number " + userId + " was successfully deleted!");
+            } else {
+                System.out.println("User DELETE failed!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rowsAffected;
     }
 
     @Override
@@ -76,9 +130,9 @@ public class UserDaoImpl implements UserDao{
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("User: Insert Successful!");
+                System.out.println("User ( "+ userName + " ) INSERT was successful!");
             } else {
-                System.out.println("User: Insert Failed!");
+                System.out.println("User INSERT failed!");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
