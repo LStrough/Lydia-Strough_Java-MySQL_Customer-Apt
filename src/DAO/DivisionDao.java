@@ -7,7 +7,8 @@ public interface DivisionDao {
     public ObservableList<Division> getAllDivisions();
     public Division getDivision(int divisionId);
     public ObservableList<Division> getDivisionsByCountry(int countryId);
-    public void updateDivision(int index, Division newDivision);
-    public boolean deleteUser(Division selectedDivision);
-    public void addUser(Division division);
+    public int updateDivisionName(String currentDivisionName, int countryId, String newDivisionName);
+    public int updateDivisionCountry(String divisionName, int currentCountryId, int newCountryId);
+    public int deleteDivision(int divisionId, String divisionName);
+    public int addDivision(String divisionName, int countryId);
 }

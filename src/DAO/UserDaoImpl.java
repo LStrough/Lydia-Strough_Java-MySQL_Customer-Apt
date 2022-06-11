@@ -66,9 +66,9 @@ public class UserDaoImpl implements UserDao{
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println(userName + " Password UPDATE was successful!");
+                System.out.println(userName + " password UPDATE was successful!");
             } else {
-                System.out.println(userName + " Password UPDATE Failed!");
+                System.out.println(userName + " password UPDATE Failed!");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -88,10 +88,10 @@ public class UserDaoImpl implements UserDao{
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println(currentUserName + "Username UPDATE was successful!");
-                System.out.println("New Username is: " + newUserName);
+                System.out.println(currentUserName + " username UPDATE was successful!");
+                System.out.println("New username: " + newUserName);
             } else {
-                System.out.println(currentUserName + " Username UPDATE Failed!");
+                System.out.println(currentUserName + " username UPDATE Failed!");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -130,7 +130,7 @@ public class UserDaoImpl implements UserDao{
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("User ( "+ userName + " ) INSERT was successful!");
+                System.out.println("User INSERT was successful!");
             } else {
                 System.out.println("User INSERT failed!");
             }
