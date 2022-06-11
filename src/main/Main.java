@@ -28,20 +28,22 @@ public class Main extends Application {
         CountryDao countryDao = new CountryDaoImpl();
         DivisionDao divisionDao = new DivisionDaoImpl();
 
-        countryDao.getAllCountries();
-        countryDao.getCountry(2);
-        divisionDao.getDivisionsByCountry(2);
+        //System.out.println(countryDao.getAllCountries());
+        //System.out.println(countryDao.getCountry(2));
+        //System.out.println(divisionDao.getDivisionsByCountry(2));
         //countryDao.addCountry("Japan");
-        //countryDao.getAllCountries();
-        //countryDao.getCountry();                  //japan countryId
-        //divisionDao.getDivisionsByCountry();      //japan countryId
-        //divisionDao.addDivision("Hokkaido", );   //japan countryId
-        //divisionDao.getDivisionsByCountry();
+        //System.out.println(countryDao.getAllCountries());
+        //System.out.println(countryDao.getCountry(4));
+        //System.out.println(divisionDao.getDivisionsByCountry(4));
+        //divisionDao.addDivision("Hokkaido", 4);
+        //System.out.println(divisionDao.getDivisionsByCountry(4));
         //countryDao.addCountry("China");
-        //countryDao.getAllCountries();
-        //countryDao.getCountry();                  //china countryId
-        //divisionDao.getDivisionsByCountry();      //china countryId
-        //countryDao.deleteCountry();               //China     expect to be successful
-        //countryDao.deleteCountry();               //Japan     expect to FAIL
+        //System.out.println(countryDao.getAllCountries());
+        //System.out.println(countryDao.getCountry(6));
+        //System.out.println(divisionDao.getDivisionsByCountry(6));
+        //countryDao.deleteCountry(6,"China");               //China success
+        //countryDao.deleteCountry(4, "Japan");               //Japan FAIL
+        //divisionDao.deleteDivision(3980, "Hokkaido");
+        //countryDao.deleteCountry(4, "Japan");                 //Japan success
     }
 }

@@ -80,6 +80,35 @@ public class CountryDaoImpl implements CountryDao{
         int rowsAffected = 0;
         JDBC.openConnection();
         DivisionDao divisionDao = new DivisionDaoImpl();
+        try{
+            if(divisionDao.getDivisionsByCountry(countryId).isEmpty()) {
+                try {
+                    String sql = "DELETE FROM countries WHERE Country_ID=? AND Country=?";
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.setInt(1, countryId);
+                    ps.setString(2, countryName);
+                    rowsAffected = ps.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Country: " + countryId + " " + countryName + " was successfully deleted!");
+                    } else {
+                        System.out.println("Country DELETE failed!");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+            else if(!divisionDao.getDivisionsByCountry(countryId).isEmpty()){
+                System.out.println(countryName + " failed to DELETE!");
+                System.out.println(countryName + " has associated divisions. DELETE remaining divisions in order to continue.");
+            }
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        /*
+         int rowsAffected = 0;
+        JDBC.openConnection();
+        DivisionDao divisionDao = new DivisionDaoImpl();
         if(divisionDao.getDivisionsByCountry(countryId).isEmpty()) {
             try {
                 String sql = "DELETE FROM countries WHERE Country_ID=? AND Country=?";
@@ -97,6 +126,15 @@ public class CountryDaoImpl implements CountryDao{
                 System.out.println("Error: " + e.getMessage());
             }
         }
+        else if(!divisionDao.getDivisionsByCountry(countryId).isEmpty()){
+            System.out.println(countryName + " failed to DELETE!");
+            System.out.println(countryName + " has associated divisions. DELETE remaining divisions in order to continue.");
+        }
+        else {
+            System.out.println(countryName + " failed to DELETE!");
+        }
+        return rowsAffected;
+         */
         return rowsAffected;
     }
 
