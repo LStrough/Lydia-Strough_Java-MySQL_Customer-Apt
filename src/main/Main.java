@@ -19,31 +19,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //Locale.setDefault(new Locale("fr"));
-        /*
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
-         */
-        JDBC.openConnection();
-        CountryDao countryDao = new CountryDaoImpl();
-        DivisionDao divisionDao = new DivisionDaoImpl();
-
-        //System.out.println(countryDao.getAllCountries());
-        //System.out.println(countryDao.getCountry(2));
-        //System.out.println(divisionDao.getDivisionsByCountry(2));
-        //countryDao.addCountry("Japan");
-        //System.out.println(countryDao.getAllCountries());
-        //System.out.println(countryDao.getCountry(4));
-        //System.out.println(divisionDao.getDivisionsByCountry(4));
-        //divisionDao.addDivision("Hokkaido", 4);
-        //System.out.println(divisionDao.getDivisionsByCountry(4));
-        //countryDao.addCountry("China");
-        //System.out.println(countryDao.getAllCountries());
-        //System.out.println(countryDao.getCountry(6));
-        //System.out.println(divisionDao.getDivisionsByCountry(6));
-        //countryDao.deleteCountry(6,"China");               //China success
-        //countryDao.deleteCountry(4, "Japan");               //Japan FAIL
-        //divisionDao.deleteDivision(3980, "Hokkaido");
-        //countryDao.deleteCountry(4, "Japan");                 //Japan success
     }
 }
