@@ -53,18 +53,70 @@ public class CountryDaoImpl implements CountryDao{
     }
 
     @Override
-    public void updateCountry(int index, Country newCountry) {
-        //mySQL update database!
+    public int updateCountry(int countryId, String currentCountryName, String newCountryName) {
+        int rowsAffected = 0;
+          try {
+            String sql = "UPDATE countries SET Country=? WHERE Country=? AND Country_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, newCountryName);
+            ps.setString(2, currentCountryName);
+            ps.setInt(3, countryId);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println(currentCountryName + " country name UPDATE was successful!");
+                System.out.println("New country name: " + newCountryName);
+            } else {
+                System.out.println(currentCountryName + " country name UPDATE Failed!");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rowsAffected;
     }
 
     @Override
-    public boolean deleteCountry(Country selectedCountry) {
-        return false;
-        //mySQL delete from database!
+    public int deleteCountry(int countryId, String countryName) {
+        int rowsAffected = 0;
+        JDBC.openConnection();
+        DivisionDao divisionDao = new DivisionDaoImpl();
+        if(divisionDao.getDivisionsByCountry(countryId).isEmpty()) {
+            try {
+                String sql = "DELETE FROM countries WHERE Country_ID=? AND Country=?";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, countryId);
+                ps.setString(2, countryName);
+                rowsAffected = ps.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Country: " + countryId + " " + countryName + " was successfully deleted!");
+                } else {
+                    System.out.println("Country DELETE failed!");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return rowsAffected;
     }
 
     @Override
-    public void addCountry(Country country) {
-        //mySQL add to database!
+    public int addCountry(String countryName) {
+        int rowsAffected = 0;
+         try {
+            String sql = "INSERT INTO countries (Country) VALUES(?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, countryName);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Country INSERT was successful!");
+            } else {
+                System.out.println("Country INSERT failed!");
+            }
+        } catch (Exception e) {
+             System.out.println("Error: " + e.getMessage());
+         }
+        return rowsAffected;
     }
 }

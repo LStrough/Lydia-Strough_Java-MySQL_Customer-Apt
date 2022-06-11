@@ -5,8 +5,12 @@ import model.Country;
 
 public interface CountryDao {
     public ObservableList<Country> getAllCountries();
+
     public Country getCountry(int countryId);
-    public void updateCountry(int index, Country newCountry);
-    public boolean deleteCountry(Country selectedCountry);
-    public void addCountry(Country country);
+
+    public int updateCountry(int countryId, String currentCountryName, String newCountryName);
+
+    public int deleteCountry(int countryId, String countryName);
+
+    public int addCountry(String countryName);
 }

@@ -25,21 +25,23 @@ public class Main extends Application {
         JDBC.closeConnection();
          */
         JDBC.openConnection();
+        CountryDao countryDao = new CountryDaoImpl();
         DivisionDao divisionDao = new DivisionDaoImpl();
-        System.out.println();
-        System.out.println();
 
-        /*
-        divisionDao.getAllDivisions();
-        divisionDao.getDivision(1);
+        countryDao.getAllCountries();
+        countryDao.getCountry(2);
         divisionDao.getDivisionsByCountry(2);
-        divisionDao.addDivision("Lydia's Place", 2);
-        divisionDao.updateDivisionName("Lydia's Place", 2, "Lydia");
-        divisionDao.updateDivisionName("Lydia's Place", 1, "Lydia");            // test fail FIRST
-        divisionDao.updateDivisionCountry("Lydia", 2, 3);
-        divisionDao.getDivisionsByCountry(2);
-        divisionDao.getDivisionsByCountry(3);
-        divisionDao.deleteDivision(1, "Lydia");                                 //get divisionId based on DB
-         */
+        //countryDao.addCountry("Japan");
+        //countryDao.getAllCountries();
+        //countryDao.getCountry();                  //japan countryId
+        //divisionDao.getDivisionsByCountry();      //japan countryId
+        //divisionDao.addDivision("Hokkaido", );   //japan countryId
+        //divisionDao.getDivisionsByCountry();
+        //countryDao.addCountry("China");
+        //countryDao.getAllCountries();
+        //countryDao.getCountry();                  //china countryId
+        //divisionDao.getDivisionsByCountry();      //china countryId
+        //countryDao.deleteCountry();               //China     expect to be successful
+        //countryDao.deleteCountry();               //Japan     expect to FAIL
     }
 }
