@@ -48,9 +48,8 @@ public class AddCustomer implements Initializable {
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
             countryId = customerCountryComboBx.getValue().getCountryId();
-            divisionId = customerDivisionComboBx.getValue().getDivisionId();
 
-            if (countryId > 0) {
+            if (countryId != 0){
                 customerDivisionComboBx.setPromptText("You must choose a Division...");
                 customerDivisionComboBx.setItems(divisionDao.getDivisionsByCountry(countryId));
                 customerDivisionComboBx.setVisibleRowCount(5);
@@ -60,10 +59,10 @@ public class AddCustomer implements Initializable {
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
             stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomer.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
-        }catch (Exception e){
+        } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
 
             if(customerName.isEmpty()){

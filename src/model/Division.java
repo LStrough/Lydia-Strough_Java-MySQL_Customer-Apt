@@ -45,6 +45,6 @@ public class Division {
 
     @Override
     public String toString() {
-        return ("Division: [" + divisionId + "] " + divisionName + " | Country: [" + countryId + "] " + countryName);
+        return (divisionName);
     }
 }
