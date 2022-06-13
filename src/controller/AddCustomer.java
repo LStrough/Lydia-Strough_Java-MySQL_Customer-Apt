@@ -25,7 +25,7 @@ public class AddCustomer implements Initializable {
     public TextField customerPostalCodeTxt;
     public TextField customerPhoneNumTxt;
     public ComboBox<Country> customerCountryComboBx;
-    public ComboBox<Division> customerDivisionComboBx;                                  //cast
+    public ComboBox<Division> customerDivisionComboBx;
     public Label customerNameE;
     public Label customerAddressE;
     public Label customerPostalCodeE;
@@ -38,16 +38,17 @@ public class AddCustomer implements Initializable {
 
     public void onActionSaveCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
-        JDBC.openConnection();
-        CustomerDao customerDao = new CustomerDaoImpl();
-        DivisionDao divisionDao = new DivisionDaoImpl();
 
         try {
+            JDBC.openConnection();
+            CustomerDao customerDao = new CustomerDaoImpl();
+            DivisionDao divisionDao = new DivisionDaoImpl();
             customerName = customerNameTxt.getText();
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
             countryId = customerCountryComboBx.getValue().getCountryId();
+            divisionId = customerDivisionComboBx.getValue().getDivisionId();
 
             if (countryId > 0) {
                 customerDivisionComboBx.setPromptText("You must choose a Division...");
