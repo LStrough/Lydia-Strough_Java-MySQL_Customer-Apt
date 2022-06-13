@@ -91,7 +91,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return ("Customer: " + Integer.toString(customerId) + " | " + customerName + " | " + address +
+        return ("Customer: [" + Integer.toString(customerId) + "] " + customerName + " | " + address +
                 " | " + postalCode + " | " + phone + " | " +  divisionName);
     }
 }
