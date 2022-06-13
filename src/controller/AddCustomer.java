@@ -32,32 +32,30 @@ public class AddCustomer implements Initializable {
     public Label customerPhoneNumE;
     public Label customerCountryE;
     public Label customerDivisionE;
+    private int countryId = 0;
+    private int divisionId = 0;
+    public String customerName, address, postalCode, phone;
 
     public void onActionSaveCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
+        JDBC.openConnection();
+        CustomerDao customerDao = new CustomerDaoImpl();
+        DivisionDao divisionDao = new DivisionDaoImpl();
 
         try {
-            String customerName = customerNameTxt.getText();
-            String address = customerAddressTxt.getText();
-            String postalCode = customerPostalCodeTxt.getText();
-            String phone = customerPhoneNumTxt.getText();
-            int divisionId = customerDivisionComboBx.getValue().getDivisionId();
+            customerName = customerNameTxt.getText();
+            address = customerAddressTxt.getText();
+            postalCode = customerPostalCodeTxt.getText();
+            phone = customerPhoneNumTxt.getText();
+            countryId = customerCountryComboBx.getValue().getCountryId();
 
-            if(customerName.isEmpty()){
-                customerNameE.setText("Customer name cannot be empty!");
-            }
-            if(address.isEmpty()){
-                customerAddressE.setText("Customer address cannot be empty!");
-            }
-            if(postalCode.isEmpty()){
-                customerPostalCodeE.setText("Customer postal code cannot be empty!");
-            }
-            if(phone.isEmpty()){
-                customerPhoneNumE.setText("Customer phone number cannot be empty!");
+            if (countryId > 0) {
+                customerDivisionComboBx.setPromptText("You must choose a Division...");
+                customerDivisionComboBx.setItems(divisionDao.getDivisionsByCountry(countryId));
+                customerDivisionComboBx.setVisibleRowCount(5);
+                divisionId = customerDivisionComboBx.getValue().getDivisionId();
             }
 
-            JDBC.openConnection();
-            CustomerDao customerDao = new CustomerDaoImpl();
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
             stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
@@ -65,9 +63,31 @@ public class AddCustomer implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please enter/select a valid value for each field!");
-            alert.showAndWait();
+            System.out.println("Error: " + e.getMessage());
+
+            if(customerName.isEmpty()){
+                customerNameE.setText("Customer name cannot be empty!");
+            }
+            if(!customerName.isEmpty()){
+                customerNameE.setText("");
+            }
+            if(address.isEmpty()){
+                customerAddressE.setText("Customer address cannot be empty!");
+            }if(!address.isEmpty()){
+                customerAddressE.setText("");
+            }
+            if(postalCode.isEmpty()){
+                customerPostalCodeE.setText("Customer postal code cannot be empty!");
+            }
+            if(!postalCode.isEmpty()){
+                customerPostalCodeE.setText("");
+            }
+            if(phone.isEmpty()){
+                customerPhoneNumE.setText("Customer phone number cannot be empty!");
+            }
+            if(!phone.isEmpty()){
+                customerPhoneNumE.setText("");
+            }
         }
     }
 
@@ -92,18 +112,14 @@ public class AddCustomer implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Customer: I am initialized!");
 
-        JDBC.openConnection();
-        CountryDao countryDao = new CountryDaoImpl();
-        DivisionDao divisionDao = new DivisionDaoImpl();
-        customerCountryComboBx.setPromptText("You must choose a Country...");
-        customerCountryComboBx.setItems(countryDao.getAllCountries());
-        customerCountryComboBx.setVisibleRowCount(5);
-
-        int countryId = customerCountryComboBx.getValue().getCountryId();
-        if(countryId > 0){
-            customerDivisionComboBx.setPromptText("You must choose a Division...");
-            customerDivisionComboBx.setItems(divisionDao.getDivisionsByCountry(countryId));
-            customerDivisionComboBx.setVisibleRowCount(5);
+        try {
+            JDBC.openConnection();
+            CountryDao countryDao = new CountryDaoImpl();
+            customerCountryComboBx.setPromptText("You must choose a Country...");
+            customerCountryComboBx.setItems(countryDao.getAllCountries());
+            customerCountryComboBx.setVisibleRowCount(5);
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

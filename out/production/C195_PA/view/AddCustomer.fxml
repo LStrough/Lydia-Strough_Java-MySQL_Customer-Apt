@@ -94,7 +94,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="customerNameE" text="Customer name cannot be empty." GridPane.rowIndex="1">
+                  <Label fx:id="customerNameE" GridPane.rowIndex="1">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
@@ -102,7 +102,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="customerAddressE" text="Customer address cannot be empty." GridPane.rowIndex="2">
+                  <Label fx:id="customerAddressE" GridPane.rowIndex="2">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
@@ -110,7 +110,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="customerPostalCodeE" text="Customer postal code cannot be empty." GridPane.rowIndex="3">
+                  <Label fx:id="customerPostalCodeE" GridPane.rowIndex="3">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
@@ -118,7 +118,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="customerPhoneNumE" text="Customer phone number cannot be empty." GridPane.rowIndex="4">
+                  <Label fx:id="customerPhoneNumE" GridPane.rowIndex="4">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
@@ -126,7 +126,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="customerCountryE" text="You must select a country for the customer." GridPane.rowIndex="5">
+                  <Label fx:id="customerCountryE" GridPane.rowIndex="5">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
@@ -134,7 +134,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="customerDivisionE" text="You must select a division for the customer." GridPane.rowIndex="6">
+                  <Label fx:id="customerDivisionE" GridPane.rowIndex="6">
                      <padding>
                         <Insets right="20.0" />
                      </padding>
