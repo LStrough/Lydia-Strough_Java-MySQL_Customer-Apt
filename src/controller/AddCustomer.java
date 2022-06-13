@@ -49,19 +49,20 @@ public class AddCustomer implements Initializable {
             phone = customerPhoneNumTxt.getText();
             countryId = customerCountryComboBx.getValue().getCountryId();
 
-            if (countryId != 0){
+            if (countryId > 0){
                 customerDivisionComboBx.setPromptText("You must choose a Division...");
                 customerDivisionComboBx.setItems(divisionDao.getDivisionsByCountry(countryId));
                 customerDivisionComboBx.setVisibleRowCount(5);
                 divisionId = customerDivisionComboBx.getValue().getDivisionId();
             }
+            if ((divisionId > 0)) {
+                customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
-            customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
-
-            stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
+                stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            }
         } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
 
@@ -87,6 +88,18 @@ public class AddCustomer implements Initializable {
             }
             if(!phone.isEmpty()){
                 customerPhoneNumE.setText("");
+            }
+            if(countryId == 0){
+                customerCountryE.setText("You must select a country.");
+            }
+            if(countryId != 0){
+                customerCountryE.setText("");
+            }
+            if(divisionId == 0){
+                customerCountryE.setText("You must select a division.");
+            }
+            if(divisionId != 0){
+                customerCountryE.setText("");
             }
         }
     }
