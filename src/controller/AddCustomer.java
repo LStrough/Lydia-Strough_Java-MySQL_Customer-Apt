@@ -90,14 +90,17 @@ public class AddCustomer implements Initializable {
             if(countryId == 0){
                 customerCountryE.setText("You must select a country.");
             }
-            if(countryId != 0){
+            if(countryId > 0){
                 customerCountryE.setText("");
             }
             if(divisionId == 0){
                 customerDivisionE.setText("You must select a division.");
             }
-            if(divisionId != 0){
+            if(divisionId > 0){
                 customerDivisionE.setText("");
+            }
+            if((divisionId !=0) && !(divisionId > 0)) {
+                customerDivisionE.setText(e.getMessage());
             }
         }
     }
