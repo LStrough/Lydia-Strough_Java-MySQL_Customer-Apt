@@ -1,4 +1,4 @@
-package helper;
+package Utilities;
 
 import DAO.DivisionDao;
 import DAO.DivisionDaoImpl;
@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 import model.Division;
 
 public class ListManager {
-    public static ObservableList<Division> getFilteredDivisions(int countryID){
+    public static ObservableList<Division> getFilteredDivisions(int countryId){
         DivisionDao divisionDao = new DivisionDaoImpl();
-        return divisionDao.getDivisionsByCountry(countryID);
+        return divisionDao.getDivisionsByCountry(countryId);
     }
 }

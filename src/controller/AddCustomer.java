@@ -1,7 +1,7 @@
 package controller;
 
 import DAO.*;
-import helper.ListManager;
+import Utilities.ListManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,22 +33,20 @@ public class AddCustomer implements Initializable {
     public Label customerPhoneNumE;
     public Label customerCountryE;
     public Label customerDivisionE;
-    //private int countryId = 0;
-    private int divisionId;
+    private int countryId, divisionId;
     public String customerName, address, postalCode, phone;
 
     public void onActionSaveCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
 
         try {
-            JDBC.openConnection();
+            //JDBC.openConnection();
             CustomerDao customerDao = new CustomerDaoImpl();
-            DivisionDao divisionDao = new DivisionDaoImpl();
+
             customerName = customerNameTxt.getText();
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
-           // countryId = customerCountryComboBx.getValue().getCountryId();
             divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
@@ -59,42 +57,6 @@ public class AddCustomer implements Initializable {
             stage.show();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
-
-            if(customerName.isEmpty()){
-                customerNameE.setText("Customer name cannot be empty!");
-            }
-            if(!customerName.isEmpty()){
-                customerNameE.setText("");
-            }
-            if(address.isEmpty()){
-                customerAddressE.setText("Customer address cannot be empty!");
-            }if(!address.isEmpty()){
-                customerAddressE.setText("");
-            }
-            if(postalCode.isEmpty()){
-                customerPostalCodeE.setText("Customer postal code cannot be empty!");
-            }
-            if(!postalCode.isEmpty()){
-                customerPostalCodeE.setText("");
-            }
-            if(phone.isEmpty()){
-                customerPhoneNumE.setText("Customer phone number cannot be empty!");
-            }
-            if(!phone.isEmpty()){
-                customerPhoneNumE.setText("");
-            }
-            if(countryId == 0){
-                customerCountryE.setText("You must select a country.");
-            }
-            if(countryId > 0){
-                customerCountryE.setText("");
-            }
-            if(divisionId == 0){
-                customerDivisionE.setText("You must select a division.");
-            }
-            if(divisionId > 0){
-                customerDivisionE.setText("");
-            }
         }
     }
 
@@ -115,30 +77,29 @@ public class AddCustomer implements Initializable {
         }
     }
 
+    public void onActionSelectCountry(ActionEvent actionEvent) {
+        countryId = customerCountryComboBx.getValue().getCountryId();
+
+        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        customerDivisionComboBx.getSelectionModel().selectFirst();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Customer: I am initialized!");
         try {
             JDBC.openConnection();
             CountryDao countryDao = new CountryDaoImpl();
-            customerCountryComboBx.setPromptText("You must choose a Country...");
+
             customerCountryComboBx.setItems(countryDao.getAllCountries());
-            customerCountryComboBx.setVisibleRowCount(5);
+            customerCountryComboBx.getSelectionModel().selectFirst();
+
+            countryId = customerCountryComboBx.getValue().getCountryId();
+
+            customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+            customerDivisionComboBx.getSelectionModel().selectFirst();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
-
-        customerCountryComboBx.getSelectionModel().selectFirst();
-        int countryID = customerCountryComboBx.getValue().getCountryId();
-
-        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryID));
-        customerDivisionComboBx.getSelectionModel().selectFirst();
-    }
-
-    public void onActionSelectCountry(ActionEvent actionEvent) {
-        int countryID = customerCountryComboBx.getValue().getCountryId();
-
-        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryID));
-        customerDivisionComboBx.getSelectionModel().selectFirst();
     }
 }
