@@ -99,6 +99,9 @@ public class MainCustomers implements Initializable {
 
         if ((result.isPresent() && result.get() == ButtonType.OK)) {
             System.out.println(customerDao.deleteCustomer(customerId, customerName));
+
+            JDBC.openConnection();
+            customerTableView.setItems(customerDao.getAllCustomers());
         }
     }
 
