@@ -31,8 +31,6 @@ public class AddCustomer implements Initializable {
     public Label customerAddressE;
     public Label customerPostalCodeE;
     public Label customerPhoneNumE;
-    public Label customerCountryE;
-    public Label customerDivisionE;
     private int countryId, divisionId;
     public String customerName, address, postalCode, phone;
 

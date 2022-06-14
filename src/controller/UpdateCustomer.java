@@ -27,8 +27,6 @@ public class UpdateCustomer implements Initializable {
     public Label customerAddressE;
     public Label customerPostalCodeE;
     public Label customerPhoneNumE;
-    public Label customerCountryE;
-    public Label customerDivisionE;
 
     public void onActionUpdateCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
@@ -49,6 +47,9 @@ public class UpdateCustomer implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }
+    }
+
+    public void onActionSelectCountry(ActionEvent actionEvent) {
     }
 
     @Override

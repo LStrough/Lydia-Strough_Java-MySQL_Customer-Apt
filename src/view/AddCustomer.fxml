@@ -126,22 +126,6 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="customerCountryE" GridPane.rowIndex="5">
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="customerDivisionE" GridPane.rowIndex="6">
-                     <padding>
-                        <Insets right="20.0" />
-                     </padding>
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
                </children>
             </GridPane>
          </children>
