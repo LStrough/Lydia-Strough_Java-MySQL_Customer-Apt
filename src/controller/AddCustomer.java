@@ -31,21 +31,20 @@ public class AddCustomer implements Initializable {
     public Label customerAddressE;
     public Label customerPostalCodeE;
     public Label customerPhoneNumE;
-    private int countryId, divisionId;
+    private int countryId;
     public String customerName, address, postalCode, phone;
 
     public void onActionSaveCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
 
         try {
-            //JDBC.openConnection();
             CustomerDao customerDao = new CustomerDaoImpl();
 
             customerName = customerNameTxt.getText();
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
-            divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
+            int divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
@@ -53,6 +52,7 @@ public class AddCustomer implements Initializable {
             scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
+            JDBC.closeConnection();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -72,6 +72,7 @@ public class AddCustomer implements Initializable {
            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
            stage.setScene(new Scene(scene));
            stage.show();
+           JDBC.closeConnection();
         }
     }
 

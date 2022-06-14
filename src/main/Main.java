@@ -25,7 +25,7 @@ public class Main extends Application {
         launch(args);
         JDBC.closeConnection();
 
-        /*
+/*
         JDBC.openConnection();
         CustomerDao customerDao = new CustomerDaoImpl();
         DivisionDao divisionDao = new DivisionDaoImpl();
@@ -40,7 +40,8 @@ public class Main extends Application {
         //customerDao.updateCustomerPostalCode(4, "98271", "85225");
         //customerDao.updateCustomerDivision(4, 46, 2);
         //customerDao.updateCustomerPhone(4, "867-5309", "310-0771");
-        //customerDao.deleteCustomer(4, "Lydia Strough");
-         */
+        //customerDao.deleteCustomer(Id, Name);
+
+ */
     }
 }
