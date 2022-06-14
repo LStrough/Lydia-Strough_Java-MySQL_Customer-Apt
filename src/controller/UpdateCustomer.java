@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Country;
 import model.Customer;
 
 import java.io.IOException;
@@ -44,27 +45,18 @@ public class UpdateCustomer implements Initializable {
         customerAddressTxt.setText(String.valueOf(selCustomer.getAddress()));
         customerPostalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
         customerPhoneNumTxt.setText(String.valueOf(selCustomer.getPhone()));
-/*
+
         customerCountryComboBx.setItems(countryDao.getAllCountries());
         customerCountryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
         countryId = selCustomer.getCountryId();
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         customerDivisionComboBx.getSelectionModel().select((selCustomer.getDivisionId() - 1));
-
- */
-        customerCountryComboBx.setItems(countryDao.getAllCountries());
-        customerCountryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
-        countryId = selCustomer.getCountryId();
-
-        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        customerDivisionComboBx.getSelectionModel().select((selCustomer.getDivisionId() - 1));
-
     }
 
     public void onActionUpdateCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
-/*
+
         try {
             CustomerDao customerDao = new CustomerDaoImpl();
 
@@ -72,7 +64,7 @@ public class UpdateCustomer implements Initializable {
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
-            int divisionId = selCustomer.getDivisionId();
+            int divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
@@ -84,8 +76,6 @@ public class UpdateCustomer implements Initializable {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
-
- */
     }
 
     public void onActionReturnToCustomer(ActionEvent actionEvent) throws IOException {
@@ -107,11 +97,10 @@ public class UpdateCustomer implements Initializable {
     }
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
-        /*countryId = selCustomer.getCountryId() + 1;
+        countryId = customerCountryComboBx.getValue().getCountryId();
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         customerDivisionComboBx.getSelectionModel().selectFirst();
-         */
     }
 
     @Override
