@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.*;
+import helper.ListManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,8 +33,8 @@ public class AddCustomer implements Initializable {
     public Label customerPhoneNumE;
     public Label customerCountryE;
     public Label customerDivisionE;
-    private int countryId = 0;
-    private int divisionId = 0;
+    //private int countryId = 0;
+    private int divisionId;
     public String customerName, address, postalCode, phone;
 
     public void onActionSaveCustomer(ActionEvent actionEvent) {
@@ -47,15 +48,9 @@ public class AddCustomer implements Initializable {
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
-            countryId = customerCountryComboBx.getValue().getCountryId();
+           // countryId = customerCountryComboBx.getValue().getCountryId();
+            divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
-            if (countryId > 0) {
-                customerDivisionComboBx.setPromptText("You must choose a Division...");
-                customerDivisionComboBx.setItems(divisionDao.getDivisionsByCountry(countryId));
-                customerDivisionComboBx.setVisibleRowCount(5);
-                divisionId = customerDivisionComboBx.getValue().getDivisionId();
-            }
-            //divisionId = customerDivisionComboBx.getValue().getDivisionId();
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
             stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -123,7 +118,6 @@ public class AddCustomer implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Customer: I am initialized!");
-
         try {
             JDBC.openConnection();
             CountryDao countryDao = new CountryDaoImpl();
@@ -133,5 +127,18 @@ public class AddCustomer implements Initializable {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+
+        customerCountryComboBx.getSelectionModel().selectFirst();
+        int countryID = customerCountryComboBx.getValue().getCountryId();
+
+        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryID));
+        customerDivisionComboBx.getSelectionModel().selectFirst();
+    }
+
+    public void onActionSelectCountry(ActionEvent actionEvent) {
+        int countryID = customerCountryComboBx.getValue().getCountryId();
+
+        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryID));
+        customerDivisionComboBx.getSelectionModel().selectFirst();
     }
 }
