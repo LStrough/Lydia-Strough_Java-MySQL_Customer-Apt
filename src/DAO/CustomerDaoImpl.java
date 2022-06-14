@@ -2,6 +2,7 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import model.Customer;
 
 import java.sql.PreparedStatement;
@@ -200,9 +201,17 @@ public class CustomerDaoImpl implements CustomerDao{
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Customer " + customerId + " " + customerName + " was successfully deleted!");
+                System.out.println("Customer: [" + customerId + "] " + customerName + " was successfully deleted!");
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("[" + customerId + "] " + customerName + " was successfully deleted.");
+                alert.showAndWait();
             } else {
                 System.out.println("Customer DELETE failed!");
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("[" + customerId + "] " + customerName + " failed to deleted.");
+                alert.showAndWait();
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
