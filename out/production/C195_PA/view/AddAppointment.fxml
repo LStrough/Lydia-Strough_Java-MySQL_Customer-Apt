@@ -58,10 +58,10 @@
                </font>
             </Label>
             <TextField fx:id="aptIdTxt" disable="true" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" />
-            <TextField fx:id="aptTitleTxt" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="aptDescriptionTxt" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="aptLocationTxt" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="aptTypeTxt" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="aptTitleTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Title" text="Title" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="aptDescriptionTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Description" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="aptLocationTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Location" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="aptTypeTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Type" text="Type" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Contact ID" GridPane.rowIndex="5">
                <font>
                   <Font size="12.0" />
@@ -144,7 +144,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="aptTitleE" text="Appointment title cannot be empty.">
+            <Label fx:id="aptTitleE">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -152,7 +152,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptDescriptionE" text="Appointment description cannot be empty." GridPane.rowIndex="1">
+            <Label fx:id="aptDescriptionE" GridPane.rowIndex="1">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -160,7 +160,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptLocationE" text="Appointment location cannot be empty." GridPane.rowIndex="2">
+            <Label fx:id="aptLocationE" GridPane.rowIndex="2">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -168,7 +168,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptTypeE" text="Appointment type cannot be empty." GridPane.rowIndex="3">
+            <Label fx:id="aptTypeE" GridPane.rowIndex="3">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -176,7 +176,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptContactIdE" text="You must select a contact ID for the appointment." GridPane.rowIndex="4">
+            <Label fx:id="aptContactIdE" GridPane.rowIndex="4">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -184,7 +184,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptCustomerIdE" text="You must select a customer ID for the appointment." GridPane.rowIndex="5">
+            <Label fx:id="aptCustomerIdE" GridPane.rowIndex="5">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -192,7 +192,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptUserIdE" text="You must select a user ID for the appointment." GridPane.rowIndex="6">
+            <Label fx:id="aptUserIdE" GridPane.rowIndex="6">
                <padding>
                   <Insets right="20.0" />
                </padding>

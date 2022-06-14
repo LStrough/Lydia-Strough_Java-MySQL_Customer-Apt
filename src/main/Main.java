@@ -19,18 +19,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //Locale.setDefault(new Locale("fr"));
-
-        /*
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
-
-         */
-
-        JDBC.openConnection();
-        CustomerDao customerDao = new CustomerDaoImpl();
-        //System.out.println(customerDao.getCustomer(10));
-        //System.out.println(customerDao.updateCustomer(10, "Customer Name", "Address",
-               // "Postal Code", "Phone Number", 1 ));
     }
 }
