@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Country;
 import model.Customer;
 
 import java.io.IOException;
@@ -51,12 +50,12 @@ public class UpdateCustomer implements Initializable {
         countryId = selCustomer.getCountryId();
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        customerDivisionComboBx.getSelectionModel().select((selCustomer.getDivisionId() - 1));
+        customerDivisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
     }
 
     public void onActionUpdateCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
-
+/*
         try {
             CustomerDao customerDao = new CustomerDaoImpl();
 
@@ -76,6 +75,7 @@ public class UpdateCustomer implements Initializable {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+ */
     }
 
     public void onActionReturnToCustomer(ActionEvent actionEvent) throws IOException {
@@ -97,10 +97,12 @@ public class UpdateCustomer implements Initializable {
     }
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
+       /*
         countryId = customerCountryComboBx.getValue().getCountryId();
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         customerDivisionComboBx.getSelectionModel().selectFirst();
+        */
     }
 
     @Override

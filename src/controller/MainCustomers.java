@@ -85,6 +85,21 @@ public class MainCustomers implements Initializable {
 
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
         System.out.println("Delete Customer Button Clicked!");
+
+        CustomerDao customerDao = new CustomerDaoImpl();
+        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
+        int customerId = selectedCustomer.getCustomerId();
+        String customerName = selectedCustomer.getCustomerName();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("The selected Customer and their corresponding appointments will be deleted, do you wish to continue?");
+        alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if ((result.isPresent() && result.get() == ButtonType.OK)) {
+            System.out.println(customerDao.deleteCustomer(customerId, customerName));
+        }
     }
 
     public void onActionAppointments(ActionEvent actionEvent) throws IOException {
