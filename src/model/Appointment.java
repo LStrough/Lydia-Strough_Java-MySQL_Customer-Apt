@@ -121,4 +121,10 @@ public class Appointment {
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        return ("Appt: [" + Integer.toString(appointmentId) + "] | Customer: [" + Integer.toString(customerId) + "] " +
+                "| Contact: [" + Integer.toString(contactId) + "]");
+    }
 }

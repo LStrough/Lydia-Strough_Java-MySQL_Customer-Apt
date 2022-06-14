@@ -191,6 +191,31 @@ public class CustomerDaoImpl implements CustomerDao{
     }
 
     @Override
+    public int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) {
+        int rowsAffected = 0;
+        try{
+            String sql = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, customerName);
+            ps.setString(2, address);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setInt(5, divisionId);
+            ps.setInt(6, customerId);
+            rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Customer UPDATE was successful!");
+            } else {
+                System.out.println("Customer UPDATE Failed!");
+            }
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        return rowsAffected;
+    }
+
+    @Override
     public int deleteCustomer(int customerId, String customerName) {     //check that customerAppointments .isEmpty()
         int rowsAffected = 0;
         try {

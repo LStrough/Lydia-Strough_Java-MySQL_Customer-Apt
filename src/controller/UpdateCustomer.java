@@ -59,13 +59,14 @@ public class UpdateCustomer implements Initializable {
         try {
             CustomerDao customerDao = new CustomerDaoImpl();
 
+            int customerId = selCustomer.getCustomerId();
             customerName = customerNameTxt.getText();
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
             int divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
-            customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
+            customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
             stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
@@ -75,6 +76,7 @@ public class UpdateCustomer implements Initializable {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+
  */
     }
 

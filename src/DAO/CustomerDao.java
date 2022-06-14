@@ -11,6 +11,7 @@ public interface CustomerDao {
     public int updateCustomerAddress(int customerId, String currentAddress, String newAddress);
     public int updateCustomerPostalCode(int customerId, String currentPostalCode, String newPostalCode);
     public int updateCustomerDivision(int customerId, int currentDivisionId, int newDivisionId);
+    public int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId);
     public int deleteCustomer(int customerId, String customerName);
     public int addCustomer(String customerName, String address, String postalCode, String phone, int divisionId);
     public Customer lookUpCustomer(int customerId);
