@@ -31,21 +31,40 @@ public class UpdateCustomer implements Initializable {
     public Label customerAddressE;
     public Label customerPostalCodeE;
     public Label customerPhoneNumE;
-    private int countryId;
+    public int countryId;
     public String customerName, address, postalCode, phone;
 
     public void updateCustomer(Customer selectedCustomer) {
+        JDBC.openConnection();
+        CountryDao countryDao = new CountryDaoImpl();
+
         selCustomer = selectedCustomer;
 
         customerNameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
         customerAddressTxt.setText(String.valueOf(selCustomer.getAddress()));
         customerPostalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
         customerPhoneNumTxt.setText(String.valueOf(selCustomer.getPhone()));
+/*
+        customerCountryComboBx.setItems(countryDao.getAllCountries());
+        customerCountryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
+        countryId = selCustomer.getCountryId();
+
+        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        customerDivisionComboBx.getSelectionModel().select((selCustomer.getDivisionId() - 1));
+
+ */
+        customerCountryComboBx.setItems(countryDao.getAllCountries());
+        customerCountryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
+        countryId = selCustomer.getCountryId();
+
+        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        customerDivisionComboBx.getSelectionModel().select((selCustomer.getDivisionId() - 1));
+
     }
 
     public void onActionUpdateCustomer(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
-
+/*
         try {
             CustomerDao customerDao = new CustomerDaoImpl();
 
@@ -65,6 +84,8 @@ public class UpdateCustomer implements Initializable {
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+
+ */
     }
 
     public void onActionReturnToCustomer(ActionEvent actionEvent) throws IOException {
@@ -86,27 +107,15 @@ public class UpdateCustomer implements Initializable {
     }
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
-        countryId = selCustomer.getCountryId();
+        /*countryId = selCustomer.getCountryId() + 1;
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         customerDivisionComboBx.getSelectionModel().selectFirst();
+         */
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Customer: I am initialized!");
-
-        try {
-            JDBC.openConnection();
-            CountryDao countryDao = new CountryDaoImpl();
-
-            customerCountryComboBx.setItems(countryDao.getAllCountries());
-            countryId = selCustomer.getCountryId();
-
-            customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-            customerDivisionComboBx.getSelectionModel().select(selCustomer.getDivisionId());
-        }catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
     }
 }

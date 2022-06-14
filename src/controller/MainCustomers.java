@@ -68,16 +68,6 @@ public class MainCustomers implements Initializable {
     public void onActionUpdateCustomer(ActionEvent actionEvent) throws IOException {
         System.out.println("Update Customer Button Clicked!");
 
-        /*
-        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
-
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/UpdateCustomer.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-
-         */
-
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/UpdateCustomer.fxml"));
         Parent scene = loader.load();
