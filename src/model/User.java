@@ -36,6 +36,6 @@ public class User {
 
     @Override
     public String toString() {
-        return ("User: [" + Integer.toString(userId) + "] " + userName + " | " + password);
+        return ("[" + Integer.toString(userId) + "] " + userName);
     }
 }

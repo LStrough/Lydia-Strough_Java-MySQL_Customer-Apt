@@ -145,6 +145,7 @@ public class Appointment {
     @Override
     public String toString() {
         return ("Appt: [" + Integer.toString(appointmentId) + "] | Customer: [" + Integer.toString(customerId) + "] " +
-                "| Contact: [" + Integer.toString(contactId) + "]" + "Start: " + startDateTime + "| End: " + endDateTime);
+                "| Contact: [" + Integer.toString(contactId) + "] | Start: " + startDate + " " + startTime
+                + " | End: " + endDate + " " + endTime);
     }
 }
