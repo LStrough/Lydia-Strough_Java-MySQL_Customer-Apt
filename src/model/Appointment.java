@@ -1,17 +1,14 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Appointment {
     private int appointmentId, customerId, userId, contactId;
     private String title, description, location, type;
-    private LocalDate startDate, endDate;
-    private LocalTime startTime, endTime;
+    private LocalDateTime startDateTime, endDateTime;
 
     public Appointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
-                       String location, String type, LocalDate startDate, LocalDate endDate, LocalTime startTime,
-                       LocalTime endTime) {
+                       String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.userId = userId;
@@ -20,10 +17,8 @@ public class Appointment {
         this.description = description;
         this.location = location;
         this.type = type;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     public int getAppointmentId() {
@@ -90,36 +85,20 @@ public class Appointment {
         this.type = type;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     @Override

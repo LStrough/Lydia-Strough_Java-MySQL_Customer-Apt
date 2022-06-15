@@ -3,13 +3,16 @@ package DAO;
 import javafx.collections.ObservableList;
 import model.Appointment;
 
-public interface AppointmentDao {
-    /*
-    public ObservableList<Appointment> getAllAppointments();
-    public Appointment getCustomer(int customerId);
-    public int updateAppointment();
-    public int deleteAppointment(int customerId, String customerName);
-    public int addAppointment(String customerName, String address, String postalCode, String phone, int divisionId);
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-     */
+public interface AppointmentDao {
+    public ObservableList<Appointment> getAllAppointments();
+    public Appointment getAppointment(int appointmentId);
+    public int updateAppointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
+                                 String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
+    public int deleteAppointment(int appointmentId, int customerId);
+    public int addAppointment(int customerId, int userId, int contactId, String title, String description,
+                              String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
 }
