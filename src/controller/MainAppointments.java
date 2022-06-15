@@ -1,12 +1,17 @@
 package controller;
 
+import DAO.AppointmentDao;
+import DAO.AppointmentDaoImpl;
+import DAO.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +24,7 @@ public class MainAppointments implements Initializable {
     Parent scene;
     public ToggleGroup viewByTgl;
     public DatePicker searchApptByDate;
-    public TableView apptTableView;
+    public TableView<Appointment> apptTableView;
     public TableColumn apptIdCol;
     public TableColumn titleCol;
     public TableColumn descriptionCol;
@@ -108,5 +113,22 @@ public class MainAppointments implements Initializable {
         System.out.println("Appointment Schedule (Main Menu): I am initialized!");
 
         userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
+
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateCol.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+        JDBC.openConnection();
+        AppointmentDao appointmentDao = new AppointmentDaoImpl();
+        apptTableView.setItems(appointmentDao.getAllAppointments());
     }
 }

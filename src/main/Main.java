@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
@@ -18,14 +20,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        /*
         //Locale.setDefault(new Locale("fr"));
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
 
-         */
-
+        /*
         JDBC.openConnection();
         AppointmentDao appointmentDao = new AppointmentDaoImpl();
         ContactDao contactDao = new ContactDaoImpl();
@@ -35,5 +35,6 @@ public class Main extends Application {
                "Location", "Type", '2022-06-15 12:00','2022-06-15 12:30'));
         //System.out.println(contactDao.getAllContacts());
 
+         */
     }
 }

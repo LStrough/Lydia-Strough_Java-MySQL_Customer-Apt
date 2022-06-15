@@ -27,13 +27,13 @@ public class UpdateCustomer implements Initializable {
     public TextField customerAddressTxt;
     public TextField customerPostalCodeTxt;
     public TextField customerPhoneNumTxt;
-    public ComboBox <Country>customerCountryComboBx;
-    public ComboBox <Division>customerDivisionComboBx;
+    public ComboBox<Country> customerCountryComboBx;
+    public ComboBox<Division> customerDivisionComboBx;
     public Label customerNameE;
     public Label customerAddressE;
     public Label customerPostalCodeE;
     public Label customerPhoneNumE;
-    public int countryId;
+    public int countryId, divisionId;
     public String customerName, address, postalCode, phone;
 
     public void updateCustomer(Customer selectedCustomer) {
@@ -53,6 +53,7 @@ public class UpdateCustomer implements Initializable {
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         customerDivisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
+        divisionId = selCustomer.getDivisionId();
     }
 
     public void onActionUpdateCustomer(ActionEvent actionEvent) {
@@ -66,7 +67,7 @@ public class UpdateCustomer implements Initializable {
             address = customerAddressTxt.getText();
             postalCode = customerPostalCodeTxt.getText();
             phone = customerPhoneNumTxt.getText();
-            int divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
+            divisionId = customerDivisionComboBx.getValue().getDivisionId();
 
             customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
@@ -74,7 +75,6 @@ public class UpdateCustomer implements Initializable {
             scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
-            JDBC.closeConnection();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -94,17 +94,14 @@ public class UpdateCustomer implements Initializable {
             scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
-            JDBC.closeConnection();
         }
     }
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
-
         countryId = customerCountryComboBx.getValue().getCountryId();
 
         customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         customerDivisionComboBx.getSelectionModel().selectFirst();
-
     }
 
     @Override
