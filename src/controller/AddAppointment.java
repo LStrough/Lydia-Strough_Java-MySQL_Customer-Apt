@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,11 +55,21 @@ public class AddAppointment implements Initializable {
             scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
+            JDBC.closeConnection();
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Appointment: I am initialized!");
+
+        JDBC.openConnection();
+        ContactDao contactDao = new ContactDaoImpl();
+        CustomerDao customerDao = new CustomerDaoImpl();
+        UserDao userDao = new UserDaoImpl();
+
+        contactIdComboBx.setItems(contactDao.getAllContacts());
+        customerIdComboBx.setItems(customerDao.getAllCustomers());
+        userIdComboBx.setItems(userDao.getAllUsers());
     }
 }

@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -63,6 +64,7 @@ public class MainAppointments implements Initializable {
 
         try{
             LocalDate date = datePicker.getValue();
+
             Appointment appointment = appointmentDao.lookUpAppointment(date);
             apptTableView.getSelectionModel().select(appointment);
             apptTableView.scrollTo(appointment);
