@@ -8,7 +8,9 @@ import model.Appointment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static DAO.JDBC.connection;
 
@@ -33,8 +35,12 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 String type = result.getString("Type");
                 LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
+                LocalDate startDate = startDateTime.toLocalDate();
+                LocalDate endDate = endDateTime.toLocalDate();
+                LocalTime startTime = startDateTime.toLocalTime();
+                LocalTime endTime = endDateTime.toLocalTime();
                 Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
-                        location, type, startDateTime, endDateTime);
+                        location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
                 appointments.add(appointment);
             }
         } catch (Exception e) {
@@ -63,8 +69,12 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 String type = result.getString("Type");
                 LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
+                LocalDate startDate = startDateTime.toLocalDate();
+                LocalDate endDate = endDateTime.toLocalDate();
+                LocalTime startTime = startDateTime.toLocalTime();
+                LocalTime endTime = endDateTime.toLocalTime();
                 apptResult = new Appointment(appointmentId, customerId, userId, contactId, title, description,
-                        location, type, startDateTime, endDateTime);
+                        location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
             }
             return apptResult;
         } catch (Exception e) {
