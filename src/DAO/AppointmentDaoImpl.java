@@ -7,6 +7,7 @@ import model.Appointment;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import static DAO.JDBC.connection;
@@ -16,7 +17,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
     @Override
     public ObservableList<Appointment> getAllAppointments() {
-        try{
+       try{
             String sql = "SELECT * FROM appointments";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet result = ps.executeQuery();
@@ -30,8 +31,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 String description = result.getString("Description");
                 String location = result.getString("Location");
                 String type = result.getString("Type");
-                //LocalDateTime startDateTime = result.getDate("Start");
-                //LocalDateTime endDateTime = result.getDate("End");
+                LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
                 Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
                         location, type, startDateTime, endDateTime);
                 appointments.add(appointment);
@@ -44,8 +45,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
     @Override
     public Appointment getAppointment(int appointmentId) {
-         try{
-            String sql = "SELECT * FROM appointments";
+        try{
+            String sql = "SELECT * FROM appointments WHERE Appointment_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, appointmentId);
 
@@ -60,8 +61,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 String description = result.getString("Description");
                 String location = result.getString("Location");
                 String type = result.getString("Type");
-                //LocalDateTime startDateTime = result.getDate("Start");
-                //LocalDateTime endDateTime = result.getDate("End");
+                LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
                 apptResult = new Appointment(appointmentId, customerId, userId, contactId, title, description,
                         location, type, startDateTime, endDateTime);
             }
@@ -86,8 +87,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
             ps.setString(4, title);
             ps.setString(5, description);
             ps.setString(6, location);
-            //ps.setDate(7, startDateTime);
-            //ps.setDate(8, endDateTime);
+            ps.setTimestamp(7, Timestamp.valueOf(startDateTime));
+            ps.setTimestamp(8, Timestamp.valueOf(endDateTime));
             ps.setInt(9, appointmentId);
             rowsAffected = ps.executeUpdate();
 
@@ -146,8 +147,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
             ps.setString(5, description);
             ps.setString(6, location);
             ps.setString(7, type);
-            //ps.setDate(8, startDateTime);
-            //ps.setDate(9, endDateTime);
+            ps.setTimestamp(8, Timestamp.valueOf(startDateTime));
+            ps.setTimestamp(9, Timestamp.valueOf(endDateTime));
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
