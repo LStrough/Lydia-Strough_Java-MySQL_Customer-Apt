@@ -16,6 +16,7 @@ import static DAO.JDBC.connection;
 
 public class AppointmentDaoImpl implements AppointmentDao{
     ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    public boolean apptFound;
 
     @Override
     public ObservableList<Appointment> getAllAppointments() {
@@ -171,5 +172,17 @@ public class AppointmentDaoImpl implements AppointmentDao{
             System.out.println("Error: " + e.getMessage());
         }
         return rowsAffected;
+    }
+
+    @Override
+    public Appointment lookUpAppointment(LocalDate date) {
+        apptFound = false;
+        for(Appointment appointment : appointments){
+            if(appointment.getStartDate() == date){
+                apptFound = true;
+                return appointment;
+            }
+        }
+        return null;
     }
 }

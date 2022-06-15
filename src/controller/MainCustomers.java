@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.AppointmentDaoImpl;
 import DAO.CustomerDao;
 import DAO.CustomerDaoImpl;
 import DAO.JDBC;

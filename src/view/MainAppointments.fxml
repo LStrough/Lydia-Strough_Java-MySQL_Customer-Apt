@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainAppointments">
    <children>
       <AnchorPane layoutX="1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1200.0">
@@ -30,7 +29,7 @@
                               </RadioButton>
                               <RadioButton mnemonicParsing="false" onAction="#onActionViewByMonth" text="View by Month" toggleGroup="$viewByTgl" />
                               <RadioButton mnemonicParsing="false" onAction="#onActionViewAll" selected="true" text="View All" toggleGroup="$viewByTgl" />
-                              <DatePicker fx:id="searchApptByDate" onAction="#onActionSearchApptByDate" prefHeight="26.0" prefWidth="200.0" promptText="Search by Date" />
+                              <DatePicker fx:id="datePicker" onAction="#onActionSearchApptByDate" prefHeight="26.0" prefWidth="200.0" promptText="Search by Date" />
                            </children>
                            <padding>
                               <Insets right="10.0" />

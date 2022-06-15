@@ -5,7 +5,6 @@ import model.Appointment;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public interface AppointmentDao {
     public ObservableList<Appointment> getAllAppointments();
@@ -15,4 +14,5 @@ public interface AppointmentDao {
     public int deleteAppointment(int appointmentId, int customerId);
     public int addAppointment(int customerId, int userId, int contactId, String title, String description,
                               String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
+    public Appointment lookUpAppointment(LocalDate date);
 }

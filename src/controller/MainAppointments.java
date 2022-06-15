@@ -15,9 +15,8 @@ import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -25,7 +24,7 @@ public class MainAppointments implements Initializable {
     Stage stage;
     Parent scene;
     public ToggleGroup viewByTgl;
-    public DatePicker searchApptByDate;
+    public DatePicker datePicker;
     public TableView<Appointment> apptTableView;
     public TableColumn apptIdCol;
     public TableColumn titleCol;
@@ -51,9 +50,32 @@ public class MainAppointments implements Initializable {
 
     public void onActionViewAll(ActionEvent actionEvent) {
         System.out.println("View All Radio Button Clicked!");
+
+        JDBC.openConnection();
+        AppointmentDao appointmentDao = new AppointmentDaoImpl();
+        apptTableView.setItems(appointmentDao.getAllAppointments());
     }
 
     public void onActionSearchApptByDate(ActionEvent actionEvent) {
+        JDBC.openConnection();
+        AppointmentDao appointmentDao = new AppointmentDaoImpl();
+        apptTableView.setItems(appointmentDao.getAllAppointments());
+
+        try{
+            LocalDate date = datePicker.getValue();
+            Appointment appointment = appointmentDao.lookUpAppointment(date);
+            apptTableView.getSelectionModel().select(appointment);
+            apptTableView.scrollTo(appointment);
+            apptTableView.requestFocus();
+        }catch(Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        if(!((AppointmentDaoImpl) appointmentDao).apptFound) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No item was found.");
+            alert.showAndWait();
+        }
+
     }
 
     public void onActionAddAppt(ActionEvent actionEvent) throws IOException {
