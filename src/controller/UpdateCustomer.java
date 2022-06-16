@@ -77,6 +77,7 @@ public class UpdateCustomer implements Initializable {
         System.out.println("Cancel Button clicked!");
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel \"Update Customer\"");
         alert.setContentText("All changes will be forgotten, do you wish to continue?");
         alert.showAndWait();
 
@@ -99,6 +100,6 @@ public class UpdateCustomer implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Add Customer: I am initialized!");
+        System.out.println("Update Customer: I am initialized!");
     }
 }

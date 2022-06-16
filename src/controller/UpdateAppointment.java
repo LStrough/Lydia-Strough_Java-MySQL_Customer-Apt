@@ -41,6 +41,7 @@ public class UpdateAppointment implements Initializable {
         System.out.println("Cancel Button clicked!");
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel \"Update Appointment\"");
         alert.setContentText("All changes will be forgotten, do you wish to continue?");
         alert.showAndWait();
 

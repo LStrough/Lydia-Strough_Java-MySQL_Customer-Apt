@@ -43,6 +43,7 @@ public class ReportContactSchedule implements Initializable {
         System.out.println("Logout Button Clicked!");
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
         alert.setContentText("Do you wish to Exit the program?");
         alert.showAndWait();
 

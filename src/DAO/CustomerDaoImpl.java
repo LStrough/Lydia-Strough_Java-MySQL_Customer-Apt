@@ -229,12 +229,14 @@ public class CustomerDaoImpl implements CustomerDao{
                 System.out.println("Customer: [" + customerId + "] " + customerName + " was successfully deleted!");
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Customer DELETE");
                 alert.setContentText("[" + customerId + "] " + customerName + " was successfully deleted.");
                 alert.showAndWait();
             } else {
                 System.out.println("Customer DELETE failed!");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Customer DELETE");
                 alert.setContentText("[" + customerId + "] " + customerName + " failed to deleted.");
                 alert.showAndWait();
             }

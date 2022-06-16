@@ -128,12 +128,14 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 System.out.println("Appointment [" + appointmentId + "] was successfully deleted!");
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment DELETE");
                 alert.setContentText("Appointment [" + appointmentId + "] was successfully deleted!");
                 alert.showAndWait();
             } else {
                 System.out.println("Appointment DELETE failed!");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Appointment DELETE");
                 alert.setContentText("Appointment [" + appointmentId + "] failed to deleted!");
                 alert.showAndWait();
             }

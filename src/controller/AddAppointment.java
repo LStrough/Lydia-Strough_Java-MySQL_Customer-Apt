@@ -39,7 +39,7 @@ public class AddAppointment implements Initializable {
 
         try{
             AppointmentDao appointmentDao = new AppointmentDaoImpl();
-
+/*
             title = typeE.getText();
             description = descriptionTxt.getText();
             location = locationTxt.getText();
@@ -56,6 +56,8 @@ public class AddAppointment implements Initializable {
 
             appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                     startDateTime, endDateTime);
+
+ */
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -65,6 +67,7 @@ public class AddAppointment implements Initializable {
         System.out.println("Cancel Button clicked!");
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel \"Add Appointment\"");
         alert.setContentText("All changes will be forgotten, do you wish to continue?");
         alert.showAndWait();
 
