@@ -57,22 +57,22 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="aptIdTxt" disable="true" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" />
-            <TextField fx:id="aptTitleTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Title" text="Title" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="aptDescriptionTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Description" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="aptLocationTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Location" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="aptTypeTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Type" text="Type" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Contact ID" GridPane.rowIndex="5">
+            <TextField disable="true" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Auto Gen- Disabled" GridPane.columnIndex="1" />
+            <TextField fx:id="titleTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Title" text="Title" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="descriptionTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Description" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="locationTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Location" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="typeTxt" maxWidth="-Infinity" prefWidth="200.0" promptText="Type" text="Type" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Contact" GridPane.rowIndex="5">
                <font>
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label text="Customer ID" GridPane.rowIndex="6">
+            <Label text="Customer" GridPane.rowIndex="6">
                <font>
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label text="User ID" GridPane.rowIndex="7">
+            <Label text="User" GridPane.rowIndex="7">
                <font>
                   <Font size="12.0" />
                </font>
@@ -87,14 +87,14 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <DatePicker fx:id="startDatePicker" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <ComboBox fx:id="contactIdComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox fx:id="customerIdComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox fx:id="userIdComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <DatePicker fx:id="startDatePicker" maxWidth="-Infinity" prefWidth="200.0" promptText="Choose a Date" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <ComboBox fx:id="contactComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Contact" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="customerComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Customer" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="userComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a User" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Time" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
       </GridPane>
-      <Button layoutX="632.0" layoutY="534.0" mnemonicParsing="false" onAction="#onActionSaveApt" prefHeight="26.0" prefWidth="70.0" text="Save" />
+      <Button layoutX="632.0" layoutY="534.0" mnemonicParsing="false" onAction="#onActionSaveAppt" prefHeight="26.0" prefWidth="70.0" text="Save" />
       <Button layoutX="721.0" layoutY="534.0" mnemonicParsing="false" onAction="#onActionReturnToMain" prefHeight="26.0" prefWidth="70.0" text="Cancel" />
       <Label layoutX="37.0" layoutY="45.0" text="Add Appointment">
          <font>
@@ -126,8 +126,8 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <DatePicker fx:id="endDatePicker" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" />
-            <ComboBox fx:id="endTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="endDatePicker" maxWidth="-Infinity" prefWidth="200.0" promptText="Choose a Date" GridPane.columnIndex="1" />
+            <ComboBox fx:id="endTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Time" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <GridPane layoutX="493.0" layoutY="145.0" prefHeight="266.0" prefWidth="284.0" vgap="15.0">
@@ -144,7 +144,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="aptTitleE">
+            <Label fx:id="titleE">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -152,7 +152,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptDescriptionE" GridPane.rowIndex="1">
+            <Label fx:id="descriptionE" GridPane.rowIndex="1">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -160,7 +160,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptLocationE" GridPane.rowIndex="2">
+            <Label fx:id="locationE" GridPane.rowIndex="2">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -168,7 +168,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptTypeE" GridPane.rowIndex="3">
+            <Label fx:id="typeE" GridPane.rowIndex="3">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -176,7 +176,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptContactIdE" GridPane.rowIndex="4">
+            <Label fx:id="contactE" GridPane.rowIndex="4">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -184,7 +184,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptCustomerIdE" GridPane.rowIndex="5">
+            <Label fx:id="customerE" GridPane.rowIndex="5">
                <padding>
                   <Insets right="20.0" />
                </padding>
@@ -192,7 +192,7 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <Label fx:id="aptUserIdE" GridPane.rowIndex="6">
+            <Label fx:id="userE" GridPane.rowIndex="6">
                <padding>
                   <Insets right="20.0" />
                </padding>

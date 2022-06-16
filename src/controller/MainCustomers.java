@@ -26,12 +26,7 @@ public class MainCustomers implements Initializable {
     Parent scene;
     public TextField searchCustomer;
     public TableView<Customer> customerTableView;
-    public TableColumn customerIdCol;
-    public TableColumn customerNameCol;
-    public TableColumn addressCol;
-    public TableColumn postalCodeCol;
-    public TableColumn phoneNumCol;
-    public TableColumn stateProvinceCol;
+    public TableColumn customerIdCol, customerNameCol, addressCol, postalCodeCol, phoneNumCol, stateProvinceCol;
     public Label userTimeZoneLbl;
 
     public void onActionSearchCustomer(ActionEvent actionEvent) {

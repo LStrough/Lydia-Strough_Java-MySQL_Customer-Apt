@@ -7,36 +7,33 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
+import model.Contact;
+import model.Customer;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UpdateAppointment implements Initializable {
     Stage stage;
     Parent scene;
-    public TextField aptIdTxt;
-    public TextField aptTitleTxt;
-    public TextField aptDescriptionTxt;
-    public TextField aptLocationTxt;
-    public TextField aptTypeTxt;
-    public ComboBox contactIdComboBx;
-    public ComboBox customerIdComboBx;
-    public ComboBox userIdComboBx;
-    public DatePicker startDatePicker;
-    public DatePicker endDatePicker;
-    public ComboBox startTimeComboBx;
-    public ComboBox endTimeComboBx;
-    public Label aptTitleE;
-    public Label aptDescriptionE;
-    public Label aptLocationE;
-    public Label aptTypeE;
-    public Label aptContactIdE;
-    public Label aptCustomerIdE;
-    public Label aptUserIdE;
+    Appointment selAppt = null;
+    public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
+    public ComboBox<Contact> contactComboBx;
+    public ComboBox<Customer> customerComboBx;
+    public ComboBox<User> userComboBx;
+    public DatePicker startDatePicker, endDatePicker;
+    public ComboBox startTimeComboBx, endTimeComboBx;
+    public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
+    private int customerId, userId, contactId;
+    private String title, description, location, type;
+    private LocalDateTime startDateTime, endDateTime;
 
-    public void onActionUpdateApt(ActionEvent actionEvent) {
+    public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
     }
 

@@ -20,16 +20,7 @@ public class ReportCustomerAppointments implements Initializable {
     public Label viewByLbl;
     public ComboBox viewByComboBx;
     public TableView customerTableView;
-    public TableColumn customerIdCol;
-    public TableColumn customerNameCol;
-    public TableColumn addressCol;
-    public TableColumn postalCodeCol;
-    public TableColumn phoneNumCol;
-    public TableColumn createdDateCol;
-    public TableColumn createdByCol;
-    public TableColumn lastUpdateCol;
-    public TableColumn lastUpdatedByCol;
-    public TableColumn stateProvinceCol;
+    public TableColumn customerIdCol, customerNameCol, addressCol, postalCodeCol, phoneNumCol, stateProvinceCol;
     public Label totalCustomersLbl;
 
     public void onActionViewByType(ActionEvent actionEvent) {

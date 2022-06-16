@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Contact;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,17 +17,9 @@ import java.util.ResourceBundle;
 public class ReportContactSchedule implements Initializable {
     Stage stage;
     Parent scene;
-    public ComboBox contactComboBx;
+    public ComboBox<Contact> contactComboBx;
     public TableView apptTableView;
-    public TableColumn apptIdCol;
-    public TableColumn titleCol;
-    public TableColumn descriptionCol;
-    public TableColumn typeCol;
-    public TableColumn startDateCol;
-    public TableColumn endDateCol;
-    public TableColumn startTimeCol;
-    public TableColumn endTimeCol;
-    public TableColumn customerIdCol;
+    public TableColumn apptIdCol, titleCol, descriptionCol, typeCol, startDateCol, endDateCol, startTimeCol, endTimeCol, customerIdCol;
 
     public void onActionCustomerAppt(ActionEvent actionEvent) throws IOException {
         System.out.println("Customer Appointments Button Clicked!");

@@ -22,17 +22,10 @@ public class UpdateCustomer implements Initializable {
     Stage stage;
     Parent scene;
     Customer selCustomer = null;
-    public TextField customerIdTxt;
-    public TextField customerNameTxt;
-    public TextField customerAddressTxt;
-    public TextField customerPostalCodeTxt;
-    public TextField customerPhoneNumTxt;
-    public ComboBox<Country> customerCountryComboBx;
-    public ComboBox<Division> customerDivisionComboBx;
-    public Label customerNameE;
-    public Label customerAddressE;
-    public Label customerPostalCodeE;
-    public Label customerPhoneNumE;
+    public TextField nameTxt, addressTxt, postalCodeTxt, phoneTxt;
+    public ComboBox<Country> countryComboBx;
+    public ComboBox<Division> divisionComboBx;
+    public Label nameE, addressE, postalCodeE, phoneE;
     public int countryId, divisionId;
     public String customerName, address, postalCode, phone;
 
@@ -42,17 +35,17 @@ public class UpdateCustomer implements Initializable {
 
         selCustomer = selectedCustomer;
 
-        customerNameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
-        customerAddressTxt.setText(String.valueOf(selCustomer.getAddress()));
-        customerPostalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
-        customerPhoneNumTxt.setText(String.valueOf(selCustomer.getPhone()));
+        nameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
+        addressTxt.setText(String.valueOf(selCustomer.getAddress()));
+        postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
+        phoneTxt.setText(String.valueOf(selCustomer.getPhone()));
 
-        customerCountryComboBx.setItems(countryDao.getAllCountries());
-        customerCountryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
+        countryComboBx.setItems(countryDao.getAllCountries());
+        countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
         countryId = selCustomer.getCountryId();
 
-        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        customerDivisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
+        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        divisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
         divisionId = selCustomer.getDivisionId();
     }
 
@@ -63,11 +56,11 @@ public class UpdateCustomer implements Initializable {
             CustomerDao customerDao = new CustomerDaoImpl();
 
             int customerId = selCustomer.getCustomerId();
-            customerName = customerNameTxt.getText();
-            address = customerAddressTxt.getText();
-            postalCode = customerPostalCodeTxt.getText();
-            phone = customerPhoneNumTxt.getText();
-            divisionId = customerDivisionComboBx.getValue().getDivisionId();
+            customerName = nameTxt.getText();
+            address = addressTxt.getText();
+            postalCode = postalCodeTxt.getText();
+            phone = phoneTxt.getText();
+            divisionId = divisionComboBx.getValue().getDivisionId();
 
             customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
@@ -98,10 +91,10 @@ public class UpdateCustomer implements Initializable {
     }
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
-        countryId = customerCountryComboBx.getValue().getCountryId();
+        countryId = countryComboBx.getValue().getCountryId();
 
-        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        customerDivisionComboBx.getSelectionModel().selectFirst();
+        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        divisionComboBx.getSelectionModel().selectFirst();
     }
 
     @Override

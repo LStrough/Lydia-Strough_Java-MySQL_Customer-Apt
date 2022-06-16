@@ -20,17 +20,10 @@ import java.util.ResourceBundle;
 public class AddCustomer implements Initializable {
     Stage stage;
     Parent scene;
-    public TextField customerIdTxt;
-    public TextField customerNameTxt;
-    public TextField customerAddressTxt;
-    public TextField customerPostalCodeTxt;
-    public TextField customerPhoneNumTxt;
-    public ComboBox<Country> customerCountryComboBx;
-    public ComboBox<Division> customerDivisionComboBx;
-    public Label customerNameE;
-    public Label customerAddressE;
-    public Label customerPostalCodeE;
-    public Label customerPhoneNumE;
+    public TextField nameTxt, addressTxt, postalCodeTxt, phoneTxt;
+    public ComboBox<Country> countryComboBx;
+    public ComboBox<Division> divisionComboBx;
+    public Label nameE, addressE, postalCodeE, phoneE;
     private int countryId;
     public String customerName, address, postalCode, phone;
 
@@ -40,11 +33,11 @@ public class AddCustomer implements Initializable {
         try {
             CustomerDao customerDao = new CustomerDaoImpl();
 
-            customerName = customerNameTxt.getText();
-            address = customerAddressTxt.getText();
-            postalCode = customerPostalCodeTxt.getText();
-            phone = customerPhoneNumTxt.getText();
-            int divisionId = customerDivisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
+            customerName = nameTxt.getText();
+            address = addressTxt.getText();
+            postalCode = postalCodeTxt.getText();
+            phone = phoneTxt.getText();
+            int divisionId = divisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
             customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
@@ -77,10 +70,10 @@ public class AddCustomer implements Initializable {
     }
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
-        countryId = customerCountryComboBx.getValue().getCountryId();
+        countryId = countryComboBx.getValue().getCountryId();
 
-        customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        customerDivisionComboBx.getSelectionModel().selectFirst();
+        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        divisionComboBx.getSelectionModel().selectFirst();
     }
 
     @Override
@@ -90,13 +83,13 @@ public class AddCustomer implements Initializable {
             JDBC.openConnection();
             CountryDao countryDao = new CountryDaoImpl();
 
-            customerCountryComboBx.setItems(countryDao.getAllCountries());
-            customerCountryComboBx.getSelectionModel().selectFirst();
+            countryComboBx.setItems(countryDao.getAllCountries());
+            countryComboBx.getSelectionModel().selectFirst();
 
-            countryId = customerCountryComboBx.getValue().getCountryId();
+            countryId = countryComboBx.getValue().getCountryId();
 
-            customerDivisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-            customerDivisionComboBx.getSelectionModel().selectFirst();
+            divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+            divisionComboBx.getSelectionModel().selectFirst();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }

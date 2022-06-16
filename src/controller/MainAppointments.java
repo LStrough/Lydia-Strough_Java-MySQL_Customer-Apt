@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -27,18 +26,8 @@ public class MainAppointments implements Initializable {
     public ToggleGroup viewByTgl;
     public DatePicker datePicker;
     public TableView<Appointment> apptTableView;
-    public TableColumn apptIdCol;
-    public TableColumn titleCol;
-    public TableColumn descriptionCol;
-    public TableColumn locationCol;
-    public TableColumn contactCol;
-    public TableColumn typeCol;
-    public TableColumn startDateCol;
-    public TableColumn endDateCol;
-    public TableColumn startTimeCol;
-    public TableColumn endTimeCol;
-    public TableColumn customerIdCol;
-    public TableColumn userIdCol;
+    public TableColumn apptIdCol, titleCol, descriptionCol, locationCol, contactCol, typeCol, startDateCol, endDateCol,
+            startTimeCol, endTimeCol, customerIdCol, userIdCol;
     public Label userTimeZoneLbl;
 
     public void onActionViewByWeek(ActionEvent actionEvent) {

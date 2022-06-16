@@ -20,14 +20,11 @@ import static DAO.LoginQuery.loginQuery;
 public class Login implements Initializable {
     Stage stage;
     Parent scene;
-    public Label usernameLbl;
-    public Label passwordLbl;
-    public Label timeZoneLbl;
+    public Label usernameLbl, passwordLbl, timeZoneLbl;
     public TextField usernameTxt;
     public PasswordField passwordTxt;
     public Label userTimeZoneLbl;
-    public Button resetBttn;
-    public Button loginBttn;
+    public Button resetBttn, loginBttn;
 
     public void onActionLogIn(ActionEvent actionEvent) {
         System.out.println("Login Button clicked!");

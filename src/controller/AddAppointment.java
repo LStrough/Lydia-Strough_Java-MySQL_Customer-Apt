@@ -8,37 +8,57 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Contact;
+import model.Customer;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
     Stage stage;
     Parent scene;
-    public TextField aptIdTxt;
-    public TextField aptTitleTxt;
-    public TextField aptDescriptionTxt;
-    public TextField aptLocationTxt;
-    public TextField aptTypeTxt;
-    public ComboBox contactIdComboBx;
-    public ComboBox customerIdComboBx;
-    public ComboBox userIdComboBx;
-    public DatePicker startDatePicker;
-    public DatePicker endDatePicker;
-    public ComboBox startTimeComboBx;
-    public ComboBox endTimeComboBx;
-    public Label aptTitleE;
-    public Label aptDescriptionE;
-    public Label aptLocationE;
-    public Label aptTypeE;
-    public Label aptContactIdE;
-    public Label aptCustomerIdE;
-    public Label aptUserIdE;
+    public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
+    public ComboBox<Contact> contactComboBx;
+    public ComboBox<Customer> customerComboBx;
+    public ComboBox<User> userComboBx;
+    public DatePicker startDatePicker, endDatePicker;
+    public ComboBox startTimeComboBx, endTimeComboBx;
+    public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
+    private int customerId, userId, contactId;
+    private String title, description, location, type;
+    private LocalDateTime startDateTime, endDateTime;
 
-    public void onActionSaveApt(ActionEvent actionEvent) {
+    public void onActionSaveAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
+
+        try{
+            AppointmentDao appointmentDao = new AppointmentDaoImpl();
+
+            title = typeE.getText();
+            description = descriptionTxt.getText();
+            location = locationTxt.getText();
+            type = typeTxt.getText();
+            contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
+            customerId = customerComboBx.getSelectionModel().getSelectedItem().getCustomerId();
+            userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
+            LocalDate startDate = startDatePicker.getValue();
+            LocalDate endDate = endDatePicker.getValue();
+            LocalTime startTime = startTimeComboBx.getValue();
+            LocalTime endTime = endTimeComboBx.getValue();
+            startDateTime = LocalDateTime.of(startDate, startTime);
+            endDateTime = LocalDateTime.of(endDate, endTime);
+
+            appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
+                    startDateTime, endDateTime);
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
@@ -68,8 +88,8 @@ public class AddAppointment implements Initializable {
         CustomerDao customerDao = new CustomerDaoImpl();
         UserDao userDao = new UserDaoImpl();
 
-        contactIdComboBx.setItems(contactDao.getAllContacts());
-        customerIdComboBx.setItems(customerDao.getAllCustomers());
-        userIdComboBx.setItems(userDao.getAllUsers());
+        contactComboBx.setItems(contactDao.getAllContacts());
+        customerComboBx.setItems(customerDao.getAllCustomers());
+        userComboBx.setItems(userDao.getAllUsers());
     }
 }
