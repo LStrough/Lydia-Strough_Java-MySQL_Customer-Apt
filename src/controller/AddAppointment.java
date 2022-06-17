@@ -37,7 +37,8 @@ public class AddAppointment implements Initializable {
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
     public int customerId, userId, contactId;
     public String title, description, location, type;
-    LocalDate startDate, endDate;
+    LocalDate startDate;
+    LocalDate endDate;
     public LocalDateTime startDateTime, endDateTime;
 
     public void onActionSaveAppt(ActionEvent actionEvent) {
@@ -53,8 +54,9 @@ public class AddAppointment implements Initializable {
             contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
             customerId = customerComboBx.getSelectionModel().getSelectedItem().getCustomerId();
             userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
+
             startDate = startDatePicker.getValue();
-            endDate = endDatePicker.getValue();
+            //endDate = endDatePicker.getValue();
 
             //startTimeComboBx.setItems();
 
@@ -95,31 +97,39 @@ public class AddAppointment implements Initializable {
     }
 
     public void onActionFilterStartDateTime(ActionEvent actionEvent) {
-        for(BusinessHour businessHour : businessHours) {
-            DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
-            String date = String.valueOf(startDate);
-            int hour = businessHour.getHour();
-            int min = businessHour.getMin();
-            String time = hour + ":" + min;
+        try{
+            //String date = String.valueOf(startDate);
+            System.out.println(startDate);
+/*
+            for(BusinessHour businessHour : businessHours) {
+                int hour = businessHour.getHour();
+                int min = businessHour.getMin();
+                String time = hour + ":" + min;
 
-            if ((hour == 8) || (hour == 9)) {
-                time = "0" + time;
+                if ((hour == 8) || (hour == 9)) {
+                    time = "0" + time;
+                }
+                if (min == 0) {
+                    time = time + "0";
+                }
+
+                String txtStartDateTime = date + " " + time;
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
+                LocalDateTime ldt = LocalDateTime.parse(txtStartDateTime, df);
+
+                ZoneId zid = ZoneId.systemDefault();
+                ZonedDateTime zdt = ldt.atZone(zid);
+
+                BusinessHour localBHr = new BusinessHour(zdt);
+
+                businessHoursLocal.add(localBHr);
             }
-            if (min == 0) {
-                time = time + "0";
-            }
+            startTimeComboBx.setItems(businessHoursLocal);
 
-            String txtStartDateTime = date + " " + time;
-            LocalDateTime ldt = LocalDateTime.parse(txtStartDateTime, df);
-
-            ZoneId zid = ZoneId.systemDefault();
-            ZonedDateTime zdt = ldt.atZone(zid);
-
-            BusinessHour localBHr = new BusinessHour(zdt);
-
-            businessHoursLocal.add(localBHr);
+ */
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
         }
-        startTimeComboBx.setItems(businessHoursLocal);
     }
 
     @Override
