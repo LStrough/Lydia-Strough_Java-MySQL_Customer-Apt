@@ -98,8 +98,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
             ps.setString(4, title);
             ps.setString(5, description);
             ps.setString(6, location);
-            ps.setTimestamp(7, Timestamp.valueOf(startDateTime));
-            ps.setTimestamp(8, Timestamp.valueOf(endDateTime));
+            ps.setTimestamp(7, Timestamp.valueOf(startDateTime));       //convert to UTC?
+            ps.setTimestamp(8, Timestamp.valueOf(endDateTime));         //convert to UTC?
             ps.setInt(9, appointmentId);
             rowsAffected = ps.executeUpdate();
 
@@ -160,8 +160,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
             ps.setString(5, description);
             ps.setString(6, location);
             ps.setString(7, type);
-            ps.setTimestamp(8, Timestamp.valueOf(startDateTime));
-            ps.setTimestamp(9, Timestamp.valueOf(endDateTime));
+            ps.setTimestamp(8, Timestamp.valueOf(startDateTime));       //convert to UTC?
+            ps.setTimestamp(9, Timestamp.valueOf(endDateTime));         //convert to UTC?
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {

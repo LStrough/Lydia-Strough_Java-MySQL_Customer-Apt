@@ -7,10 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Appointment;
-import model.Contact;
-import model.Customer;
-import model.User;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,11 +24,8 @@ public class UpdateAppointment implements Initializable {
     public ComboBox<Customer> customerComboBx;
     public ComboBox<User> userComboBx;
     public DatePicker startDatePicker, endDatePicker;
-    public ComboBox startTimeComboBx, endTimeComboBx;
+    public ComboBox<BusinessHour> startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
-    private int customerId, userId, contactId;
-    private String title, description, location, type;
-    private LocalDateTime startDateTime, endDateTime;
 
     public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
@@ -53,6 +47,9 @@ public class UpdateAppointment implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }
+    }
+
+    public void onActionFilterEndDateTime(ActionEvent actionEvent) {
     }
 
     @Override

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.BusinessHour;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -28,18 +29,18 @@ public class AddAppointment implements Initializable {
     public ComboBox<Customer> customerComboBx;
     public ComboBox<User> userComboBx;
     public DatePicker startDatePicker, endDatePicker;
-    public ComboBox startTimeComboBx, endTimeComboBx;
+    public ComboBox<BusinessHour> startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
-    private int customerId, userId, contactId;
-    private String title, description, location, type;
-    private LocalDateTime startDateTime, endDateTime;
+    public int customerId, userId, contactId;
+    public String title, description, location, type;
+    public LocalDateTime startDateTime, endDateTime;
 
     public void onActionSaveAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
 
         try{
             AppointmentDao appointmentDao = new AppointmentDaoImpl();
-/*
+
             title = typeE.getText();
             description = descriptionTxt.getText();
             location = locationTxt.getText();
@@ -47,17 +48,21 @@ public class AddAppointment implements Initializable {
             contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
             customerId = customerComboBx.getSelectionModel().getSelectedItem().getCustomerId();
             userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
+
             LocalDate startDate = startDatePicker.getValue();
             LocalDate endDate = endDatePicker.getValue();
-            LocalTime startTime = startTimeComboBx.getValue();
-            LocalTime endTime = endTimeComboBx.getValue();
+            /*
+            startTime = startTimeComboBx.getValue();
+            endTime = endTimeComboBx.getValue();
+
+            //if() {}           //check that values aren't overlapping
+
             startDateTime = LocalDateTime.of(startDate, startTime);
             endDateTime = LocalDateTime.of(endDate, endTime);
 
             appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                     startDateTime, endDateTime);
-
- */
+             */
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -82,6 +87,9 @@ public class AddAppointment implements Initializable {
         }
     }
 
+    public void onActionFilterEndDateTime(ActionEvent actionEvent) {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Appointment: I am initialized!");
@@ -94,5 +102,6 @@ public class AddAppointment implements Initializable {
         contactComboBx.setItems(contactDao.getAllContacts());
         customerComboBx.setItems(customerDao.getAllCustomers());
         userComboBx.setItems(userDao.getAllUsers());
+        startTimeComboBx.setItems(BusinessHour.getBusinessHrs());
     }
 }
