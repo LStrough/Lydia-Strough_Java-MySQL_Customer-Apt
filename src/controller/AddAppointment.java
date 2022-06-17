@@ -27,7 +27,7 @@ import static model.BusinessHour.businessHours;
 public class AddAppointment implements Initializable {
     Stage stage;
     Parent scene;
-    private ObservableList<BusinessHour> businessHoursLocal = FXCollections.observableArrayList();
+
     public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
     public ComboBox<Contact> contactComboBx;
     public ComboBox<Customer> customerComboBx;
@@ -35,11 +35,14 @@ public class AddAppointment implements Initializable {
     public DatePicker startDatePicker, endDatePicker;
     public ComboBox<BusinessHour> startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
+
     public int customerId, userId, contactId;
     public String title, description, location, type;
-    LocalDate startDate;
-    LocalDate endDate;
+    public LocalDate startDate, endDate;
+    public BusinessHour startTime, endTime;
     public LocalDateTime startDateTime, endDateTime;
+    public ObservableList<BusinessHour> businessHoursLocal = FXCollections.observableArrayList();
+
 
     public void onActionSaveAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
@@ -56,22 +59,19 @@ public class AddAppointment implements Initializable {
             userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
 
             startDate = startDatePicker.getValue();
-            //endDate = endDatePicker.getValue();
-
-            //startTimeComboBx.setItems();
-
-            /*
+            endDate = endDatePicker.getValue();
             startTime = startTimeComboBx.getValue();
             endTime = endTimeComboBx.getValue();
 
-            //if() {}           //check that values aren't overlapping
-
-            startDateTime = LocalDateTime.of(startDate, startTime);
-            endDateTime = LocalDateTime.of(endDate, endTime);
+            /*
+            if() {  //check that appointment times aren't overlapping
+                startDateTime = LocalDateTime.of(startDate, startTime);
+                endDateTime = LocalDateTime.of(endDate, endTime);
+            }
+             */
 
             appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                     startDateTime, endDateTime);
-             */
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -98,9 +98,8 @@ public class AddAppointment implements Initializable {
 
     public void onActionFilterStartDateTime(ActionEvent actionEvent) {
         try{
-            //String date = String.valueOf(startDate);
-            System.out.println(startDate);
-/*
+            LocalDate date = startDate;
+
             for(BusinessHour businessHour : businessHours) {
                 int hour = businessHour.getHour();
                 int min = businessHour.getMin();
@@ -125,8 +124,6 @@ public class AddAppointment implements Initializable {
                 businessHoursLocal.add(localBHr);
             }
             startTimeComboBx.setItems(businessHoursLocal);
-
- */
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }

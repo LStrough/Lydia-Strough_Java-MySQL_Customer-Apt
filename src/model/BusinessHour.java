@@ -53,6 +53,8 @@ public class BusinessHour {
 
     @Override
     public String toString() {
+
+
         String time = hour + ":" + min;
         if((hour == 8) || (hour == 9)) {
             time = "0" + time;
@@ -60,6 +62,6 @@ public class BusinessHour {
         if(min == 0) {
             time = time + "0";
         }
-        return time;
+        return (zonedDateTime + " " + time);
     }
 }
