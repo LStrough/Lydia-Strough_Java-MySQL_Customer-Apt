@@ -65,13 +65,13 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="countryComboBx" maxWidth="-Infinity" onAction="#onActionSelectCountry" prefWidth="200.0" promptText="Select a Country" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="countryComboBx" maxWidth="-Infinity" onAction="#onActionSelectCountry" prefWidth="200.0" promptText="Select a Country" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="Division" GridPane.rowIndex="6">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="divisionComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Division" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="divisionComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Division" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                </children>
             </GridPane>
             <Button layoutX="547.0" layoutY="478.0" mnemonicParsing="false" onAction="#onActionSaveCustomer" prefHeight="26.0" prefWidth="70.0" text="Save" />
