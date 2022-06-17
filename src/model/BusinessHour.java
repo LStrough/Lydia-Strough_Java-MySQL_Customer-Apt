@@ -3,6 +3,11 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class BusinessHour {
     private int hour;
     private int min;
@@ -39,6 +44,26 @@ public class BusinessHour {
 
     @Override
     public String toString() {
-        return(Integer.toString(hour) + ":" + Integer.toString(min));
+        /*
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
+        String time = hour + ":" + min;
+        if((hour == 8) || (hour == 9)) {
+            time = "0" + time;
+        }
+        if(min == 0) {
+            time = time + "0";
+        }
+        LocalTime localTimeObj = LocalTime.parse(time, df);
+        return(localTimeObj.toString());
+         */
+
+        String time = hour + ":" + min;
+        if((hour == 8) || (hour == 9)) {
+            time = "0" + time;
+        }
+        if(min == 0) {
+            time = time + "0";
+        }
+        return time;
     }
 }
