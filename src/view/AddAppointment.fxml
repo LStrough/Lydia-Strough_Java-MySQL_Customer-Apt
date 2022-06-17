@@ -88,11 +88,11 @@
                   <Font size="12.0" />
                </font>
             </Label>
-            <DatePicker fx:id="startDatePicker" maxWidth="-Infinity" prefWidth="200.0" promptText="Choose a Date" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <DatePicker fx:id="startDatePicker" maxWidth="-Infinity" onAction="#onActionFilterStartDateTime" prefWidth="200.0" promptText="Choose a Date" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <ComboBox fx:id="contactComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Contact" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="customerComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Customer" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <ComboBox fx:id="userComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a User" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" onAction="#onActionFilterEndDateTime" prefWidth="200.0" promptText="Select a Time" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Time" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="9" />
          </children>
       </GridPane>
       <Button layoutX="632.0" layoutY="534.0" mnemonicParsing="false" onAction="#onActionSaveAppt" prefHeight="26.0" prefWidth="70.0" text="Save" />
