@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static java.time.ZoneId.systemDefault;
 import static model.BusinessHour.businessHours;
 
 public class AddAppointment implements Initializable {
@@ -97,9 +98,9 @@ public class AddAppointment implements Initializable {
     }
 
     public void onActionFilterStartDateTime(ActionEvent actionEvent) {
+     /*
         try{
             LocalDate date = startDate;
-
             for(BusinessHour businessHour : businessHours) {
                 int hour = businessHour.getHour();
                 int min = businessHour.getMin();
@@ -112,18 +113,40 @@ public class AddAppointment implements Initializable {
                     time = time + "0";
                 }
 
-                String txtStartDateTime = date + " " + time;
-                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
-                LocalDateTime ldt = LocalDateTime.parse(txtStartDateTime, df);
+            String txtStartDateTime = date + " " + time;
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
+            LocalDateTime ldt = LocalDateTime.parse(txtStartDateTime, df);
+            ZoneId zid = ZoneId.systemDefault();
+            ZonedDateTime zdt = ldt.atZone(zid);
+            BusinessHour localBHr = new BusinessHour(zdt);
+            businessHoursLocal.add(localBHr);
+            }
+            startTimeComboBx.setItems(businessHoursLocal);
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
 
+      */
+        try{
+            LocalDate date = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
+            System.out.println(date);
+/*
+            for(BusinessHour businessHour : businessHours) {
+                int hour = businessHour.getHour();
+                int min = businessHour.getMin();
+
+                LocalTime time = LocalTime.of(hour, min);
+
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
+                LocalDateTime ldt = LocalDateTime.of(date, time);
                 ZoneId zid = ZoneId.systemDefault();
                 ZonedDateTime zdt = ldt.atZone(zid);
 
                 BusinessHour localBHr = new BusinessHour(zdt);
-
                 businessHoursLocal.add(localBHr);
             }
             startTimeComboBx.setItems(businessHoursLocal);
+ */
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
