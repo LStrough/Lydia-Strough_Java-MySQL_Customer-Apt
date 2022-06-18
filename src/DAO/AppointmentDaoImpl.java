@@ -8,9 +8,7 @@ import model.Appointment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 
 import static DAO.JDBC.connection;
 
@@ -98,8 +96,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
             ps.setString(4, title);
             ps.setString(5, description);
             ps.setString(6, location);
-            ps.setTimestamp(7, Timestamp.valueOf(startDateTime));       //convert to UTC?
-            ps.setTimestamp(8, Timestamp.valueOf(endDateTime));         //convert to UTC?
+            ps.setTimestamp(7, Timestamp.valueOf(startDateTime));
+            ps.setTimestamp(8, Timestamp.valueOf(endDateTime));
             ps.setInt(9, appointmentId);
             rowsAffected = ps.executeUpdate();
 
@@ -160,8 +158,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
             ps.setString(5, description);
             ps.setString(6, location);
             ps.setString(7, type);
-            ps.setTimestamp(8, Timestamp.valueOf(startDateTime));       //convert to UTC?
-            ps.setTimestamp(9, Timestamp.valueOf(endDateTime));         //convert to UTC?
+            ps.setTimestamp(8, Timestamp.valueOf(startDateTime));
+            ps.setTimestamp(9, Timestamp.valueOf(endDateTime));
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -178,13 +176,24 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
     @Override
     public Appointment lookUpAppointment(LocalDate date) {
-        apptFound = false;
+        apptFound = false;                                                          //why doesn't this work??
+
         for(Appointment appointment : appointments){
             if(appointment.getStartDate() == date){
                 apptFound = true;
                 return appointment;
             }
         }
+        return null;
+    }
+
+    @Override
+    public ObservableList<Appointment> orderApptsByMonth() {
+        return null;
+    }
+
+    @Override
+    public ObservableList<Appointment> orderApptsByWeek() {
         return null;
     }
 }

@@ -18,12 +18,8 @@ import model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import static java.time.ZoneId.systemDefault;
-import static model.BusinessHour.businessHours;
 
 public class AddAppointment implements Initializable {
     Stage stage;
@@ -42,7 +38,7 @@ public class AddAppointment implements Initializable {
     public LocalDate startDate, endDate;
     public BusinessHour startTime, endTime;
     public LocalDateTime startDateTime, endDateTime;
-    public ObservableList<BusinessHour> businessHoursLocal = FXCollections.observableArrayList();
+   // public ObservableList<BusinessHour> businessHoursLocal = FXCollections.observableArrayList();
 
 
     public void onActionSaveAppt(ActionEvent actionEvent) {
@@ -98,7 +94,7 @@ public class AddAppointment implements Initializable {
     }
 
     public void onActionFilterStartDateTime(ActionEvent actionEvent) {
-     /*
+        /*
         try{
             LocalDate date = startDate;
             for(BusinessHour businessHour : businessHours) {
@@ -127,10 +123,11 @@ public class AddAppointment implements Initializable {
         }
 
       */
+        /*
         try{
             LocalDate date = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
             System.out.println(date);
-/*
+
             for(BusinessHour businessHour : businessHours) {
                 int hour = businessHour.getHour();
                 int min = businessHour.getMin();
@@ -146,10 +143,10 @@ public class AddAppointment implements Initializable {
                 businessHoursLocal.add(localBHr);
             }
             startTimeComboBx.setItems(businessHoursLocal);
- */
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
+         */
     }
 
     @Override
@@ -164,5 +161,9 @@ public class AddAppointment implements Initializable {
         contactComboBx.setItems(contactDao.getAllContacts());
         customerComboBx.setItems(customerDao.getAllCustomers());
         userComboBx.setItems(userDao.getAllUsers());
+        startTimeComboBx.setItems(BusinessHour.getBusinessHrs());
+
+        startTimeComboBx.getSelectionModel().getSelectedItem();
+        endTimeComboBx.getSelectionModel().getSelectedItem();
     }
 }

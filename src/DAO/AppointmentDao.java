@@ -15,4 +15,8 @@ public interface AppointmentDao {
     public int addAppointment(int customerId, int userId, int contactId, String title, String description,
                               String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
     public Appointment lookUpAppointment(LocalDate date);
+
+    public ObservableList<Appointment> orderApptsByMonth();
+
+    public ObservableList<Appointment> orderApptsByWeek();
 }
