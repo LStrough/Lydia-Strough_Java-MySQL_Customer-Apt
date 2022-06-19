@@ -51,18 +51,23 @@ public class MainAppointments implements Initializable {
         JDBC.openConnection();
         AppointmentDao appointmentDao = new AppointmentDaoImpl();
         apptTableView.setItems(appointmentDao.getAllAppointments());
+        LocalDate selDate = datePicker.getValue();
 
         try{
-            LocalDate selDate = datePicker.getValue();
             ObservableList<Appointment> appts = appointmentDao.lookUpAppointment(selDate);
             apptTableView.setItems(appts);
         }catch(Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
         if(!((AppointmentDaoImpl) appointmentDao).apptFound) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("No item was found.");
-            alert.showAndWait();
+            if(selDate.equals(null)) {
+                apptTableView.setItems(appointmentDao.getAllAppointments());
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("No item was found.");
+                alert.showAndWait();
+            }
         }
 
     }
