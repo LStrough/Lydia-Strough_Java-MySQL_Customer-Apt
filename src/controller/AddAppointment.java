@@ -79,7 +79,6 @@ public class AddAppointment implements Initializable {
         alert.setTitle("Cancel \"Add Appointment\"");
         alert.setContentText("All changes will be forgotten, do you wish to continue?");
         alert.showAndWait();
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {

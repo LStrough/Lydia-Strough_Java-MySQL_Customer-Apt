@@ -78,8 +78,17 @@ public class MainAppointments implements Initializable {
     public void onActionUpdateAppt(ActionEvent actionEvent) throws IOException {
         System.out.println("Update Appointment Button Clicked!");
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/UpdateAppointment.fxml"));
+        Parent scene = loader.load();
+
+        UpdateAppointment updateApptController = loader.getController();
+
+        Appointment selectedAppt = apptTableView.getSelectionModel().getSelectedItem();
+
+        updateApptController.updateAppointment(selectedAppt);
+
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/UpdateAppointment.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
@@ -87,6 +96,7 @@ public class MainAppointments implements Initializable {
     public void onActionDeleteAppt(ActionEvent actionEvent) {
         System.out.println("Delete Appointment Button Clicked!");
 
+        JDBC.openConnection();
         AppointmentDao apptDao = new AppointmentDaoImpl();
         Appointment selAppt = apptTableView.getSelectionModel().getSelectedItem();
         int appointmentId = selAppt.getAppointmentId();

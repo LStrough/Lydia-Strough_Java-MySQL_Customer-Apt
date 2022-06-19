@@ -74,7 +74,6 @@ public class AddCustomer implements Initializable {
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
         countryId = countryComboBx.getValue().getCountryId();
-
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         divisionComboBx.getSelectionModel().selectFirst();
     }
@@ -88,9 +87,7 @@ public class AddCustomer implements Initializable {
 
             countryComboBx.setItems(countryDao.getAllCountries());
             countryComboBx.getSelectionModel().selectFirst();
-
             countryId = countryComboBx.getValue().getCountryId();
-
             divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
             divisionComboBx.getSelectionModel().selectFirst();
         }catch (Exception e){

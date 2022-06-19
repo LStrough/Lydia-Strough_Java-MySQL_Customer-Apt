@@ -81,7 +81,8 @@ public class MainCustomers implements Initializable {
 
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
         System.out.println("Delete Customer Button Clicked!");
-        
+
+        JDBC.openConnection();
         CustomerDao customerDao = new CustomerDaoImpl();
         Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
         int customerId = selectedCustomer.getCustomerId();

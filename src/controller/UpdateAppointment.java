@@ -29,6 +29,28 @@ public class UpdateAppointment implements Initializable {
 
     Appointment selAppt = null;
 
+    public void updateAppointment(Appointment selectedAppt) {
+        /*
+        JDBC.openConnection();
+        CountryDao countryDao = new CountryDaoImpl();
+
+        selAppt = selectedAppt;
+
+        nameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
+        addressTxt.setText(String.valueOf(selCustomer.getAddress()));
+        postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
+        phoneTxt.setText(String.valueOf(selCustomer.getPhone()));
+
+        countryComboBx.setItems(countryDao.getAllCountries());
+        countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
+        countryId = selCustomer.getCountryId();
+
+        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        divisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
+        divisionId = selCustomer.getDivisionId();
+        */
+    }
+
     public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
     }
