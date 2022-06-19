@@ -130,14 +130,14 @@ public class UpdateAppointment implements Initializable {
             }
             if((startDate == null) || (endDate == null)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("\"Add Appointment\" ERROR");
-                alert.setContentText("Your \"Start/End Date\" cannot be empty!");
+                alert.setTitle("\"Update Appointment\" ERROR");
+                alert.setContentText("You must choose a \"Start/End Date\"!");
                 alert.showAndWait();
             }
             if((startTime == null) || (endTime == null)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("\"Add Appointment\" ERROR");
-                alert.setContentText("Your \"Start/End Time\" cannot be empty!");
+                alert.setTitle("\"Update Appointment\" ERROR");
+                alert.setContentText("You must choose a \"Start/End Time\"!");
                 alert.showAndWait();
             }
             else {
