@@ -58,7 +58,7 @@ public class UpdateAppointment implements Initializable {
         userComboBx.setItems(userDao.getAllUsers());
         userComboBx.getSelectionModel().select(selAppt.getUserId() - 1);
         startDatePicker.setValue(selAppt.getStartDate());
-        startDatePicker.setValue(selAppt.getStartDate());
+        endDatePicker.setValue(selAppt.getEndDate());
         startTimeComboBx.getSelectionModel().select(selAppt.getStartTime());
         endTimeComboBx.getSelectionModel().select(selAppt.getEndTime());
     }
@@ -90,7 +90,7 @@ public class UpdateAppointment implements Initializable {
                     location, type, startDateTime, endDateTime);
 
             stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
         }catch (Exception e) {
