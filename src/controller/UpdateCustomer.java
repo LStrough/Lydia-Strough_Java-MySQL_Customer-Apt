@@ -21,11 +21,13 @@ import java.util.ResourceBundle;
 public class UpdateCustomer implements Initializable {
     Stage stage;
     Parent scene;
-    Customer selCustomer = null;
+
     public TextField nameTxt, addressTxt, postalCodeTxt, phoneTxt;
     public ComboBox<Country> countryComboBx;
     public ComboBox<Division> divisionComboBx;
     public Label nameE, addressE, postalCodeE, phoneE;
+
+    Customer selCustomer = null;
     public int countryId, divisionId;
     public String customerName, address, postalCode, phone;
 

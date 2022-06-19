@@ -37,14 +37,13 @@ public class AddAppointment implements Initializable {
     public LocalTime startTime, endTime;
     public LocalDateTime startDateTime, endDateTime;
 
-
     public void onActionSaveAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
 
         try{
             AppointmentDao appointmentDao = new AppointmentDaoImpl();
 
-            title = typeE.getText();
+            title = titleTxt.getText();
             description = descriptionTxt.getText();
             location = locationTxt.getText();
             type = typeTxt.getText();
@@ -55,19 +54,21 @@ public class AddAppointment implements Initializable {
             endDate = endDatePicker.getValue();
             startTime = startTimeComboBx.getSelectionModel().getSelectedItem();
             endTime = endTimeComboBx.getSelectionModel().getSelectedItem();
-            /*
-            if() {  //check that appointment times aren't overlapping
-                startDateTime = LocalDateTime.of(startDate, startTime);
-                endDateTime = LocalDateTime.of(endDate, endTime);
-            }
-             */
-            startDateTime = LocalDateTime.of(startDate, startTime);
-            endDateTime = LocalDateTime.of(endDate, endTime);
+            startDateTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(),
+                    startTime.getHour(), startTime.getMinute());
+            endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(),
+                    endTime.getHour(), endTime.getMinute());
+
             appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                     startDateTime, endDateTime);
+
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+            JDBC.closeConnection();
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
-            System.out.println("Start: " + startDateTime + " End: " + endDateTime);
         }
     }
 

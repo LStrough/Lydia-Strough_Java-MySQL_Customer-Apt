@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 public class UpdateAppointment implements Initializable {
     Stage stage;
     Parent scene;
-    Appointment selAppt = null;
+
     public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
     public ComboBox<Contact> contactComboBx;
     public ComboBox<Customer> customerComboBx;
@@ -26,6 +26,8 @@ public class UpdateAppointment implements Initializable {
     public DatePicker startDatePicker, endDatePicker;
     public ComboBox startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
+
+    Appointment selAppt = null;
 
     public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");

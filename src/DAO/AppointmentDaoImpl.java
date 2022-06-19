@@ -149,7 +149,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
         int rowsAffected = 0;
         try {
             String sql = "INSERT INTO appointments (Customer_ID, User_ID, Contact_ID, Title, Description, Location, Type, " +
-                    "Start, End) VALUES(?,?,?,?,?)";
+                    "Start, End) VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, customerId);
             ps.setInt(2, userId);

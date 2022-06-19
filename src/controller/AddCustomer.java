@@ -20,10 +20,12 @@ import java.util.ResourceBundle;
 public class AddCustomer implements Initializable {
     Stage stage;
     Parent scene;
+
     public TextField nameTxt, addressTxt, postalCodeTxt, phoneTxt;
     public ComboBox<Country> countryComboBx;
     public ComboBox<Division> divisionComboBx;
     public Label nameE, addressE, postalCodeE, phoneE;
+
     private int countryId;
     public String customerName, address, postalCode, phone;
 
