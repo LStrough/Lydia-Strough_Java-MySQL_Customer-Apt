@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,10 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.*;
+import utilities.TimeManager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -24,35 +29,73 @@ public class UpdateAppointment implements Initializable {
     public ComboBox<Customer> customerComboBx;
     public ComboBox<User> userComboBx;
     public DatePicker startDatePicker, endDatePicker;
-    public ComboBox startTimeComboBx, endTimeComboBx;
+    public ComboBox<LocalTime> startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
 
     Appointment selAppt = null;
+    public int customerId, userId, contactId;
+    public String title, description, location, type;
+    public LocalDate startDate, endDate;
+    public LocalTime startTime, endTime;
+    public LocalDateTime startDateTime, endDateTime;
 
     public void updateAppointment(Appointment selectedAppt) {
-        /*
         JDBC.openConnection();
-        CountryDao countryDao = new CountryDaoImpl();
-
+        ContactDao contactDao = new ContactDaoImpl();
+        CustomerDao customerDao = new CustomerDaoImpl();
+        UserDao userDao = new UserDaoImpl();
         selAppt = selectedAppt;
 
-        nameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
-        addressTxt.setText(String.valueOf(selCustomer.getAddress()));
-        postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
-        phoneTxt.setText(String.valueOf(selCustomer.getPhone()));
+        titleTxt.setText(String.valueOf(selAppt.getTitle()));
+        descriptionTxt.setText(String.valueOf(selAppt.getDescription()));
+        locationTxt.setText(String.valueOf(selAppt.getLocation()));
+        typeTxt.setText(String.valueOf(selAppt.getType()));
 
-        countryComboBx.setItems(countryDao.getAllCountries());
-        countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
-        countryId = selCustomer.getCountryId();
-
-        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        divisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
-        divisionId = selCustomer.getDivisionId();
-        */
+        contactComboBx.setItems(contactDao.getAllContacts());
+        contactComboBx.getSelectionModel().select(selAppt.getContactId() - 1);
+        customerComboBx.setItems(customerDao.getAllCustomers());
+        customerComboBx.getSelectionModel().select(selAppt.getCustomerId() - 1);
+        userComboBx.setItems(userDao.getAllUsers());
+        userComboBx.getSelectionModel().select(selAppt.getUserId() - 1);
+        startDatePicker.setValue(selAppt.getStartDate());
+        startDatePicker.setValue(selAppt.getStartDate());
+        startTimeComboBx.getSelectionModel().select(selAppt.getStartTime());
+        endTimeComboBx.getSelectionModel().select(selAppt.getEndTime());
     }
 
     public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
+
+        try {
+            AppointmentDao appointmentDao = new AppointmentDaoImpl();
+
+            int appointmentId = selAppt.getAppointmentId();
+            title = titleTxt.getText();
+            description = descriptionTxt.getText();
+            location = locationTxt.getText();
+            type = typeTxt.getText();
+            contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
+            customerId = customerComboBx.getSelectionModel().getSelectedItem().getCustomerId();
+            userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
+            startDate = startDatePicker.getValue();
+            endDate = endDatePicker.getValue();
+            startTime = startTimeComboBx.getSelectionModel().getSelectedItem();
+            endTime = endTimeComboBx.getSelectionModel().getSelectedItem();
+            startDateTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(),
+                    startTime.getHour(), startTime.getMinute());
+            endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(),
+                    endTime.getHour(), endTime.getMinute());
+
+            appointmentDao.updateAppointment(appointmentId, customerId, userId, contactId, title, description,
+                    location, type, startDateTime, endDateTime);
+
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
@@ -76,5 +119,13 @@ public class UpdateAppointment implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Update Appointment: I am initialized!");
+
+        ZoneId osZId = ZoneId.systemDefault();
+        ZoneId businessZId =  ZoneId.of("America/New_York");
+        LocalTime startTime = LocalTime.of(8,0);
+        int workHours = 13;
+
+        startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
+        endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9,0), workHours));
     }
 }

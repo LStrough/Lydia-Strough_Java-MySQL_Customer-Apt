@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class MainAppointments implements Initializable {
     Stage stage;
     Parent scene;
+
     public ToggleGroup viewByTgl;
     public DatePicker datePicker;
     public TableView<Appointment> apptTableView;

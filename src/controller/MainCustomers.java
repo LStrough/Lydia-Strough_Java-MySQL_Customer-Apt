@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class MainCustomers implements Initializable {
     Stage stage;
     Parent scene;
+
     public TextField searchCustomer;
     public TableView<Customer> customerTableView;
     public TableColumn customerIdCol, customerNameCol, addressCol, postalCodeCol, phoneNumCol, stateProvinceCol;

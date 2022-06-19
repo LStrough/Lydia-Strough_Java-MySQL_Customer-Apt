@@ -20,6 +20,7 @@ import static DAO.LoginQuery.loginQuery;
 public class Login implements Initializable {
     Stage stage;
     Parent scene;
+
     public Label usernameLbl, passwordLbl, timeZoneLbl;
     public TextField usernameTxt;
     public PasswordField passwordTxt;

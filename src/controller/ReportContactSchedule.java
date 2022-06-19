@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 public class ReportContactSchedule implements Initializable {
     Stage stage;
     Parent scene;
+
     public ComboBox<Contact> contactComboBx;
     public TableView apptTableView;
     public TableColumn apptIdCol, titleCol, descriptionCol, typeCol, startDateCol, endDateCol, startTimeCol, endTimeCol, customerIdCol;
