@@ -25,7 +25,7 @@ public class UpdateCustomer implements Initializable {
     public TextField nameTxt, addressTxt, postalCodeTxt, phoneTxt;
     public ComboBox<Country> countryComboBx;
     public ComboBox<Division> divisionComboBx;
-    public Label nameE, addressE, postalCodeE, phoneE;
+    public Label nameE, addressE, postalCodeE, phoneE, countryE, divisionE;
 
     Customer selCustomer = null;
     public int countryId, divisionId;
@@ -64,12 +64,49 @@ public class UpdateCustomer implements Initializable {
             phone = phoneTxt.getText();
             divisionId = divisionComboBx.getValue().getDivisionId();
 
-            customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
+            if(customerName.isEmpty()){
+                nameE.setText("Customer \"Name\" cannot be empty!");
+            }
+            if(!customerName.isEmpty()){
+                nameE.setText("");
+            }
+            if(address.isEmpty()){
+                addressE.setText("Customer \"Address\" cannot be empty!");
+            }if(!address.isEmpty()){
+                addressE.setText("");
+            }
+            if(postalCode.isEmpty()){
+                postalCodeE.setText("Customer \"Postal Code\" cannot be empty!");
+            }
+            if(!postalCode.isEmpty()){
+                postalCodeE.setText("");
+            }
+            if(phone.isEmpty()){
+                phoneE.setText("Customer \"Phone Number\" cannot be empty!");
+            }
+            if(!phone.isEmpty()){
+                phoneE.setText("");
+            }
+            if(countryComboBx.getSelectionModel() == null){
+                countryE.setText("You must select a \"Country\".");
+            }
+            if(!(countryComboBx.getSelectionModel() == null)){
+                countryE.setText("");
+            }
+            if(divisionComboBx.getSelectionModel() == null){
+                divisionE.setText("You must select a \"Division\".");
+            }
+            if(!(divisionComboBx.getSelectionModel() == null)){
+                divisionE.setText("");
+            }
+            else {
+                customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
-            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
+                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }

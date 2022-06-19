@@ -86,13 +86,69 @@ public class UpdateAppointment implements Initializable {
             endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(),
                     endTime.getHour(), endTime.getMinute());
 
-            appointmentDao.updateAppointment(appointmentId, customerId, userId, contactId, title, description,
-                    location, type, startDateTime, endDateTime);
+            if(title.isEmpty()) {
+                titleE.setText("\"Title\" cannot be empty!");
+            }
+            if(!title.isEmpty()) {
+                titleE.setText("");
+            }
+            if(description.isEmpty()) {
+                descriptionE.setText("\"Description\" cannot be empty!");
+            }
+            if(!description.isEmpty()) {
+                descriptionE.setText("");
+            }
+            if(location.isEmpty()) {
+                locationE.setText("\"Location\" cannot be empty!");
+            }
+            if(!location.isEmpty()) {
+                locationE.setText("");
+            }
+            if(type.isEmpty()) {
+                typeE.setText("\"Type\" cannot be empty!");
+            }
+            if(!type.isEmpty()) {
+                typeE.setText("");
+            }
+            if(contactComboBx.getSelectionModel() == null) {
+                contactE.setText("You must choose a \"Contact\"!");
+            }
+            if(!(contactComboBx.getSelectionModel() == null)) {
+                contactE.setText("");
+            }
+            if(customerComboBx.getSelectionModel() == null) {
+                customerE.setText("You must choose a \"Customer\"!");
+            }
+            if(!(customerComboBx.getSelectionModel() == null)) {
+                customerE.setText("");
+            }
+            if(userComboBx.getSelectionModel() == null) {
+                userE.setText("You must choose a \"User\"!");
+            }
+            if(!(userComboBx.getSelectionModel() == null)) {
+                userE.setText("");
+            }
+            if((startDate == null) || (endDate == null)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("\"Add Appointment\" ERROR");
+                alert.setContentText("Your \"Start/End Date\" cannot be empty!");
+                alert.showAndWait();
+            }
+            if((startTime == null) || (endTime == null)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("\"Add Appointment\" ERROR");
+                alert.setContentText("Your \"Start/End Time\" cannot be empty!");
+                alert.showAndWait();
+            }
+            else {
+                appointmentDao.updateAppointment(appointmentId, customerId, userId, contactId, title, description,
+                        location, type, startDateTime, endDateTime);
 
-            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
+                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            }
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
