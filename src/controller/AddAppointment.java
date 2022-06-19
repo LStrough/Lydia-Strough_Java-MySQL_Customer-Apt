@@ -53,20 +53,21 @@ public class AddAppointment implements Initializable {
             userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
             startDate = startDatePicker.getValue();
             endDate = endDatePicker.getValue();
-            startTime = startTimeComboBx.getValue();
-            endTime = endTimeComboBx.getValue();
-
+            startTime = startTimeComboBx.getSelectionModel().getSelectedItem();
+            endTime = endTimeComboBx.getSelectionModel().getSelectedItem();
             /*
             if() {  //check that appointment times aren't overlapping
                 startDateTime = LocalDateTime.of(startDate, startTime);
                 endDateTime = LocalDateTime.of(endDate, endTime);
             }
              */
-
+            startDateTime = LocalDateTime.of(startDate, startTime);
+            endDateTime = LocalDateTime.of(endDate, endTime);
             appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                     startDateTime, endDateTime);
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
+            System.out.println("Start: " + startDateTime + " End: " + endDateTime);
         }
     }
 
@@ -89,15 +90,12 @@ public class AddAppointment implements Initializable {
         }
     }
 
-    public void onActionFilterStartDateTime(ActionEvent actionEvent) {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Appointment: I am initialized!");
 
         ZoneId osZId = ZoneId.systemDefault();
-        ZoneId businessZId =  ZoneId.of("America/New_York");                //EST
+        ZoneId businessZId =  ZoneId.of("America/New_York");
         LocalTime startTime = LocalTime.of(8,0);
         int workHours = 13;
 

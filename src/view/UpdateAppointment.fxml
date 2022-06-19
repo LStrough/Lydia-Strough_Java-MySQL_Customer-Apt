@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateAppointment">
+<AnchorPane prefHeight="600.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateAppointment">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="875.0">
          <children>
@@ -93,7 +93,7 @@
                   <ComboBox fx:id="contactComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Contact" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <ComboBox fx:id="customerComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Customer" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ComboBox fx:id="userComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a User" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" onAction="#onActionFilterEndDateTime" prefWidth="200.0" promptText="Select a Time" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <ComboBox fx:id="startTimeComboBx" maxWidth="-Infinity" prefWidth="200.0" promptText="Select a Time" visibleRowCount="5" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                </children>
             </GridPane>
             <Button layoutX="632.0" layoutY="534.0" mnemonicParsing="false" onAction="#onActionUpdateAppt" prefHeight="26.0" prefWidth="70.0" text="Save" />

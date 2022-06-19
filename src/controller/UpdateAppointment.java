@@ -49,9 +49,6 @@ public class UpdateAppointment implements Initializable {
         }
     }
 
-    public void onActionFilterEndDateTime(ActionEvent actionEvent) {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Update Appointment: I am initialized!");
