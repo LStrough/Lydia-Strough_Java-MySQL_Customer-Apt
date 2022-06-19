@@ -70,6 +70,7 @@ public class BusinessHour {
             time = time + "0";
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm");
-        return (ldtConverted.format(dtf));
+        return(time);
+        //return (ldtConverted.format(dtf));
     }
 }
