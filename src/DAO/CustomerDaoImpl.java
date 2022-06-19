@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 public class CustomerDaoImpl implements CustomerDao{
-    ObservableList<Customer> customers = FXCollections.observableArrayList();
+    ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
     public boolean customerFound;
 
     @Override
@@ -35,12 +35,12 @@ public class CustomerDaoImpl implements CustomerDao{
                 String divisionName = result.getString("Division");
                 Customer customer = new Customer(customerId, divisionId, countryId, customerName, address, postalCode,
                         phone, countryName, divisionName);
-                customers.add(customer);
+                allCustomers.add(customer);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());;
         }
-        return customers;
+        return allCustomers;
     }
 
     @Override
@@ -275,7 +275,7 @@ public class CustomerDaoImpl implements CustomerDao{
     @Override
     public Customer lookUpCustomer(int customerId) {
         customerFound = false;
-        for(Customer customer : customers){
+        for(Customer customer : allCustomers){
             if(customer.getCustomerId() == customerId){
                 customerFound = true;
                 return customer;
@@ -289,13 +289,13 @@ public class CustomerDaoImpl implements CustomerDao{
         ObservableList<Customer> filteredCustomers = FXCollections.observableArrayList();
         customerFound = false;
 
-        for(Customer customer : customers) {
+        for(Customer customer : allCustomers) {
             if(customer.getCustomerName().toLowerCase().contains(customerName.toLowerCase())){
                 filteredCustomers.add(customer);
             }
         }
         if(filteredCustomers.isEmpty()) {
-            return customers;
+            return allCustomers;
         }
         customerFound = true;
         return filteredCustomers;

@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 public class ContactDaoImpl implements ContactDao{
-    ObservableList<Contact> contacts = FXCollections.observableArrayList();
+    ObservableList<Contact> allContacts = FXCollections.observableArrayList();
 
     @Override
     public ObservableList<Contact> getAllContacts() {
@@ -23,12 +23,12 @@ public class ContactDaoImpl implements ContactDao{
                 int contactId = result.getInt("Contact_ID");
                 String contactName = result.getString("Contact_Name");
                 Contact contact = new Contact(contactId, contactName);
-                contacts.add(contact);
+                allContacts.add(contact);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());;
         }
-        return contacts;
+        return allContacts;
     }
 
     @Override

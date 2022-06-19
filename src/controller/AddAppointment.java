@@ -97,7 +97,7 @@ public class AddAppointment implements Initializable {
         System.out.println("Add Appointment: I am initialized!");
 
         ZoneId osZId = ZoneId.systemDefault();
-        ZoneId businessZId =  ZoneId.of("America/New_York"); //EST
+        ZoneId businessZId =  ZoneId.of("America/New_York");                //EST
         LocalTime startTime = LocalTime.of(8,0);
         int workHours = 13;
 

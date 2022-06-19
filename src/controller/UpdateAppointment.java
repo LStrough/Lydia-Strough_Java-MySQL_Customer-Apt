@@ -24,7 +24,7 @@ public class UpdateAppointment implements Initializable {
     public ComboBox<Customer> customerComboBx;
     public ComboBox<User> userComboBx;
     public DatePicker startDatePicker, endDatePicker;
-    public ComboBox<BusinessHour> startTimeComboBx, endTimeComboBx;
+    public ComboBox startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
 
     public void onActionUpdateAppt(ActionEvent actionEvent) {

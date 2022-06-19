@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 public class UserDaoImpl implements UserDao{
-    ObservableList<User> users = FXCollections.observableArrayList();
+    ObservableList<User> allUsers = FXCollections.observableArrayList();
 
     @Override
     public ObservableList<User> getAllUsers(){
@@ -24,12 +24,12 @@ public class UserDaoImpl implements UserDao{
                 String userName = result.getString("User_Name");
                 String password = result.getString("Password");
                 User user = new User(userId, userName, password);
-                users.add(user);
+                allUsers.add(user);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());;
         }
-        return users;
+        return allUsers;
     }
 
     @Override

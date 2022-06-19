@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 public class DivisionDaoImpl implements DivisionDao{
-    ObservableList<Division> divisions = FXCollections.observableArrayList();
+    ObservableList<Division> allDivisions = FXCollections.observableArrayList();
     ObservableList<Division> divisionsByCountry = FXCollections.observableArrayList();
 
     @Override
@@ -27,12 +27,12 @@ public class DivisionDaoImpl implements DivisionDao{
                 String divisionName = result.getString("Division");
                 String countryName = result.getString("Country");
                 Division division = new Division(divisionId, countryId, divisionName, countryName);
-                divisions.add(division);
+                allDivisions.add(division);
             }
         }catch (Exception e) {
              System.out.println("Error: " + e.getMessage());
          }
-        return divisions;
+        return allDivisions;
     }
 
     @Override

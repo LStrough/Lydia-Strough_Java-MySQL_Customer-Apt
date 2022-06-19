@@ -3,6 +3,7 @@ package controller;
 import DAO.AppointmentDao;
 import DAO.AppointmentDaoImpl;
 import DAO.JDBC;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,10 +54,8 @@ public class MainAppointments implements Initializable {
 
         try{
             LocalDate selDate = datePicker.getValue();
-            Appointment appointment = appointmentDao.lookUpAppointment(selDate);
-            apptTableView.getSelectionModel().select(appointment);
-            apptTableView.scrollTo(appointment);
-            apptTableView.requestFocus();
+            ObservableList<Appointment> appts = appointmentDao.lookUpAppointment(selDate);
+            apptTableView.setItems(appts);
         }catch(Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

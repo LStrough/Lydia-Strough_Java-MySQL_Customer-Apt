@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 public class CountryDaoImpl implements CountryDao{
-    ObservableList<Country> countries = FXCollections.observableArrayList();
+    ObservableList<Country> allCountries = FXCollections.observableArrayList();
 
     @Override
     public ObservableList<Country> getAllCountries() {
@@ -23,12 +23,12 @@ public class CountryDaoImpl implements CountryDao{
                 int countryId = result.getInt("Country_ID");
                 String countryName = result.getString("Country");
                 Country country = new Country(countryId, countryName);
-                countries.add(country);
+                allCountries.add(country);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());;
         }
-        return countries;
+        return allCountries;
     }
 
     @Override

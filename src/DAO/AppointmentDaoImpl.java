@@ -13,7 +13,7 @@ import java.time.*;
 import static DAO.JDBC.connection;
 
 public class AppointmentDaoImpl implements AppointmentDao{
-    ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     public boolean apptFound;
 
     @Override
@@ -40,12 +40,12 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 LocalTime endTime = endDateTime.toLocalTime();
                 Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
                         location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
-                appointments.add(appointment);
+                allAppointments.add(appointment);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());;
         }
-        return appointments;
+        return allAppointments;
     }
 
     @Override
@@ -175,32 +175,20 @@ public class AppointmentDaoImpl implements AppointmentDao{
     }
 
     @Override
-    public Appointment lookUpAppointment(LocalDate selDate) {
-        ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
+    public ObservableList<Appointment> lookUpAppointment(LocalDate selDate) {
+        ObservableList<Appointment> filteredAppts = FXCollections.observableArrayList();
         apptFound = false;
 
-        for(Appointment appointment : appointments) {
+        for(Appointment appointment : allAppointments) {
             if(appointment.getStartDate().equals(selDate)){
-                filteredAppointments.add(appointment);
+                filteredAppts.add(appointment);
             }
         }
-        if(filteredAppointments.isEmpty()) {
-            return (Appointment) appointments;
+        if(filteredAppts.isEmpty()) {
+            return allAppointments;
         }
         apptFound = true;
-        return (Appointment) filteredAppointments;
-
-       /* apptFound = false;
-
-        for(Appointment appointment : appointments){
-            if(appointment.getStartDate() == selDate){
-                apptFound = true;
-                return appointment;
-            }
-        }
-        return null;
-
-        */
+        return filteredAppts;
     }
 
     @Override
