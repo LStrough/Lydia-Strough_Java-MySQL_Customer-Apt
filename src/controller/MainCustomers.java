@@ -90,7 +90,7 @@ public class MainCustomers implements Initializable {
         String customerName = selectedCustomer.getCustomerName();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("The selected Customer and their corresponding appointments will be deleted. Do you wish to continue?");
+        alert.setContentText("The selected \"Customer\" and their corresponding \"Appointment(s)\" will be deleted. Do you wish to continue?");
         alert.showAndWait();
         Optional<ButtonType> result = alert.showAndWait();
 

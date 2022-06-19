@@ -104,7 +104,7 @@ public class MainAppointments implements Initializable {
         int customerId = selAppt.getCustomerId();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("The selected Appointment will be deleted. Do you wish to continue?");
+        alert.setContentText("The selected \"Appointment\" will be deleted. Do you wish to continue?");
         alert.showAndWait();
         Optional<ButtonType> result = alert.showAndWait();
 
