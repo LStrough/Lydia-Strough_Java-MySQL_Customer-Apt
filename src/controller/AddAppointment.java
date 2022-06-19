@@ -173,6 +173,7 @@ public class AddAppointment implements Initializable {
 
         startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours)
         );
+        endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9,0), workHours));
 
         startTimeComboBx.getSelectionModel().getSelectedItem();
         endTimeComboBx.getSelectionModel().getSelectedItem();

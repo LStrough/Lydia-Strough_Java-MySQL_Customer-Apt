@@ -27,7 +27,6 @@ public class TimeManager {
         int midnightOrGreater = 0;
         for(int i = localStartingHour; i <= totalHours; i++) {
             if(i<24) {
-                //System.out.println(i);
                 timeList.add(LocalTime.of(i,0));
             }
             if(i>23) {
@@ -35,8 +34,6 @@ public class TimeManager {
                 midnightOrGreater += 1;
             }
         }
-        for(LocalTime lt : timeList)
-            System.out.println(lt);
-        return null;
+        return timeList;
     }
 }
