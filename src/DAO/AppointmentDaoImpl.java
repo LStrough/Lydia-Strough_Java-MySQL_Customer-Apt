@@ -201,4 +201,23 @@ public class AppointmentDaoImpl implements AppointmentDao{
     public ObservableList<Appointment> orderApptsByWeek() {
         return null;
     }
+
+    @Override
+    public boolean businessHourValidation(LocalDateTime localStart, LocalDateTime localEnd) {
+        boolean validApptTime = false;
+        LocalDateTime ldtStart = LocalDateTime.of(localStart.getYear(), localStart.getMonth(), localStart.getDayOfMonth(), localStart.getHour(), localStart.getMinute());
+        LocalDateTime ldtEnd = LocalDateTime.of(localEnd.getYear(), localEnd.getMonth(), localEnd.getDayOfMonth(), localEnd.getHour(), localEnd.getMinute());
+        ZonedDateTime businessZdtStart = ldtStart.atZone(ZoneId.of("America/New_York"));
+        ZonedDateTime businessZdtEnd = ldtEnd.atZone(ZoneId.of("America/New_York"));
+        if((businessZdtStart.getHour() > 22) || (businessZdtStart.getHour() < 8) || (businessZdtEnd.getHour() > 22) ||
+                (businessZdtEnd.getHour() < 8)) {
+            validApptTime = false;
+        }
+        return validApptTime;
+    }
+
+    @Override
+    public boolean apptOverlapValidation(Appointment selAppt) {
+        return false;
+    }
 }
