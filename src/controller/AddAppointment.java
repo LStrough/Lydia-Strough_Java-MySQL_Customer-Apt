@@ -154,6 +154,11 @@ public class AddAppointment implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Appointment: I am initialized!");
 
+        ZoneId osZId = ZoneId.systemDefault();
+        ZoneId businessZId =  ZoneId.of("America/New_York");
+        LocalTime startTime = LocalTime.of(8,0);
+        int workHours = 14;
+
         JDBC.openConnection();
         ContactDao contactDao = new ContactDaoImpl();
         CustomerDao customerDao = new CustomerDaoImpl();
@@ -162,9 +167,12 @@ public class AddAppointment implements Initializable {
         contactComboBx.setItems(contactDao.getAllContacts());
         customerComboBx.setItems(customerDao.getAllCustomers());
         userComboBx.setItems(userDao.getAllUsers());
-        startTimeComboBx.setItems(TimeManager.businessHourInit(0));
-        endTimeComboBx.setItems(TimeManager.businessHourInit(1));
-        endTimeComboBx.getItems().add(LocalTime.of(0,0));
+        //startTimeComboBx.setItems(TimeManager.businessHourInit(0));
+        //endTimeComboBx.setItems(TimeManager.businessHourInit(1));
+        //endTimeComboBx.getItems().add(LocalTime.of(0,0));
+
+        startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours)
+        );
 
         startTimeComboBx.getSelectionModel().getSelectedItem();
         endTimeComboBx.getSelectionModel().getSelectedItem();
