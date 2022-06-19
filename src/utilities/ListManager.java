@@ -1,4 +1,4 @@
-package Utilities;
+package utilities;
 
 import DAO.DivisionDao;
 import DAO.DivisionDaoImpl;

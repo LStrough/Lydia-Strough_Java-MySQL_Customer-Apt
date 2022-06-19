@@ -18,7 +18,8 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void businessHourInit() { //08:00 - 22:00
+    /*public static void businessHourInit(int start) { //08:00 - 22:00
+
         BusinessHour bHr0800= new BusinessHour(8, 00);
         BusinessHour bHr0815= new BusinessHour(8, 15);
         BusinessHour bHr0830= new BusinessHour(8, 30);
@@ -162,11 +163,15 @@ public class Main extends Application {
         BusinessHour bHr2200= new BusinessHour(22, 00);
 
         BusinessHour.addBusinessHour(bHr2200);
+
+
     }
+
+     */
+
 
     public static void main(String[] args) {
         //Locale.setDefault(new Locale("fr"));
-        businessHourInit();
 
         JDBC.openConnection();
         launch(args);

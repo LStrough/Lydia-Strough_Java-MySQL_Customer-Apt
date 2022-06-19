@@ -14,6 +14,7 @@ import model.BusinessHour;
 import model.Contact;
 import model.Customer;
 import model.User;
+import utilities.TimeManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,13 +31,13 @@ public class AddAppointment implements Initializable {
     public ComboBox<Customer> customerComboBx;
     public ComboBox<User> userComboBx;
     public DatePicker startDatePicker, endDatePicker;
-    public ComboBox<BusinessHour> startTimeComboBx, endTimeComboBx;
+    public ComboBox<LocalTime> startTimeComboBx, endTimeComboBx;
     public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
 
     public int customerId, userId, contactId;
     public String title, description, location, type;
     public LocalDate startDate, endDate;
-    public BusinessHour startTime, endTime;
+    //public  startTime, endTime;
     public LocalDateTime startDateTime, endDateTime;
    // public ObservableList<BusinessHour> businessHoursLocal = FXCollections.observableArrayList();
 
@@ -57,8 +58,8 @@ public class AddAppointment implements Initializable {
 
             startDate = startDatePicker.getValue();
             endDate = endDatePicker.getValue();
-            startTime = startTimeComboBx.getValue();
-            endTime = endTimeComboBx.getValue();
+            //startTime = startTimeComboBx.getValue();
+            //endTime = endTimeComboBx.getValue();
 
             /*
             if() {  //check that appointment times aren't overlapping
@@ -161,7 +162,9 @@ public class AddAppointment implements Initializable {
         contactComboBx.setItems(contactDao.getAllContacts());
         customerComboBx.setItems(customerDao.getAllCustomers());
         userComboBx.setItems(userDao.getAllUsers());
-        startTimeComboBx.setItems(BusinessHour.getBusinessHrs());
+        startTimeComboBx.setItems(TimeManager.businessHourInit(0));
+        endTimeComboBx.setItems(TimeManager.businessHourInit(1));
+        endTimeComboBx.getItems().add(LocalTime.of(0,0));
 
         startTimeComboBx.getSelectionModel().getSelectedItem();
         endTimeComboBx.getSelectionModel().getSelectedItem();
