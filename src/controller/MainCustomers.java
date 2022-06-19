@@ -90,7 +90,6 @@ public class MainCustomers implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("The selected Customer and their corresponding appointments will be deleted. Do you wish to continue?");
         alert.showAndWait();
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if ((result.isPresent() && result.get() == ButtonType.OK)) {
@@ -126,7 +125,6 @@ public class MainCustomers implements Initializable {
         alert.setTitle("Logout");
         alert.setContentText("Do you wish to Exit the program?");
         alert.showAndWait();
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if ((result.isPresent() && result.get() == ButtonType.OK)) {

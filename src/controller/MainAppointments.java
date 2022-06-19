@@ -86,6 +86,23 @@ public class MainAppointments implements Initializable {
 
     public void onActionDeleteAppt(ActionEvent actionEvent) {
         System.out.println("Delete Appointment Button Clicked!");
+
+        AppointmentDao apptDao = new AppointmentDaoImpl();
+        Appointment selAppt = apptTableView.getSelectionModel().getSelectedItem();
+        int appointmentId = selAppt.getAppointmentId();
+        int customerId = selAppt.getCustomerId();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("The selected Appointment will be deleted. Do you wish to continue?");
+        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if ((result.isPresent() && result.get() == ButtonType.OK)) {
+            System.out.println(apptDao.deleteAppointment(appointmentId, customerId));
+
+            JDBC.openConnection();
+            apptTableView.setItems(apptDao.getAllAppointments());
+        }
     }
 
     public void onActionCustomers(ActionEvent actionEvent) throws IOException {
@@ -113,7 +130,6 @@ public class MainAppointments implements Initializable {
         alert.setTitle("Logout");
         alert.setContentText("Do you wish to Exit the program?");
         alert.showAndWait();
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if ((result.isPresent() && result.get() == ButtonType.OK)) {
