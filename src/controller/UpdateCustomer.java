@@ -47,7 +47,15 @@ public class UpdateCustomer implements Initializable {
         countryId = selCustomer.getCountryId();
 
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
-        divisionComboBx.getSelectionModel().select(selCustomer.getDivisionId() - 1);
+
+        Division div = null;
+        for(Division division : ListManager.getFilteredDivisions(countryId)) {
+            if(division.getDivisionId() == selectedCustomer.getDivisionId()) {
+                div = division;
+                break;
+            }
+        }
+        divisionComboBx.getSelectionModel().select(div);
         divisionId = selCustomer.getDivisionId();
     }
 
@@ -64,6 +72,7 @@ public class UpdateCustomer implements Initializable {
             phone = phoneTxt.getText();
             divisionId = divisionComboBx.getValue().getDivisionId();
 
+            /*
             if(customerName.isEmpty()){
                 nameE.setText("Customer \"Name\" cannot be empty!");
             }
@@ -99,16 +108,18 @@ public class UpdateCustomer implements Initializable {
             if(!(divisionComboBx.getSelectionModel() == null)){
                 divisionE.setText("");
             }
-            else {
+
+             */
+
                 customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
-            }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

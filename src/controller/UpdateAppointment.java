@@ -55,6 +55,8 @@ public class UpdateAppointment implements Initializable {
         contactComboBx.getSelectionModel().select(selAppt.getContactId() - 1);
         customerComboBx.setItems(customerDao.getAllCustomers());
         customerComboBx.getSelectionModel().select(selAppt.getCustomerId() - 1);
+
+
         userComboBx.setItems(userDao.getAllUsers());
         userComboBx.getSelectionModel().select(selAppt.getUserId() - 1);
         startDatePicker.setValue(selAppt.getStartDate());

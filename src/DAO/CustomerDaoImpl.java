@@ -193,6 +193,7 @@ public class CustomerDaoImpl implements CustomerDao{
     @Override
     public int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) {
         int rowsAffected = 0;
+        System.out.println("Update Customer.....");
         try{
             String sql = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -202,6 +203,7 @@ public class CustomerDaoImpl implements CustomerDao{
             ps.setString(4, phone);
             ps.setInt(5, divisionId);
             ps.setInt(6, customerId);
+            System.out.println(ps.toString());
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -211,6 +213,7 @@ public class CustomerDaoImpl implements CustomerDao{
             }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return rowsAffected;
     }

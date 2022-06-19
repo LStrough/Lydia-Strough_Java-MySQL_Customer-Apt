@@ -40,6 +40,8 @@ public class AddCustomer implements Initializable {
             postalCode = postalCodeTxt.getText();
             phone = phoneTxt.getText();
             int divisionId = divisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
+/*
+
 
             if(customerName.isEmpty()){
                 nameE.setText("Customer \"Name\" cannot be empty!");
@@ -76,14 +78,16 @@ public class AddCustomer implements Initializable {
             if(!(divisionComboBx.getSelectionModel() == null)){
                 divisionE.setText("");
             }
-            else {
+
+ */
+
                 customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
-            }
+
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
