@@ -60,16 +60,10 @@ public class MainAppointments implements Initializable {
             System.out.println("Error: " + e.getMessage());
         }
         if(!((AppointmentDaoImpl) appointmentDao).apptFound) {
-            if(selDate.equals(null)) {
-                apptTableView.setItems(appointmentDao.getAllAppointments());
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("No item was found.");
-                alert.showAndWait();
-            }
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("No item was found.");
+            alert.showAndWait();
         }
-
     }
 
     public void onActionAddAppt(ActionEvent actionEvent) throws IOException {
