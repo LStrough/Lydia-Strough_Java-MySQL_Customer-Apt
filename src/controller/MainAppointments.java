@@ -52,9 +52,8 @@ public class MainAppointments implements Initializable {
         apptTableView.setItems(appointmentDao.getAllAppointments());
 
         try{
-            LocalDate date = datePicker.getValue();
-
-            Appointment appointment = appointmentDao.lookUpAppointment(date);
+            LocalDate selDate = datePicker.getValue();
+            Appointment appointment = appointmentDao.lookUpAppointment(selDate);
             apptTableView.getSelectionModel().select(appointment);
             apptTableView.scrollTo(appointment);
             apptTableView.requestFocus();

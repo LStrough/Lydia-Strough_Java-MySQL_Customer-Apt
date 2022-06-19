@@ -1,8 +1,6 @@
 package controller;
 
 import DAO.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.BusinessHour;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -37,9 +34,8 @@ public class AddAppointment implements Initializable {
     public int customerId, userId, contactId;
     public String title, description, location, type;
     public LocalDate startDate, endDate;
-    //public  startTime, endTime;
+    public LocalTime startTime, endTime;
     public LocalDateTime startDateTime, endDateTime;
-   // public ObservableList<BusinessHour> businessHoursLocal = FXCollections.observableArrayList();
 
 
     public void onActionSaveAppt(ActionEvent actionEvent) {
@@ -55,11 +51,10 @@ public class AddAppointment implements Initializable {
             contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
             customerId = customerComboBx.getSelectionModel().getSelectedItem().getCustomerId();
             userId = userComboBx.getSelectionModel().getSelectedItem().getUserId();
-
             startDate = startDatePicker.getValue();
             endDate = endDatePicker.getValue();
-            //startTime = startTimeComboBx.getValue();
-            //endTime = endTimeComboBx.getValue();
+            startTime = startTimeComboBx.getValue();
+            endTime = endTimeComboBx.getValue();
 
             /*
             if() {  //check that appointment times aren't overlapping
@@ -95,59 +90,6 @@ public class AddAppointment implements Initializable {
     }
 
     public void onActionFilterStartDateTime(ActionEvent actionEvent) {
-        /*
-        try{
-            LocalDate date = startDate;
-            for(BusinessHour businessHour : businessHours) {
-                int hour = businessHour.getHour();
-                int min = businessHour.getMin();
-                String time = hour + ":" + min;
-
-                if ((hour == 8) || (hour == 9)) {
-                    time = "0" + time;
-                }
-                if (min == 0) {
-                    time = time + "0";
-                }
-
-            String txtStartDateTime = date + " " + time;
-            DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
-            LocalDateTime ldt = LocalDateTime.parse(txtStartDateTime, df);
-            ZoneId zid = ZoneId.systemDefault();
-            ZonedDateTime zdt = ldt.atZone(zid);
-            BusinessHour localBHr = new BusinessHour(zdt);
-            businessHoursLocal.add(localBHr);
-            }
-            startTimeComboBx.setItems(businessHoursLocal);
-        } catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
-
-      */
-        /*
-        try{
-            LocalDate date = LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
-            System.out.println(date);
-
-            for(BusinessHour businessHour : businessHours) {
-                int hour = businessHour.getHour();
-                int min = businessHour.getMin();
-
-                LocalTime time = LocalTime.of(hour, min);
-
-                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm");
-                LocalDateTime ldt = LocalDateTime.of(date, time);
-                ZoneId zid = ZoneId.systemDefault();
-                ZonedDateTime zdt = ldt.atZone(zid);
-
-                BusinessHour localBHr = new BusinessHour(zdt);
-                businessHoursLocal.add(localBHr);
-            }
-            startTimeComboBx.setItems(businessHoursLocal);
-        }catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
-        }
-         */
     }
 
     @Override
@@ -155,9 +97,9 @@ public class AddAppointment implements Initializable {
         System.out.println("Add Appointment: I am initialized!");
 
         ZoneId osZId = ZoneId.systemDefault();
-        ZoneId businessZId =  ZoneId.of("America/New_York");
+        ZoneId businessZId =  ZoneId.of("America/New_York"); //EST
         LocalTime startTime = LocalTime.of(8,0);
-        int workHours = 14;
+        int workHours = 13;
 
         JDBC.openConnection();
         ContactDao contactDao = new ContactDaoImpl();
@@ -167,15 +109,7 @@ public class AddAppointment implements Initializable {
         contactComboBx.setItems(contactDao.getAllContacts());
         customerComboBx.setItems(customerDao.getAllCustomers());
         userComboBx.setItems(userDao.getAllUsers());
-        //startTimeComboBx.setItems(TimeManager.businessHourInit(0));
-        //endTimeComboBx.setItems(TimeManager.businessHourInit(1));
-        //endTimeComboBx.getItems().add(LocalTime.of(0,0));
-
-        startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours)
-        );
+        startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
         endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9,0), workHours));
-
-        startTimeComboBx.getSelectionModel().getSelectedItem();
-        endTimeComboBx.getSelectionModel().getSelectedItem();
     }
 }

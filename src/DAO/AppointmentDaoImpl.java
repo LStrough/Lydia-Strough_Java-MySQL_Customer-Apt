@@ -175,16 +175,32 @@ public class AppointmentDaoImpl implements AppointmentDao{
     }
 
     @Override
-    public Appointment lookUpAppointment(LocalDate date) {
-        apptFound = false;                                                          //why doesn't this work??
+    public Appointment lookUpAppointment(LocalDate selDate) {
+        ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
+        apptFound = false;
+
+        for(Appointment appointment : appointments) {
+            if(appointment.getStartDate().equals(selDate)){
+                filteredAppointments.add(appointment);
+            }
+        }
+        if(filteredAppointments.isEmpty()) {
+            return (Appointment) appointments;
+        }
+        apptFound = true;
+        return (Appointment) filteredAppointments;
+
+       /* apptFound = false;
 
         for(Appointment appointment : appointments){
-            if(appointment.getStartDate() == date){
+            if(appointment.getStartDate() == selDate){
                 apptFound = true;
                 return appointment;
             }
         }
         return null;
+
+        */
     }
 
     @Override
