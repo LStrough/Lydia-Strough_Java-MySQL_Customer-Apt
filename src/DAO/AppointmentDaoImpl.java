@@ -12,20 +12,21 @@ import java.time.*;
 
 import static DAO.JDBC.connection;
 
-public class AppointmentDaoImpl implements AppointmentDao{
+public class AppointmentDaoImpl implements AppointmentDao {
     ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     public boolean apptFound;
 
     @Override
     public ObservableList<Appointment> getAllAppointments() {
-       try{
+        try {
             String sql = "SELECT * FROM appointments";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet result = ps.executeQuery();
 
-            while(result.next()) {
+            while (result.next()) {
                 int appointmentId = result.getInt("Appointment_ID");
-                int customerId = result.getInt("Customer_ID");;
+                int customerId = result.getInt("Customer_ID");
+                ;
                 int userId = result.getInt("User_ID");
                 int contactId = result.getInt("Contact_ID");
                 String title = result.getString("Title");
@@ -51,16 +52,17 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
     @Override
     public Appointment getAppointment(int appointmentId) {
-        try{
+        try {
             String sql = "SELECT * FROM appointments WHERE Appointment_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, appointmentId);
 
             ResultSet result = ps.executeQuery();
             Appointment apptResult = null;
-            if(result.next()) {
+            if (result.next()) {
                 appointmentId = result.getInt("Appointment_ID");
-                int customerId = result.getInt("Customer_ID");;
+                int customerId = result.getInt("Customer_ID");
+                ;
                 int userId = result.getInt("User_ID");
                 int contactId = result.getInt("Contact_ID");
                 String title = result.getString("Title");
@@ -88,15 +90,16 @@ public class AppointmentDaoImpl implements AppointmentDao{
     public ObservableList<Appointment> getApptByCustomer(int customerId) {
         ObservableList<Appointment> customerAppts = FXCollections.observableArrayList();
 
-        try{
+        try {
             String sql = "SELECT * FROM appointments WHERE Customer_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, customerId);
 
             ResultSet result = ps.executeQuery();
-            while(result.next()) {
+            while (result.next()) {
                 int appointmentId = result.getInt("Appointment_ID");
-                customerId = result.getInt("Customer_ID");;
+                customerId = result.getInt("Customer_ID");
+                ;
                 int userId = result.getInt("User_ID");
                 int contactId = result.getInt("Contact_ID");
                 String title = result.getString("Title");
@@ -124,7 +127,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
     public int updateAppointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
                                  String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         int rowsAffected = 0;
-        try{
+        try {
             String sql = "UPDATE appointments SET Customer_ID=?, User_ID=?, Contact_ID=?, Title=?, Description=?, " +
                     "Location=?, Type=?, Start=?, End=? WHERE Appointment_ID=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -145,7 +148,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
             } else {
                 System.out.println("Appointment UPDATE Failed!");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
@@ -205,11 +208,10 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
             if (rowsAffected > 0) {
                 System.out.println("Appointment INSERT was successful!");
-            }
-            else {
+            } else {
                 System.out.println("Appointment INSERT failed!");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
@@ -221,12 +223,12 @@ public class AppointmentDaoImpl implements AppointmentDao{
         ObservableList<Appointment> filteredAppts = FXCollections.observableArrayList();
         apptFound = false;
 
-        for(Appointment appointment : allAppointments) {
-            if(appointment.getStartDate().equals(selDate)){
+        for (Appointment appointment : allAppointments) {
+            if (appointment.getStartDate().equals(selDate)) {
                 filteredAppts.add(appointment);
             }
         }
-        if(filteredAppts.isEmpty()) {
+        if (filteredAppts.isEmpty()) {
             return allAppointments;
         }
         apptFound = true;
@@ -249,8 +251,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
         apptZone = apptZone.withZoneSameInstant(ZoneId.of("US/Eastern"));
         apptStartTime = apptZone.toLocalDateTime();
 
-        LocalTime businessOpen = LocalTime.of(8,0);
-        LocalTime businessClose = LocalTime.of(22,0);
+        LocalTime businessOpen = LocalTime.of(8, 0);
+        LocalTime businessClose = LocalTime.of(22, 0);
         return ((apptStartTime.toLocalTime().isAfter(businessOpen) || apptStartTime.toLocalTime().equals(businessOpen)) &&
                 (apptStartTime.toLocalTime().isBefore(businessClose)));
     }
@@ -261,18 +263,53 @@ public class AppointmentDaoImpl implements AppointmentDao{
         apptZone = apptZone.withZoneSameInstant(ZoneId.of("US/Eastern"));
         apptEndTime = apptZone.toLocalDateTime();
 
-        LocalTime businessOpen = LocalTime.of(8,0);
-        LocalTime businessClose = LocalTime.of(22,0);
-        return ((apptEndTime.toLocalTime().isAfter(businessOpen) || apptEndTime.toLocalTime().equals(businessOpen)) &&
+        LocalTime businessOpen = LocalTime.of(8, 0);
+        LocalTime businessClose = LocalTime.of(22, 0);
+        return ((apptEndTime.toLocalTime().isAfter(businessOpen)) &&
                 (apptEndTime.toLocalTime().isBefore(businessClose) || apptEndTime.toLocalTime().equals(businessClose)));    //can end at close!
     }
 
     @Override
-    public boolean checkForOverlap(int customerId, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+    public boolean checkForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime, LocalTime selEndTime) {
         AppointmentDao apptDao = new AppointmentDaoImpl();
         ObservableList<Appointment> customerAppts = apptDao.getApptByCustomer(customerId);
         boolean overlap = false;
 
+        for (Appointment appt : customerAppts) {
+            //start or end on same day
+            if ((appt.getStartDate() == selStartDate) || (appt.getStartDate() == selEndDate) || (appt.getEndDate() == selStartDate)
+                    || (appt.getEndDate() == selEndDate)) {
+                //start or end at the same time
+                if ((appt.getStartTime() == selStartTime) || (appt.getEndTime() == selEndTime)) {
+                    overlap = true;
+                    break;
+                 //old appt starts & ends during new appt
+                }else if(appt.getStartTime().isAfter(selStartTime) && appt.getEndTime().isBefore(selEndTime)) {
+                    overlap = true;
+                    break;
+                 //new appt starts & ends during old appt
+                }else if(selStartTime.isAfter(appt.getStartTime()) && (selEndTime.isBefore(appt.getEndTime()))) {
+                    overlap = true;
+                    break;
+                 //old appt starts before new & ends in new
+                }else if((appt.getStartTime().isBefore(selStartTime)) && (appt.getEndTime().isBefore(selEndTime))) {
+                    overlap = true;
+                    break;
+                 //old appt starts in new and ends after new
+                } else if ((appt.getStartTime().isAfter(selStartTime)) && (appt.getEndTime().isAfter(selEndTime))) {
+                    overlap = true;
+                    break;
+                 //new appt starts before old & ends in old
+                }else if ((selStartTime.isBefore(appt.getStartTime())) && (selEndTime.isBefore(appt.getEndTime()))) {
+                    overlap = true;
+                    break;
+                //new appt starts in old and ends after old
+                }else if((selStartTime.isAfter(appt.getStartTime())) && (selEndTime.isAfter(appt.getEndTime()))) {
+                    overlap = true;
+                    break;
+                }
+            }
+        }
         return overlap;
     }
 }
