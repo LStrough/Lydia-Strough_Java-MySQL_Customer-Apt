@@ -51,8 +51,6 @@ public class UpdateAppointment implements Initializable {
         locationTxt.setText(String.valueOf(selAppt.getLocation()));
         typeTxt.setText(String.valueOf(selAppt.getType()));
 
-        contactComboBx.setItems(contactDao.getAllContacts());
-        //contactComboBx.getSelectionModel().select(selAppt.getContactId() - 1);
         Contact selContact = null;
         for(Contact contact : contactDao.getAllContacts()) {
             if(contact.getContactId() == selAppt.getContactId()) {
@@ -62,8 +60,6 @@ public class UpdateAppointment implements Initializable {
         }
         contactComboBx.getSelectionModel().select(selContact);
 
-        customerComboBx.setItems(customerDao.getAllCustomers());
-        //customerComboBx.getSelectionModel().select(selAppt.getCustomerId() - 1);
         Customer selCustomer = null;
         for(Customer customer : customerDao.getAllCustomers()) {
             if(customer.getCustomerId() == selAppt.getCustomerId()){
@@ -73,8 +69,6 @@ public class UpdateAppointment implements Initializable {
         }
         customerComboBx.getSelectionModel().select(selCustomer);
 
-        userComboBx.setItems(userDao.getAllUsers());
-        //userComboBx.getSelectionModel().select(selAppt.getUserId() - 1);
         User selUser = null;
         for(User user : userDao.getAllUsers()) {
             if(user.getUserId() == selAppt.getUserId()) {
@@ -220,6 +214,14 @@ public class UpdateAppointment implements Initializable {
             LocalTime startTime = LocalTime.of(8, 0);
             int workHours = 13;
 
+            JDBC.openConnection();
+            ContactDao contactDao = new ContactDaoImpl();
+            CustomerDao customerDao = new CustomerDaoImpl();
+            UserDao userDao = new UserDaoImpl();
+
+            contactComboBx.setItems(contactDao.getAllContacts());
+            customerComboBx.setItems(customerDao.getAllCustomers());
+            userComboBx.setItems(userDao.getAllUsers());
             startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
             endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9, 0), workHours));
         }catch (Exception e) {

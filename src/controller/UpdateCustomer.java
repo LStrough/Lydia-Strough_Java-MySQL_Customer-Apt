@@ -34,8 +34,8 @@ public class UpdateCustomer implements Initializable {
     public void updateCustomer(Customer selectedCustomer) {
         JDBC.openConnection();
         CountryDao countryDao = new CountryDaoImpl();
-        selCustomer = selectedCustomer;
 
+        selCustomer = selectedCustomer;
         nameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
         addressTxt.setText(String.valueOf(selCustomer.getAddress()));
         postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
