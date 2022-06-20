@@ -51,6 +51,7 @@ public class UpdateCustomer implements Initializable {
                 break;
             }
         }
+        countryComboBx.getSelectionModel().select(selCountry);
         //countryId = selCustomer.getCountryId();
         countryId = selCountry.getCountryId();
 
