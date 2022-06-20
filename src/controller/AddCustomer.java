@@ -162,6 +162,7 @@ public class AddCustomer implements Initializable {
             divisionComboBx.getSelectionModel().selectFirst();
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -191,21 +191,32 @@ public class AddAppointment implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Appointment: I am initialized!");
+        try {
+            ZoneId osZId = ZoneId.systemDefault();
+            ZoneId businessZId = ZoneId.of("America/New_York");
+            LocalTime startTime = LocalTime.of(8, 0);
+            int workHours = 13;
 
-        ZoneId osZId = ZoneId.systemDefault();
-        ZoneId businessZId =  ZoneId.of("America/New_York");
-        LocalTime startTime = LocalTime.of(8,0);
-        int workHours = 13;
+            JDBC.openConnection();
+            ContactDao contactDao = new ContactDaoImpl();
+            CustomerDao customerDao = new CustomerDaoImpl();
+            UserDao userDao = new UserDaoImpl();
 
-        JDBC.openConnection();
-        ContactDao contactDao = new ContactDaoImpl();
-        CustomerDao customerDao = new CustomerDaoImpl();
-        UserDao userDao = new UserDaoImpl();
-
-        contactComboBx.setItems(contactDao.getAllContacts());
-        customerComboBx.setItems(customerDao.getAllCustomers());
-        userComboBx.setItems(userDao.getAllUsers());
-        startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
-        endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9,0), workHours));
+            contactComboBx.setItems(contactDao.getAllContacts());
+            contactComboBx.getSelectionModel().selectFirst();
+            customerComboBx.setItems(customerDao.getAllCustomers());
+            customerComboBx.getSelectionModel().selectFirst();
+            userComboBx.setItems(userDao.getAllUsers());
+            userComboBx.getSelectionModel().selectFirst();
+            startDatePicker.setValue(LocalDate.now());
+            endDatePicker.setValue(LocalDate.now());
+            startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
+            startTimeComboBx.getSelectionModel().selectFirst();
+            endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9, 0), workHours));
+            endTimeComboBx.getSelectionModel().selectFirst();
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
