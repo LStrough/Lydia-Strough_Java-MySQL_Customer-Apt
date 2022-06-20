@@ -34,18 +34,15 @@ public class UpdateCustomer implements Initializable {
     public void updateCustomer(Customer selectedCustomer) {
         JDBC.openConnection();
         CountryDao countryDao = new CountryDaoImpl();
-
         selCustomer = selectedCustomer;
 
         nameTxt.setText(String.valueOf(selCustomer.getCustomerName()));
         addressTxt.setText(String.valueOf(selCustomer.getAddress()));
         postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
         phoneTxt.setText(String.valueOf(selCustomer.getPhone()));
-
         countryComboBx.setItems(countryDao.getAllCountries());
         countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
         countryId = selCustomer.getCountryId();
-
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
 
         Division div = null;
@@ -55,6 +52,7 @@ public class UpdateCustomer implements Initializable {
                 break;
             }
         }
+
         divisionComboBx.getSelectionModel().select(div);
         divisionId = selCustomer.getDivisionId();
     }
@@ -72,51 +70,26 @@ public class UpdateCustomer implements Initializable {
             phone = phoneTxt.getText();
             divisionId = divisionComboBx.getValue().getDivisionId();
 
-            /*
-            if(customerName.isEmpty()){
-                nameE.setText("Customer \"Name\" cannot be empty!");
-            }
-            if(!customerName.isEmpty()){
-                nameE.setText("");
-            }
-            if(address.isEmpty()){
-                addressE.setText("Customer \"Address\" cannot be empty!");
-            }if(!address.isEmpty()){
-                addressE.setText("");
-            }
-            if(postalCode.isEmpty()){
-                postalCodeE.setText("Customer \"Postal Code\" cannot be empty!");
-            }
-            if(!postalCode.isEmpty()){
-                postalCodeE.setText("");
-            }
-            if(phone.isEmpty()){
-                phoneE.setText("Customer \"Phone Number\" cannot be empty!");
-            }
-            if(!phone.isEmpty()){
-                phoneE.setText("");
-            }
-            if(countryComboBx.getSelectionModel() == null){
-                countryE.setText("You must select a \"Country\".");
-            }
-            if(!(countryComboBx.getSelectionModel() == null)){
-                countryE.setText("");
-            }
-            if(divisionComboBx.getSelectionModel() == null){
-                divisionE.setText("You must select a \"Division\".");
-            }
-            if(!(divisionComboBx.getSelectionModel() == null)){
-                divisionE.setText("");
-            }
-
-             */
-
+            if(customerName.isBlank()) {
+                exceptionMessage(1);
+            }else if(address.isBlank()) {
+                exceptionMessage(2);
+            }else if (postalCode.isBlank()){
+                exceptionMessage(3);
+            }else if (phone.isBlank()){
+                exceptionMessage(4);
+            }else if (countryComboBx.getSelectionModel() == null){
+                exceptionMessage(5);
+            }else if (divisionComboBx.getSelectionModel() == null){
+                exceptionMessage(6);
+            }else {
                 customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
+            }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
@@ -130,7 +103,6 @@ public class UpdateCustomer implements Initializable {
         alert.setTitle("Cancel \"Update Customer\"");
         alert.setContentText("All changes will be forgotten, do you wish to continue?");
         alert.showAndWait();
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -143,9 +115,31 @@ public class UpdateCustomer implements Initializable {
 
     public void onActionSelectCountry(ActionEvent actionEvent) {
         countryId = countryComboBx.getValue().getCountryId();
-
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         divisionComboBx.getSelectionModel().selectFirst();
+    }
+
+    public void exceptionMessage(int exceptionNum){
+        switch (exceptionNum) {
+            case 1 -> {
+                nameE.setText("Customer \"Name\" cannot be empty!");
+            }
+            case 2 -> {
+                addressE.setText("Customer \"Address\" cannot be empty!");
+            }
+            case 3 -> {
+                postalCodeE.setText("Customer \"Postal Code\" cannot be empty!");
+            }
+            case 4 -> {
+                phoneE.setText("Customer \"Phone Number\" cannot be empty!");
+            }
+            case 5 -> {
+                countryE.setText("You must select a \"Country\".");
+            }
+            case 6 -> {
+                divisionE.setText("You must select a \"Division\".");
+            }
+        }
     }
 
     @Override

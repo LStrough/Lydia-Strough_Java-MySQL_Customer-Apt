@@ -58,7 +58,7 @@ public class AddAppointment implements Initializable {
                     startTime.getHour(), startTime.getMinute());
             endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(),
                     endTime.getHour(), endTime.getMinute());
-
+/*
             if(title.isEmpty()) {
                 titleE.setText("\"Title\" cannot be empty!");
             }
@@ -113,7 +113,8 @@ public class AddAppointment implements Initializable {
                 alert.setContentText("You must choose a \"Start/End Time\"!");
                 alert.showAndWait();
             }
-            else {
+
+ */
                 appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                         startDateTime, endDateTime);
 
@@ -122,7 +123,6 @@ public class AddAppointment implements Initializable {
                 stage.setScene(new Scene(scene));
                 stage.show();
                 JDBC.closeConnection();
-            }
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
