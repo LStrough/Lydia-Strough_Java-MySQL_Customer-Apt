@@ -41,34 +41,33 @@ public class AddCustomer implements Initializable {
             int divisionId = divisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
 
             if(customerName.isBlank()) {
-                exceptionMessage(1);
+                errorMessage(1);
                 formatError = true;
             } else if(address.isBlank()) {
-                exceptionMessage(7);
-                exceptionMessage(2);
+                errorMessage(7);
+                errorMessage(2);
                 formatError = true;
             } else if (postalCode.isBlank()){
-                exceptionMessage(8);
-                exceptionMessage(3);
+                errorMessage(8);
+                errorMessage(3);
                 formatError = true;
             }else if (phone.isBlank()){
-                exceptionMessage(9);
-                exceptionMessage(4);
+                errorMessage(9);
+                errorMessage(4);
                 formatError = true;
             }else if (countryComboBx.getSelectionModel() == null){
-                exceptionMessage(10);
-                exceptionMessage(5);
+                errorMessage(10);
+                errorMessage(5);
                 formatError = true;
             }else if (divisionComboBx.getSelectionModel() == null){
-                exceptionMessage(11);
-                exceptionMessage(6);
+                errorMessage(11);
+                errorMessage(6);
                 formatError = true;
             } else {
-                exceptionMessage(12);
-                formatError = false;
+                errorMessage(12);
             }
 
-            if(formatError == false) {
+            if(!formatError) {
                 CustomerDao customerDao = new CustomerDaoImpl();
                 customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
@@ -108,8 +107,8 @@ public class AddCustomer implements Initializable {
         divisionComboBx.getSelectionModel().selectFirst();
     }
 
-    public void exceptionMessage(int exceptionNum){
-        switch (exceptionNum) {
+    public void errorMessage(int errorNum){
+        switch (errorNum) {
             case 1 -> {
                 nameE.setText("Customer \"Name\" cannot be empty!");
             }
