@@ -5,10 +5,12 @@ import model.Appointment;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public interface AppointmentDao {
     public ObservableList<Appointment> getAllAppointments();
     public Appointment getAppointment(int appointmentId);
+    public ObservableList<Appointment> getApptByCustomer(int customerId);
     public int updateAppointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
                                  String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
     public int deleteAppointment(int appointmentId, int customerId);
@@ -17,6 +19,6 @@ public interface AppointmentDao {
     public ObservableList<Appointment> lookUpAppointment(LocalDate date);
     public ObservableList<Appointment> orderApptsByMonth();
     public ObservableList<Appointment> orderApptsByWeek();
-    public boolean businessHourValidation(LocalDateTime startDateTime, LocalDateTime endDateTime);
-    public boolean apptOverlapValidation(Appointment selAppt);
+    public boolean checkApptTime(LocalDateTime apptTime);
+    public boolean checkForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime, LocalTime selEndTime);
 }

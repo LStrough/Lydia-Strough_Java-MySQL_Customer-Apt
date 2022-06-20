@@ -87,12 +87,6 @@ public class UpdateCustomer implements Initializable {
             }else if (phone.isBlank()){
                 errorMessage(4);
                 formatError = true;
-            }else if (countryComboBx.getSelectionModel() == null){
-                errorMessage(5);
-                formatError = true;
-            }else if (divisionComboBx.getSelectionModel() == null){
-                errorMessage(6);
-                formatError = true;
             }
 
             if(!formatError) {
@@ -146,12 +140,6 @@ public class UpdateCustomer implements Initializable {
             }
             case 4 -> {
                 phoneE.setText("Customer \"Phone Number\" cannot be empty!");
-            }
-            case 5 -> {
-                countryE.setText("You must select a \"Country\".");
-            }
-            case 6 -> {
-                divisionE.setText("You must select a \"Division\".");
             }
         }
     }

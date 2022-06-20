@@ -43,7 +43,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
                 allAppointments.add(appointment);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());;
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return allAppointments;
     }
@@ -77,9 +78,46 @@ public class AppointmentDaoImpl implements AppointmentDao{
             }
             return apptResult;
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());;
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public ObservableList<Appointment> getApptByCustomer(int customerId) {
+        ObservableList<Appointment> customerAppts = FXCollections.observableArrayList();
+
+        try{
+            String sql = "SELECT * FROM appointments WHERE Customer_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, customerId);
+
+            ResultSet result = ps.executeQuery();
+            while(result.next()) {
+                int appointmentId = result.getInt("Appointment_ID");
+                customerId = result.getInt("Customer_ID");;
+                int userId = result.getInt("User_ID");
+                int contactId = result.getInt("Contact_ID");
+                String title = result.getString("Title");
+                String description = result.getString("Description");
+                String location = result.getString("Location");
+                String type = result.getString("Type");
+                LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
+                LocalDate startDate = startDateTime.toLocalDate();
+                LocalDate endDate = endDateTime.toLocalDate();
+                LocalTime startTime = startDateTime.toLocalTime();
+                LocalTime endTime = endDateTime.toLocalTime();
+                Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
+                        location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
+                customerAppts.add(appointment);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return customerAppts;
     }
 
     @Override
@@ -109,6 +147,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
             }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return rowsAffected;
     }
@@ -140,6 +179,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return rowsAffected;
     }
@@ -171,6 +211,7 @@ public class AppointmentDaoImpl implements AppointmentDao{
             }
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return rowsAffected;
     }
@@ -203,21 +244,23 @@ public class AppointmentDaoImpl implements AppointmentDao{
     }
 
     @Override
-    public boolean businessHourValidation(LocalDateTime localStart, LocalDateTime localEnd) {
-        boolean validApptTime = false;
-        LocalDateTime ldtStart = LocalDateTime.of(localStart.getYear(), localStart.getMonth(), localStart.getDayOfMonth(), localStart.getHour(), localStart.getMinute());
-        LocalDateTime ldtEnd = LocalDateTime.of(localEnd.getYear(), localEnd.getMonth(), localEnd.getDayOfMonth(), localEnd.getHour(), localEnd.getMinute());
-        ZonedDateTime businessZdtStart = ldtStart.atZone(ZoneId.of("America/New_York"));
-        ZonedDateTime businessZdtEnd = ldtEnd.atZone(ZoneId.of("America/New_York"));
-        if((businessZdtStart.getHour() > 22) || (businessZdtStart.getHour() < 8) || (businessZdtEnd.getHour() > 22) ||
-                (businessZdtEnd.getHour() < 8)) {
-            validApptTime = false;
-        }
-        return validApptTime;
+    public boolean checkApptTime(LocalDateTime apptTime) {
+        ZonedDateTime apptZone = apptTime.atZone(ZoneId.systemDefault());
+        apptZone = apptZone.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        apptTime = apptZone.toLocalDateTime();
+
+        LocalTime businessOpen = LocalTime.of(8,0);
+        LocalTime businessClose = LocalTime.of(22,0);
+        return ((apptTime.toLocalTime().isAfter(businessOpen) || apptTime.toLocalTime().equals(businessOpen)) &&
+                (apptTime.toLocalTime().isBefore(businessClose)));
     }
 
     @Override
-    public boolean apptOverlapValidation(Appointment selAppt) {
-        return false;
+    public boolean checkForOverlap(int customerId, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+        AppointmentDao apptDao = new AppointmentDaoImpl();
+        ObservableList<Appointment> customerAppts = apptDao.getApptByCustomer(customerId);
+        boolean overlap = false;
+
+        return overlap;
     }
 }

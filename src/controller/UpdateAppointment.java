@@ -118,21 +118,6 @@ public class UpdateAppointment implements Initializable {
             } else if(type.isBlank()) {
                 errorMessage(4);
                 formatError = true;
-            } else if(contactComboBx.getSelectionModel() == null) {
-                errorMessage(5);
-                formatError = true;
-            } else if(customerComboBx.getSelectionModel() == null) {
-                errorMessage(6);
-                formatError = true;
-            } else if(userComboBx.getSelectionModel() == null) {
-                errorMessage(7);
-                formatError = true;
-            } else if((startDate == null) || (endDate == null)) {
-                errorMessage(8);
-                formatError = true;
-            } else if((startTime == null) || (endTime == null)) {
-                errorMessage(9);
-                formatError = true;
             }
 
             if(!formatError) {
@@ -182,24 +167,22 @@ public class UpdateAppointment implements Initializable {
                 typeE.setText("\"Type\" cannot be empty!");
             }
             case 5 -> {
-                contactE.setText("You must choose a \"Contact\"!");
-            }
-            case 6 -> {
-                customerE.setText("You must choose a \"Customer\"!");
-            }
-            case 7 -> {
-                userE.setText("You must choose a \"User\"!");
-            }
-            case 8 -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("\"Add Appointment\" ERROR");
-                alert.setContentText("You must choose a \"Start/End Date\"!");
+                alert.setTitle("Invalid Start or End Time");
+                alert.setContentText("You have selected an appointment time that is outside of \"Business Hours\". Please select a time that is " +
+                        "between 08:00 and 22:00 EST!");
                 alert.showAndWait();
             }
-            case 9 -> {
+            case 6 -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("\"Add Appointment\" ERROR");
-                alert.setContentText("You must choose a \"Start/End Time\"!");
+                alert.setTitle("Invalid Start or End Time");
+                alert.setContentText("\"Start Date/Time\" must come BEFORE \"End Date/Time\". Please try again!");
+                alert.showAndWait();
+            }
+            case 7 -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Overlapping Appointment");
+                alert.setContentText("Customer has overlapping appointments. Please select a different time!");
                 alert.showAndWait();
             }
         }

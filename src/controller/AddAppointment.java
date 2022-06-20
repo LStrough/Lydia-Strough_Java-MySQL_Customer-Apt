@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -70,36 +71,34 @@ public class AddAppointment implements Initializable {
             } else if(type.isBlank()) {
                 errorMessage(4);
                 formatError = true;
-            } else if(contactComboBx.getSelectionModel() == null) {
-                errorMessage(5);
-                formatError = true;
-            } else if(customerComboBx.getSelectionModel() == null) {
-                errorMessage(6);
-                formatError = true;
-            } else if(userComboBx.getSelectionModel() == null) {
-                errorMessage(7);
-                formatError = true;
-            } else if((startDate == null) || (endDate == null)) {
-                errorMessage(8);
-                formatError = true;
-            } else if((startTime == null) || (endTime == null)) {
-                errorMessage(9);
-                formatError = true;
             }
 
             if(!formatError) {
-                AppointmentDao appointmentDao = new AppointmentDaoImpl();
-                appointmentDao.addAppointment(customerId, userId, contactId, title, description, location, type,
-                        startDateTime, endDateTime);
+                AppointmentDao apptDao = new AppointmentDaoImpl();
+                if(apptDao.checkApptTime(startDateTime) && apptDao.checkApptTime(endDateTime)) {
+                    if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {
+                        if(!(apptDao.checkForOverlap(customerId, startDate, endDate, startTime, endTime))) {
+                            apptDao.addAppointment(customerId, userId, contactId, title, description, location, type,
+                                    startDateTime, endDateTime);
 
-                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
-                JDBC.closeConnection();
+                            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                            scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
+                            stage.setScene(new Scene(scene));
+                            stage.show();
+                            JDBC.closeConnection();
+                        }else {
+                            errorMessage(7);
+                        }
+                    } else {
+                        errorMessage(6);
+                    }
+                }else {
+                    errorMessage(5);
+                }
             }
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -136,24 +135,22 @@ public class AddAppointment implements Initializable {
                 typeE.setText("\"Type\" cannot be empty!");
             }
             case 5 -> {
-                contactE.setText("You must choose a \"Contact\"!");
-            }
-            case 6 -> {
-                customerE.setText("You must choose a \"Customer\"!");
-            }
-            case 7 -> {
-                userE.setText("You must choose a \"User\"!");
-            }
-            case 8 -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("\"Add Appointment\" ERROR");
-                alert.setContentText("You must choose a \"Start/End Date\"!");
+                alert.setTitle("Invalid Start or End Time");
+                alert.setContentText("You have selected an appointment time that is outside of \"Business Hours\". Please select a time that is " +
+                        "between 08:00 and 22:00 EST!");
                 alert.showAndWait();
             }
-            case 9 -> {
+            case 6 -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("\"Add Appointment\" ERROR");
-                alert.setContentText("You must choose a \"Start/End Time\"!");
+                alert.setTitle("Invalid Start or End Time");
+                alert.setContentText("\"Start Date/Time\" must come BEFORE \"End Date/Time\". Please try again!");
+                alert.showAndWait();
+            }
+            case 7 -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Overlapping Appointment");
+                alert.setContentText("Customer has overlapping appointments. Please select a different time!");
                 alert.showAndWait();
             }
         }
