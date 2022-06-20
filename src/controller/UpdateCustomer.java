@@ -41,9 +41,6 @@ public class UpdateCustomer implements Initializable {
         postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
         phoneTxt.setText(String.valueOf(selCustomer.getPhone()));
 
-        //countryComboBx.setItems(countryDao.getAllCountries());
-        //countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
-
         Country selCountry = null;
         for(Country country : countryDao.getAllCountries()) {
             if(country.getCountryId() == selCustomer.getCountryId()) {
@@ -52,7 +49,6 @@ public class UpdateCustomer implements Initializable {
             }
         }
         countryComboBx.getSelectionModel().select(selCountry);
-        //countryId = selCustomer.getCountryId();
         countryId = selCountry.getCountryId();
 
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
@@ -64,7 +60,6 @@ public class UpdateCustomer implements Initializable {
             }
         }
         divisionComboBx.getSelectionModel().select(selDivision);
-        //divisionId = selCustomer.getDivisionId();
         divisionId = selDivision.getDivisionId();
     }
 
