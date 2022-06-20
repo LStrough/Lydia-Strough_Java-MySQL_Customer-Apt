@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -73,11 +72,11 @@ public class AddAppointment implements Initializable {
                 formatError = true;
             }
 
-            if(!formatError) {
+            if(!formatError) {                                                                                  //No blank text fields
                 AppointmentDao apptDao = new AppointmentDaoImpl();
-                if(apptDao.checkApptTime(startDateTime) && apptDao.checkApptTime(endDateTime)) {
-                    if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {
-                        if(!(apptDao.checkForOverlap(customerId, startDate, endDate, startTime, endTime))) {
+                if(apptDao.checkApptTime(startDateTime) && apptDao.checkApptTime(endDateTime)) {                //within Business hours
+                    if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {                      //start of appointment is before end
+                        if(!(apptDao.checkForOverlap(customerId, startDate, endDate, startTime, endTime))) {    //No appt overlap
                             apptDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                                     startDateTime, endDateTime);
 
