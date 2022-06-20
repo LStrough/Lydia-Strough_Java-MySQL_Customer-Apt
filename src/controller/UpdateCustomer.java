@@ -61,8 +61,7 @@ public class UpdateCustomer implements Initializable {
         System.out.println("Save Button clicked!");
 
         try {
-            CustomerDao customerDao = new CustomerDaoImpl();
-
+            boolean formatError = false;
             int customerId = selCustomer.getCustomerId();
             customerName = nameTxt.getText();
             address = addressTxt.getText();
@@ -72,17 +71,34 @@ public class UpdateCustomer implements Initializable {
 
             if(customerName.isBlank()) {
                 exceptionMessage(1);
-            }else if(address.isBlank()) {
+                formatError = true;
+            } else if(address.isBlank()) {
+                exceptionMessage(7);
                 exceptionMessage(2);
-            }else if (postalCode.isBlank()){
+                formatError = true;
+            } else if (postalCode.isBlank()){
+                exceptionMessage(8);
                 exceptionMessage(3);
+                formatError = true;
             }else if (phone.isBlank()){
+                exceptionMessage(9);
                 exceptionMessage(4);
+                formatError = true;
             }else if (countryComboBx.getSelectionModel() == null){
+                exceptionMessage(10);
                 exceptionMessage(5);
+                formatError = true;
             }else if (divisionComboBx.getSelectionModel() == null){
+                exceptionMessage(11);
                 exceptionMessage(6);
-            }else {
+                formatError = true;
+            } else {
+                exceptionMessage(12);
+                formatError = false;
+            }
+
+            if(formatError == false){
+                CustomerDao customerDao = new CustomerDaoImpl();
                 customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
@@ -138,6 +154,24 @@ public class UpdateCustomer implements Initializable {
             }
             case 6 -> {
                 divisionE.setText("You must select a \"Division\".");
+            }
+            case 7 -> {
+                nameE.setText("");
+            }
+            case 8 -> {
+                addressE.setText("");
+            }
+            case 9 -> {
+                postalCodeE.setText("");
+            }
+            case 10 -> {
+                phoneE.setText("");
+            }
+            case 11 -> {
+                countryE.setText("");
+            }
+            case 12 -> {
+                divisionE.setText("");
             }
         }
     }

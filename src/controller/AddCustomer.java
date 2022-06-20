@@ -33,63 +33,53 @@ public class AddCustomer implements Initializable {
         System.out.println("Save Button clicked!");
 
         try {
-            CustomerDao customerDao = new CustomerDaoImpl();
-
+            boolean formatError = false;
             customerName = nameTxt.getText();
             address = addressTxt.getText();
             postalCode = postalCodeTxt.getText();
             phone = phoneTxt.getText();
             int divisionId = divisionComboBx.getSelectionModel().getSelectedItem().getDivisionId();
-/*
 
-
-            if(customerName.isEmpty()){
-                nameE.setText("Customer \"Name\" cannot be empty!");
-            }
-            if(!customerName.isEmpty()){
-                nameE.setText("");
-            }
-            if(address.isEmpty()){
-                addressE.setText("Customer \"Address\" cannot be empty!");
-            }if(!address.isEmpty()){
-                addressE.setText("");
-            }
-            if(postalCode.isEmpty()){
-                postalCodeE.setText("Customer \"Postal Code\" cannot be empty!");
-            }
-            if(!postalCode.isEmpty()){
-                postalCodeE.setText("");
-            }
-            if(phone.isEmpty()){
-                phoneE.setText("Customer \"Phone Number\" cannot be empty!");
-            }
-            if(!phone.isEmpty()){
-                phoneE.setText("");
-            }
-            if(countryComboBx.getSelectionModel() == null){
-                countryE.setText("You must select a \"Country\".");
-            }
-            if(!(countryComboBx.getSelectionModel() == null)){
-                countryE.setText("");
-            }
-            if(divisionComboBx.getSelectionModel() == null){
-                divisionE.setText("You must select a \"Division\".");
-            }
-            if(!(divisionComboBx.getSelectionModel() == null)){
-                divisionE.setText("");
+            if(customerName.isBlank()) {
+                exceptionMessage(1);
+                formatError = true;
+            } else if(address.isBlank()) {
+                exceptionMessage(7);
+                exceptionMessage(2);
+                formatError = true;
+            } else if (postalCode.isBlank()){
+                exceptionMessage(8);
+                exceptionMessage(3);
+                formatError = true;
+            }else if (phone.isBlank()){
+                exceptionMessage(9);
+                exceptionMessage(4);
+                formatError = true;
+            }else if (countryComboBx.getSelectionModel() == null){
+                exceptionMessage(10);
+                exceptionMessage(5);
+                formatError = true;
+            }else if (divisionComboBx.getSelectionModel() == null){
+                exceptionMessage(11);
+                exceptionMessage(6);
+                formatError = true;
+            } else {
+                exceptionMessage(12);
+                formatError = false;
             }
 
- */
-
+            if(formatError == false) {
+                CustomerDao customerDao = new CustomerDaoImpl();
                 customerDao.addCustomer(customerName, address, postalCode, phone, divisionId);
 
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/MainCustomers.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
-
+            }
         }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -116,6 +106,47 @@ public class AddCustomer implements Initializable {
         countryId = countryComboBx.getValue().getCountryId();
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         divisionComboBx.getSelectionModel().selectFirst();
+    }
+
+    public void exceptionMessage(int exceptionNum){
+        switch (exceptionNum) {
+            case 1 -> {
+                nameE.setText("Customer \"Name\" cannot be empty!");
+            }
+            case 2 -> {
+                addressE.setText("Customer \"Address\" cannot be empty!");
+            }
+            case 3 -> {
+                postalCodeE.setText("Customer \"Postal Code\" cannot be empty!");
+            }
+            case 4 -> {
+                phoneE.setText("Customer \"Phone Number\" cannot be empty!");
+            }
+            case 5 -> {
+                countryE.setText("You must select a \"Country\".");
+            }
+            case 6 -> {
+                divisionE.setText("You must select a \"Division\".");
+            }
+            case 7 -> {
+                nameE.setText("");
+            }
+            case 8 -> {
+                addressE.setText("");
+            }
+            case 9 -> {
+                postalCodeE.setText("");
+            }
+            case 10 -> {
+                phoneE.setText("");
+            }
+            case 11 -> {
+                countryE.setText("");
+            }
+            case 12 -> {
+                divisionE.setText("");
+            }
+        }
     }
 
     @Override
