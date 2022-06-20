@@ -40,9 +40,19 @@ public class UpdateCustomer implements Initializable {
         addressTxt.setText(String.valueOf(selCustomer.getAddress()));
         postalCodeTxt.setText(String.valueOf(selCustomer.getPostalCode()));
         phoneTxt.setText(String.valueOf(selCustomer.getPhone()));
-        countryComboBx.setItems(countryDao.getAllCountries());
-        countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
-        countryId = selCustomer.getCountryId();
+
+        //countryComboBx.setItems(countryDao.getAllCountries());
+        //countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
+
+        Country selCountry = null;
+        for(Country country : countryDao.getAllCountries()) {
+            if(country.getCountryId() == selCustomer.getCountryId()) {
+                selCountry = country;
+                break;
+            }
+        }
+        //countryId = selCustomer.getCountryId();
+        countryId = selCountry.getCountryId();
 
         divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
         Division selDivision = null;
@@ -53,7 +63,8 @@ public class UpdateCustomer implements Initializable {
             }
         }
         divisionComboBx.getSelectionModel().select(selDivision);
-        divisionId = selCustomer.getDivisionId();
+        //divisionId = selCustomer.getDivisionId();
+        divisionId = selDivision.getDivisionId();
     }
 
     public void onActionUpdateCustomer(ActionEvent actionEvent) {
@@ -152,5 +163,10 @@ public class UpdateCustomer implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Update Customer: I am initialized!");
+
+        JDBC.openConnection();
+        CountryDao countryDao = new CountryDaoImpl();
+
+        countryComboBx.setItems(countryDao.getAllCountries());
     }
 }
