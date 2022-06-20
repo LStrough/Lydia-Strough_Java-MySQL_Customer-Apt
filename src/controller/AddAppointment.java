@@ -74,7 +74,7 @@ public class AddAppointment implements Initializable {
 
             if(!formatError) {                                                                                  //No blank text fields
                 AppointmentDao apptDao = new AppointmentDaoImpl();
-                if(apptDao.checkApptTime(startDateTime) && apptDao.checkApptTime(endDateTime)) {                //within Business hours
+                if(apptDao.checkApptStartTime(startDateTime) && apptDao.checkApptEndTime(endDateTime)) {        //within Business hours
                     if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {                      //start of appointment is before end
                         if(!(apptDao.checkForOverlap(customerId, startDate, endDate, startTime, endTime))) {    //No appt overlap
                             apptDao.addAppointment(customerId, userId, contactId, title, description, location, type,

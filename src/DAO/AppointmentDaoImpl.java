@@ -244,15 +244,27 @@ public class AppointmentDaoImpl implements AppointmentDao{
     }
 
     @Override
-    public boolean checkApptTime(LocalDateTime apptTime) {
-        ZonedDateTime apptZone = apptTime.atZone(ZoneId.systemDefault());
+    public boolean checkApptStartTime(LocalDateTime apptStartTime) {
+        ZonedDateTime apptZone = apptStartTime.atZone(ZoneId.systemDefault());
         apptZone = apptZone.withZoneSameInstant(ZoneId.of("US/Eastern"));
-        apptTime = apptZone.toLocalDateTime();
+        apptStartTime = apptZone.toLocalDateTime();
 
         LocalTime businessOpen = LocalTime.of(8,0);
         LocalTime businessClose = LocalTime.of(22,0);
-        return ((apptTime.toLocalTime().isAfter(businessOpen) || apptTime.toLocalTime().equals(businessOpen)) &&
-                (apptTime.toLocalTime().isBefore(businessClose)));
+        return ((apptStartTime.toLocalTime().isAfter(businessOpen) || apptStartTime.toLocalTime().equals(businessOpen)) &&
+                (apptStartTime.toLocalTime().isBefore(businessClose)));
+    }
+
+    @Override
+    public boolean checkApptEndTime(LocalDateTime apptEndTime) {
+        ZonedDateTime apptZone = apptEndTime.atZone(ZoneId.systemDefault());
+        apptZone = apptZone.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        apptEndTime = apptZone.toLocalDateTime();
+
+        LocalTime businessOpen = LocalTime.of(8,0);
+        LocalTime businessClose = LocalTime.of(22,0);
+        return ((apptEndTime.toLocalTime().isAfter(businessOpen) || apptEndTime.toLocalTime().equals(businessOpen)) &&
+                (apptEndTime.toLocalTime().isBefore(businessClose) || apptEndTime.toLocalTime().equals(businessClose)));    //can end at close!
     }
 
     @Override
