@@ -43,17 +43,16 @@ public class UpdateCustomer implements Initializable {
         countryComboBx.setItems(countryDao.getAllCountries());
         countryComboBx.getSelectionModel().select(selCustomer.getCountryId() - 1);
         countryId = selCustomer.getCountryId();
-        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
 
-        Division div = null;
+        divisionComboBx.setItems(ListManager.getFilteredDivisions(countryId));
+        Division selDivision = null;
         for(Division division : ListManager.getFilteredDivisions(countryId)) {
-            if(division.getDivisionId() == selectedCustomer.getDivisionId()) {
-                div = division;
+            if(division.getDivisionId() == selCustomer.getDivisionId()) {
+                selDivision = division;
                 break;
             }
         }
-
-        divisionComboBx.getSelectionModel().select(div);
+        divisionComboBx.getSelectionModel().select(selDivision);
         divisionId = selCustomer.getDivisionId();
     }
 
@@ -73,30 +72,23 @@ public class UpdateCustomer implements Initializable {
                 errorMessage(1);
                 formatError = true;
             } else if(address.isBlank()) {
-                errorMessage(7);
                 errorMessage(2);
                 formatError = true;
             } else if (postalCode.isBlank()){
-                errorMessage(8);
                 errorMessage(3);
                 formatError = true;
             }else if (phone.isBlank()){
-                errorMessage(9);
                 errorMessage(4);
                 formatError = true;
             }else if (countryComboBx.getSelectionModel() == null){
-                errorMessage(10);
                 errorMessage(5);
                 formatError = true;
             }else if (divisionComboBx.getSelectionModel() == null){
-                errorMessage(11);
                 errorMessage(6);
                 formatError = true;
-            } else {
-                errorMessage(12);
             }
 
-            if(!formatError){
+            if(!formatError) {
                 CustomerDao customerDao = new CustomerDaoImpl();
                 customerDao.updateCustomer(customerId, customerName, address, postalCode, phone, divisionId);
 
@@ -153,24 +145,6 @@ public class UpdateCustomer implements Initializable {
             }
             case 6 -> {
                 divisionE.setText("You must select a \"Division\".");
-            }
-            case 7 -> {
-                nameE.setText("");
-            }
-            case 8 -> {
-                addressE.setText("");
-            }
-            case 9 -> {
-                postalCodeE.setText("");
-            }
-            case 10 -> {
-                phoneE.setText("");
-            }
-            case 11 -> {
-                countryE.setText("");
-            }
-            case 12 -> {
-                divisionE.setText("");
             }
         }
     }

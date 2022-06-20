@@ -44,21 +44,46 @@ public class UpdateAppointment implements Initializable {
         ContactDao contactDao = new ContactDaoImpl();
         CustomerDao customerDao = new CustomerDaoImpl();
         UserDao userDao = new UserDaoImpl();
-        selAppt = selectedAppt;
 
+        selAppt = selectedAppt;
         titleTxt.setText(String.valueOf(selAppt.getTitle()));
         descriptionTxt.setText(String.valueOf(selAppt.getDescription()));
         locationTxt.setText(String.valueOf(selAppt.getLocation()));
         typeTxt.setText(String.valueOf(selAppt.getType()));
 
         contactComboBx.setItems(contactDao.getAllContacts());
-        contactComboBx.getSelectionModel().select(selAppt.getContactId() - 1);
-        customerComboBx.setItems(customerDao.getAllCustomers());
-        customerComboBx.getSelectionModel().select(selAppt.getCustomerId() - 1);
+        //contactComboBx.getSelectionModel().select(selAppt.getContactId() - 1);
+        Contact selContact = null;
+        for(Contact contact : contactDao.getAllContacts()) {
+            if(contact.getContactId() == selAppt.getContactId()) {
+                selContact = contact;
+                break;
+            }
+        }
+        contactComboBx.getSelectionModel().select(selContact);
 
+        customerComboBx.setItems(customerDao.getAllCustomers());
+        //customerComboBx.getSelectionModel().select(selAppt.getCustomerId() - 1);
+        Customer selCustomer = null;
+        for(Customer customer : customerDao.getAllCustomers()) {
+            if(customer.getCustomerId() == selAppt.getCustomerId()){
+                selCustomer = customer;
+                break;
+            }
+        }
+        customerComboBx.getSelectionModel().select(selCustomer);
 
         userComboBx.setItems(userDao.getAllUsers());
-        userComboBx.getSelectionModel().select(selAppt.getUserId() - 1);
+        //userComboBx.getSelectionModel().select(selAppt.getUserId() - 1);
+        User selUser = null;
+        for(User user : userDao.getAllUsers()) {
+            if(user.getUserId() == selAppt.getUserId()) {
+                selUser = user;
+                break;
+            }
+        }
+        userComboBx.getSelectionModel().select(selUser);
+
         startDatePicker.setValue(selAppt.getStartDate());
         endDatePicker.setValue(selAppt.getEndDate());
         startTimeComboBx.getSelectionModel().select(selAppt.getStartTime());
@@ -87,31 +112,25 @@ public class UpdateAppointment implements Initializable {
             endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(),
                     endTime.getHour(), endTime.getMinute());
 
-            if(title.isEmpty()) {
+            if(title.isBlank()) {
                 errorMessage(1);
                 formatError = true;
-            } else if(description.isEmpty()) {
-                errorMessage(10);
+            } else if(description.isBlank()) {
                 errorMessage(2);
                 formatError = true;
-            } else if(location.isEmpty()) {
-                errorMessage(11);
+            } else if(location.isBlank()) {
                 errorMessage(3);
                 formatError = true;
-            } else if(type.isEmpty()) {
-                errorMessage(12);
+            } else if(type.isBlank()) {
                 errorMessage(4);
                 formatError = true;
             } else if(contactComboBx.getSelectionModel() == null) {
-                errorMessage(13);
                 errorMessage(5);
                 formatError = true;
             } else if(customerComboBx.getSelectionModel() == null) {
-                errorMessage(14);
                 errorMessage(6);
                 formatError = true;
             } else if(userComboBx.getSelectionModel() == null) {
-                errorMessage(15);
                 errorMessage(7);
                 formatError = true;
             } else if((startDate == null) || (endDate == null)) {
@@ -120,8 +139,6 @@ public class UpdateAppointment implements Initializable {
             } else if((startTime == null) || (endTime == null)) {
                 errorMessage(9);
                 formatError = true;
-            } else {
-                errorMessage(16);
             }
 
             if(!formatError) {
@@ -146,7 +163,6 @@ public class UpdateAppointment implements Initializable {
         alert.setTitle("Cancel \"Update Appointment\"");
         alert.setContentText("All changes will be forgotten, do you wish to continue?");
         alert.showAndWait();
-
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -192,40 +208,23 @@ public class UpdateAppointment implements Initializable {
                 alert.setContentText("You must choose a \"Start/End Time\"!");
                 alert.showAndWait();
             }
-            case 10 -> {
-                titleE.setText("");
-            }
-            case 11 -> {
-                descriptionE.setText("");
-            }
-            case 12 -> {
-                locationE.setText("");
-            }
-            case 13 -> {
-                typeE.setText("");
-            }
-            case 14 -> {
-                contactE.setText("");
-            }
-            case 15 -> {
-                customerE.setText("");
-            }
-            case 16 -> {
-                userE.setText("");
-            }
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Update Appointment: I am initialized!");
+        try {
+            ZoneId osZId = ZoneId.systemDefault();
+            ZoneId businessZId = ZoneId.of("America/New_York");
+            LocalTime startTime = LocalTime.of(8, 0);
+            int workHours = 13;
 
-        ZoneId osZId = ZoneId.systemDefault();
-        ZoneId businessZId =  ZoneId.of("America/New_York");
-        LocalTime startTime = LocalTime.of(8,0);
-        int workHours = 13;
-
-        startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
-        endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9,0), workHours));
+            startTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, startTime, workHours));
+            endTimeComboBx.setItems(TimeManager.dynamicBusinessHoursInit(osZId, businessZId, LocalTime.of(9, 0), workHours));
+        }catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

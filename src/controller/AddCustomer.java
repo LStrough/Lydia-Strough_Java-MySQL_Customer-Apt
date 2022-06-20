@@ -44,27 +44,20 @@ public class AddCustomer implements Initializable {
                 errorMessage(1);
                 formatError = true;
             } else if(address.isBlank()) {
-                errorMessage(7);
                 errorMessage(2);
                 formatError = true;
             } else if (postalCode.isBlank()){
-                errorMessage(8);
                 errorMessage(3);
                 formatError = true;
             }else if (phone.isBlank()){
-                errorMessage(9);
                 errorMessage(4);
                 formatError = true;
             }else if (countryComboBx.getSelectionModel() == null){
-                errorMessage(10);
                 errorMessage(5);
                 formatError = true;
             }else if (divisionComboBx.getSelectionModel() == null){
-                errorMessage(11);
                 errorMessage(6);
                 formatError = true;
-            } else {
-                errorMessage(12);
             }
 
             if(!formatError) {
@@ -126,24 +119,6 @@ public class AddCustomer implements Initializable {
             }
             case 6 -> {
                 divisionE.setText("You must select a \"Division\".");
-            }
-            case 7 -> {
-                nameE.setText("");
-            }
-            case 8 -> {
-                addressE.setText("");
-            }
-            case 9 -> {
-                postalCodeE.setText("");
-            }
-            case 10 -> {
-                phoneE.setText("");
-            }
-            case 11 -> {
-                countryE.setText("");
-            }
-            case 12 -> {
-                divisionE.setText("");
             }
         }
     }

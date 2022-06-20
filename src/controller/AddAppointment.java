@@ -58,31 +58,25 @@ public class AddAppointment implements Initializable {
             endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(),
                     endTime.getHour(), endTime.getMinute());
 
-            if(title.isEmpty()) {
+            if(title.isBlank()) {
                 errorMessage(1);
                 formatError = true;
-            } else if(description.isEmpty()) {
-                errorMessage(10);
+            } else if(description.isBlank()) {
                 errorMessage(2);
                 formatError = true;
-            } else if(location.isEmpty()) {
-                errorMessage(11);
+            } else if(location.isBlank()) {
                 errorMessage(3);
                 formatError = true;
-            } else if(type.isEmpty()) {
-                errorMessage(12);
+            } else if(type.isBlank()) {
                 errorMessage(4);
                 formatError = true;
             } else if(contactComboBx.getSelectionModel() == null) {
-                errorMessage(13);
                 errorMessage(5);
                 formatError = true;
             } else if(customerComboBx.getSelectionModel() == null) {
-                errorMessage(14);
                 errorMessage(6);
                 formatError = true;
             } else if(userComboBx.getSelectionModel() == null) {
-                errorMessage(15);
                 errorMessage(7);
                 formatError = true;
             } else if((startDate == null) || (endDate == null)) {
@@ -91,8 +85,6 @@ public class AddAppointment implements Initializable {
             } else if((startTime == null) || (endTime == null)) {
                 errorMessage(9);
                 formatError = true;
-            } else {
-                errorMessage(16);
             }
 
             if(!formatError) {
@@ -163,27 +155,6 @@ public class AddAppointment implements Initializable {
                 alert.setTitle("\"Add Appointment\" ERROR");
                 alert.setContentText("You must choose a \"Start/End Time\"!");
                 alert.showAndWait();
-            }
-            case 10 -> {
-                titleE.setText("");
-            }
-            case 11 -> {
-                descriptionE.setText("");
-            }
-            case 12 -> {
-                locationE.setText("");
-            }
-            case 13 -> {
-                typeE.setText("");
-            }
-            case 14 -> {
-                contactE.setText("");
-            }
-            case 15 -> {
-                customerE.setText("");
-            }
-            case 16 -> {
-                userE.setText("");
             }
         }
     }
