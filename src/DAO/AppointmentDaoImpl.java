@@ -277,14 +277,15 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
         for (Appointment appt : customerAppts) {
             //start or end on same day
-            if ((appt.getStartDate() == selStartDate) || (appt.getStartDate() == selEndDate) || (appt.getEndDate() == selStartDate)
-                    || (appt.getEndDate() == selEndDate)) {
+            if ((appt.getStartDate() == selStartDate) || (appt.getEndDate() == selEndDate)) {
                 //start or end at the same time
                 if ((appt.getStartTime() == selStartTime) || (appt.getEndTime() == selEndTime)) {
                     overlap = true;
                     break;
                  //old appt starts & ends during new appt
-                }else if(appt.getStartTime().isAfter(selStartTime) && appt.getEndTime().isBefore(selEndTime)) {
+                }
+                /*
+                else if(appt.getStartTime().isAfter(selStartTime) && appt.getEndTime().isBefore(selEndTime)) {
                     overlap = true;
                     break;
                  //new appt starts & ends during old appt
@@ -308,6 +309,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
                     overlap = true;
                     break;
                 }
+                 */
             }
         }
         return overlap;
