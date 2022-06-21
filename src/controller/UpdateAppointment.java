@@ -121,6 +121,31 @@ public class UpdateAppointment implements Initializable {
             }
 
             if(!formatError) {
+                AppointmentDao apptDao = new AppointmentDaoImpl();
+                if(apptDao.checkApptStartTime(startDateTime) && apptDao.checkApptEndTime(endDateTime)) {
+                    if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {
+                        if(!apptDao.checkUpdatedApptForOverlap(customerId, startDate, endDate, startTime, endTime, appointmentId)) {
+                            AppointmentDao appointmentDao = new AppointmentDaoImpl();
+                            appointmentDao.updateAppointment(appointmentId, customerId, userId, contactId, title, description,
+                                    location, type, startDateTime, endDateTime);
+
+                            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                            scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
+                            stage.setScene(new Scene(scene));
+                            stage.show();
+                        }else {
+                            errorMessage(7);
+                        }
+                    } else {
+                        errorMessage(6);
+                    }
+                }else {
+                    errorMessage(5);
+                }
+            }
+
+            /*
+            if(!formatError) {
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
                 appointmentDao.updateAppointment(appointmentId, customerId, userId, contactId, title, description,
                         location, type, startDateTime, endDateTime);
@@ -130,6 +155,7 @@ public class UpdateAppointment implements Initializable {
                 stage.setScene(new Scene(scene));
                 stage.show();
             }
+             */
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

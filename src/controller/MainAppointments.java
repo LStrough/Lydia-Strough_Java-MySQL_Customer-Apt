@@ -39,16 +39,16 @@ public class MainAppointments implements Initializable {
         System.out.println("View by Week Radio Button Clicked!");
 
         JDBC.openConnection();
-        AppointmentDao appointmentDao = new AppointmentDaoImpl();
-        apptTableView.setItems(appointmentDao.orderApptsByWeek());
+        AppointmentDao apptDao = new AppointmentDaoImpl();
+        //apptTableView.setItems(apptDao.orderApptsByWeek());
     }
 
     public void onActionViewByMonth(ActionEvent actionEvent) {
         System.out.println("View by Month Radio Button Clicked!");
 
         JDBC.openConnection();
-        AppointmentDao appointmentDao = new AppointmentDaoImpl();
-        apptTableView.setItems(appointmentDao.orderApptsByMonth());
+        AppointmentDao apptDao = new AppointmentDaoImpl();
+        //apptTableView.setItems(apptDao.orderApptsByMonth());
     }
 
     public void onActionViewAll(ActionEvent actionEvent) {

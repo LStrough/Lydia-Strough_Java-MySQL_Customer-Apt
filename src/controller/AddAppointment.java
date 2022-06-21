@@ -71,12 +71,12 @@ public class AddAppointment implements Initializable {
                 errorMessage(4);
                 formatError = true;
             }
-///*
-            if(!formatError) {                                                                                  //No blank text fields
+
+            if(!formatError) {
                 AppointmentDao apptDao = new AppointmentDaoImpl();
-                if(apptDao.checkApptStartTime(startDateTime) && apptDao.checkApptEndTime(endDateTime)) {        //within Business hours
-                    if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {                      //start of appointment is before end
-                        if(!apptDao.checkForOverlap(customerId, startDate, endDate, startTime, endTime)) {    //No appt overlap
+                if(apptDao.checkApptStartTime(startDateTime) && apptDao.checkApptEndTime(endDateTime)) {
+                    if (startDateTime.toLocalTime().isBefore(endDateTime.toLocalTime())) {
+                        if(!apptDao.checkNewApptForOverlap(customerId, startDate, endDate, startTime, endTime)) {
                             apptDao.addAppointment(customerId, userId, contactId, title, description, location, type,
                                     startDateTime, endDateTime);
 
@@ -95,24 +95,6 @@ public class AddAppointment implements Initializable {
                     errorMessage(5);
                 }
             }
-
-//*/
-
-            /*
-            if(!formatError) {                                                                                //No blank text fields
-                AppointmentDao apptDao = new AppointmentDaoImpl();
-
-                apptDao.addAppointment(customerId, userId, contactId, title, description, location, type,
-                               startDateTime, endDateTime);
-
-                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
-                JDBC.closeConnection();
-
-            }
-             */
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();

@@ -21,5 +21,9 @@ public interface AppointmentDao {
     public ObservableList<Appointment> orderApptsByWeek();
     public boolean checkApptStartTime(LocalDateTime apptStartTime);
     public boolean checkApptEndTime(LocalDateTime apptEndTime);
-    public boolean checkForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime, LocalTime selEndTime);
+    public boolean checkNewApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,
+                                          LocalTime selEndTime);
+    public boolean checkUpdatedApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,
+                                              LocalTime selEndTime, int apptId);
+
 }

@@ -5,15 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import model.Appointment;
 
-import javax.swing.text.DateFormatter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
-import java.util.Collections;
 
 import static DAO.JDBC.connection;
 
@@ -243,32 +238,12 @@ public class AppointmentDaoImpl implements AppointmentDao {
     @Override
     public ObservableList<Appointment> orderApptsByMonth() {
         ObservableList<Appointment> apptsSortedByMonth = FXCollections.observableArrayList();
-
-        for(Appointment appt : allAppointments) {
-            appt.getStartDate().format(DateTimeFormatter.ofPattern("mm-dd-yyy"));
-            apptsSortedByMonth.add(appt);
-        }
-
-        Collections.sort(apptsSortedByMonth,
-                (a1, a2) ->
-                        a1.getStartDate().compareTo(a2.getStartDate()));
-
         return apptsSortedByMonth;
     }
 
     @Override
     public ObservableList<Appointment> orderApptsByWeek() {
         ObservableList<Appointment> apptsSortedByWeek = FXCollections.observableArrayList();
-
-        for(Appointment appt : allAppointments) {
-            appt.getStartDate().format(DateTimeFormatter.ofPattern("dd-mm-yyyy"));
-            apptsSortedByWeek.add(appt);
-        }
-
-        Collections.sort(apptsSortedByWeek,
-                (a1, a2) ->
-                        a1.getStartDate().compareTo(a2.getStartDate()));
-
         return apptsSortedByWeek;
     }
 
@@ -297,30 +272,45 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public boolean checkForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime, LocalTime selEndTime) {
+    public boolean checkNewApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,
+                                          LocalTime selEndTime) {
         AppointmentDao apptDao = new AppointmentDaoImpl();
         ObservableList<Appointment> customerAppts = apptDao.getApptByCustomer(customerId);
         boolean overlap = false;
 
         for (Appointment appt : customerAppts) {
-           LocalDate start = appt.getStartDate();
-
             //start or end on same day
             if ((appt.getStartDate().isEqual(selStartDate)) || (appt.getEndDate().isEqual(selEndDate))) {
-                //start or end at the same time
+                //start at the same time
                 if (appt.getStartTime().equals(selStartTime)) {
                     overlap = true;
                     break;
-                    //old appt starts & ends during new appt
-                }
-                else if(appt.getStartTime().isAfter(selStartTime) && appt.getStartTime().isBefore(selEndTime)) {
+                 //old appt starts after new appt begins & old appt starts before old ends
+                } else if(appt.getStartTime().isAfter(selStartTime) && appt.getStartTime().isBefore(selEndTime)) {
                     overlap = true;
                     break;
-                    //new appt starts & ends during old appt
+                    //new appt starts before old starts & new appt ends after old appt starts
                 }else if(selStartTime.isBefore(appt.getStartTime()) && (selEndTime.isAfter(appt.getStartTime()))) {
                     overlap = true;
                     break;
                 }
+            }
+        }
+        return overlap;
+    }
+
+    @Override
+    public boolean checkUpdatedApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,
+                                              LocalTime selEndTime, int apptId) {
+        AppointmentDao apptDao = new AppointmentDaoImpl();
+        ObservableList<Appointment> customerAppts = apptDao.getApptByCustomer(customerId);
+        boolean overlap = false;
+
+        for(Appointment appt : customerAppts) {
+            if((appt.getAppointmentId() == apptId) && (selStartTime.equals(appt.getStartTime()) && (selEndTime.equals(appt.getEndTime())))) {
+                break;
+            }else {
+                checkNewApptForOverlap(customerId, selStartDate, selEndDate, selStartTime, selEndTime);
             }
         }
         return overlap;
