@@ -5,10 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import model.Appointment;
 
+import javax.swing.text.DateFormatter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.Collections;
 
 import static DAO.JDBC.connection;
 
@@ -237,12 +242,34 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     @Override
     public ObservableList<Appointment> orderApptsByMonth() {
-        return null;
+        ObservableList<Appointment> apptsSortedByMonth = FXCollections.observableArrayList();
+
+        for(Appointment appt : allAppointments) {
+            appt.getStartDate().format(DateTimeFormatter.ofPattern("mm-dd-yyy"));
+            apptsSortedByMonth.add(appt);
+        }
+
+        Collections.sort(apptsSortedByMonth,
+                (a1, a2) ->
+                        a1.getStartDate().compareTo(a2.getStartDate()));
+
+        return apptsSortedByMonth;
     }
 
     @Override
     public ObservableList<Appointment> orderApptsByWeek() {
-        return null;
+        ObservableList<Appointment> apptsSortedByWeek = FXCollections.observableArrayList();
+
+        for(Appointment appt : allAppointments) {
+            appt.getStartDate().format(DateTimeFormatter.ofPattern("dd-mm-yyyy"));
+            apptsSortedByWeek.add(appt);
+        }
+
+        Collections.sort(apptsSortedByWeek,
+                (a1, a2) ->
+                        a1.getStartDate().compareTo(a2.getStartDate()));
+
+        return apptsSortedByWeek;
     }
 
     @Override

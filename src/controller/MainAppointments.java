@@ -3,6 +3,7 @@ package controller;
 import DAO.AppointmentDao;
 import DAO.AppointmentDaoImpl;
 import DAO.JDBC;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,9 @@ import model.Appointment;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+
 import java.time.ZoneId;
+
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -34,10 +37,18 @@ public class MainAppointments implements Initializable {
 
     public void onActionViewByWeek(ActionEvent actionEvent) {
         System.out.println("View by Week Radio Button Clicked!");
+
+        JDBC.openConnection();
+        AppointmentDao appointmentDao = new AppointmentDaoImpl();
+        apptTableView.setItems(appointmentDao.orderApptsByWeek());
     }
 
     public void onActionViewByMonth(ActionEvent actionEvent) {
         System.out.println("View by Month Radio Button Clicked!");
+
+        JDBC.openConnection();
+        AppointmentDao appointmentDao = new AppointmentDaoImpl();
+        apptTableView.setItems(appointmentDao.orderApptsByMonth());
     }
 
     public void onActionViewAll(ActionEvent actionEvent) {
