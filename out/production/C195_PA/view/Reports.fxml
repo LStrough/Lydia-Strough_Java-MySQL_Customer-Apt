@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="1202.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports">
+   <children>
+      <AnchorPane layoutX="1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1200.0">
+         <children>
+            <AnchorPane layoutX="50.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="1100.0">
+               <children>
+                  <AnchorPane prefHeight="426.0" prefWidth="1104.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="22.0" layoutY="14.0" prefHeight="26.0" prefWidth="1060.0" spacing="30.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="26.0" prefWidth="290.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="26.0" prefWidth="142.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Type" />
+                                          <ComboBox fx:id="typeComboBx" onAction="#onActionFilterByTypeMonth" prefWidth="100.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="26.0" prefWidth="152.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Month" />
+                                          <ComboBox fx:id="monthComboBx" onAction="#onActionFilterByTypeMonth" prefWidth="100.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="26.0" prefWidth="290.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Country" />
+                                    <ComboBox fx:id="countryComboBx" onAction="#onActionFilterByCountry" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="26.0" prefWidth="290.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Contact" />
+                                    <ComboBox fx:id="contactComboBx" onAction="#onActionFilterByContact" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="2.0" layoutY="382.0" prefHeight="26.0" prefWidth="1100.0" spacing="105.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="140.0" spacing="15.0">
+                                 <children>
+                                    <Label fx:id="totalCustomersLbl" prefHeight="17.0" prefWidth="140.0" text="Total Customers: " />
+                                 </children>
+                              </HBox>
+                              <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionReturnToMain" prefHeight="26.0" prefWidth="190.0" text="Cancel" />
+                              <Button contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onActionLogout" prefHeight="26.0" prefWidth="190.0" text="Logout" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="reportTableView" layoutX="22.0" layoutY="58.0" prefHeight="310.0" prefWidth="1060.0">
+                           <columns>
+                              <TableColumn fx:id="apptIdCol" prefWidth="60.0" text="Appt ID" />
+                              <TableColumn fx:id="titleCol" prefWidth="100.0" text="Title" />
+                              <TableColumn fx:id="descriptionCol" prefWidth="120.0" text="Description" />
+                              <TableColumn fx:id="locationCol" prefWidth="120.0" text="Location" />
+                              <TableColumn fx:id="contactCol" prefWidth="90.0" text="Contact" />
+                              <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="startDateCol" prefWidth="90.0" text="Start Date" />
+                              <TableColumn fx:id="endDateCol" prefWidth="90.0" text="End Date" />
+                              <TableColumn fx:id="startTimeCol" prefWidth="85.0" text="Start Time" />
+                              <TableColumn fx:id="endTimeCol" prefWidth="85.0" text="End Time" />
+                              <TableColumn fx:id="customerIdCol" text="Customer ID" />
+                              <TableColumn fx:id="userIdCol" prefWidth="64.0" text="User ID" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <Label layoutX="68.0" layoutY="30.0" prefHeight="26.0" prefWidth="60.0" text="Reports">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="70.0" layoutY="30.0" prefHeight="26.0" prefWidth="1060.0" spacing="100.0">
+               <children>
+                  <RadioButton fx:id="typeMonthRadioBtn" mnemonicParsing="false" onAction="#onActionPopulateTypeMonth" selected="true" text="View by Type &amp; Month">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="viewByTgl" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="countryRadioBtn" mnemonicParsing="false" onAction="#onActionPopulateCountry" text="View by Country" toggleGroup="$viewByTgl" />
+                  <RadioButton fx:id="contactRadioBtn" mnemonicParsing="false" onAction="#onActionPopulateContact" text="View by Contact" toggleGroup="$viewByTgl" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -140,7 +140,7 @@ public class MainAppointments implements Initializable {
         System.out.println("Reports Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportCustomerAppointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/Reports.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
