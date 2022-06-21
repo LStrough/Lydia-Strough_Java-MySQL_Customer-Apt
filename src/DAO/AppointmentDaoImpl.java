@@ -309,34 +309,32 @@ public class AppointmentDaoImpl implements AppointmentDao {
                 if ((appt.getStartTime() == selStartTime) || (appt.getEndTime() == selEndTime)) {
                     overlap = true;
                     break;
-                 //old appt starts & ends during new appt
+                    //old appt starts & ends during new appt
                 }
-                /*
                 else if(appt.getStartTime().isAfter(selStartTime) && appt.getEndTime().isBefore(selEndTime)) {
                     overlap = true;
                     break;
-                 //new appt starts & ends during old appt
+                    //new appt starts & ends during old appt
                 }else if(selStartTime.isAfter(appt.getStartTime()) && (selEndTime.isBefore(appt.getEndTime()))) {
                     overlap = true;
                     break;
-                 //old appt starts before new & ends in new
+                    //old appt starts before new & ends in new
                 }else if((appt.getStartTime().isBefore(selStartTime)) && (appt.getEndTime().isBefore(selEndTime))) {
                     overlap = true;
                     break;
-                 //old appt starts in new and ends after new
+                    //old appt starts in new and ends after new
                 } else if ((appt.getStartTime().isAfter(selStartTime)) && (appt.getEndTime().isAfter(selEndTime))) {
                     overlap = true;
                     break;
-                 //new appt starts before old & ends in old
+                    //new appt starts before old & ends in old
                 }else if ((selStartTime.isBefore(appt.getStartTime())) && (selEndTime.isBefore(appt.getEndTime()))) {
                     overlap = true;
                     break;
-                //new appt starts in old and ends after old
+                    //new appt starts in old and ends after old
                 }else if((selStartTime.isAfter(appt.getStartTime())) && (selEndTime.isAfter(appt.getEndTime()))) {
                     overlap = true;
                     break;
                 }
-                 */
             }
         }
         return overlap;

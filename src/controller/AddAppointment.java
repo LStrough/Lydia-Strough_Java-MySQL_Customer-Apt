@@ -71,7 +71,7 @@ public class AddAppointment implements Initializable {
                 errorMessage(4);
                 formatError = true;
             }
-
+///*
             if(!formatError) {                                                                                  //No blank text fields
                 AppointmentDao apptDao = new AppointmentDaoImpl();
                 if(apptDao.checkApptStartTime(startDateTime) && apptDao.checkApptEndTime(endDateTime)) {        //within Business hours
@@ -95,6 +95,24 @@ public class AddAppointment implements Initializable {
                     errorMessage(5);
                 }
             }
+
+ //*/
+
+            /*
+            if(!formatError) {                                                                                //No blank text fields
+                AppointmentDao apptDao = new AppointmentDaoImpl();
+
+                apptDao.addAppointment(customerId, userId, contactId, title, description, location, type,
+                               startDateTime, endDateTime);
+
+                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+                JDBC.closeConnection();
+
+            }
+             */
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
