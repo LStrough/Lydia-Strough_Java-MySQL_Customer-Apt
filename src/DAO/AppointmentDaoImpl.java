@@ -303,35 +303,21 @@ public class AppointmentDaoImpl implements AppointmentDao {
         boolean overlap = false;
 
         for (Appointment appt : customerAppts) {
+           LocalDate start = appt.getStartDate();
+
             //start or end on same day
-            if ((appt.getStartDate() == selStartDate) || (appt.getEndDate() == selEndDate)) {
+            if ((appt.getStartDate().isEqual(selStartDate)) || (appt.getEndDate().isEqual(selEndDate))) {
                 //start or end at the same time
-                if ((appt.getStartTime() == selStartTime) || (appt.getEndTime() == selEndTime)) {
+                if (appt.getStartTime().equals(selStartTime)) {
                     overlap = true;
                     break;
                     //old appt starts & ends during new appt
                 }
-                else if(appt.getStartTime().isAfter(selStartTime) && appt.getEndTime().isBefore(selEndTime)) {
+                else if(appt.getStartTime().isAfter(selStartTime) && appt.getStartTime().isBefore(selEndTime)) {
                     overlap = true;
                     break;
                     //new appt starts & ends during old appt
-                }else if(selStartTime.isAfter(appt.getStartTime()) && (selEndTime.isBefore(appt.getEndTime()))) {
-                    overlap = true;
-                    break;
-                    //old appt starts before new & ends in new
-                }else if((appt.getStartTime().isBefore(selStartTime)) && (appt.getEndTime().isBefore(selEndTime))) {
-                    overlap = true;
-                    break;
-                    //old appt starts in new and ends after new
-                } else if ((appt.getStartTime().isAfter(selStartTime)) && (appt.getEndTime().isAfter(selEndTime))) {
-                    overlap = true;
-                    break;
-                    //new appt starts before old & ends in old
-                }else if ((selStartTime.isBefore(appt.getStartTime())) && (selEndTime.isBefore(appt.getEndTime()))) {
-                    overlap = true;
-                    break;
-                    //new appt starts in old and ends after old
-                }else if((selStartTime.isAfter(appt.getStartTime())) && (selEndTime.isAfter(appt.getEndTime()))) {
+                }else if(selStartTime.isBefore(appt.getStartTime()) && (selEndTime.isAfter(appt.getStartTime()))) {
                     overlap = true;
                     break;
                 }
