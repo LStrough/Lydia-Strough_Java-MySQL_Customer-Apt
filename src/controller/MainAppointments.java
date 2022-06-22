@@ -40,7 +40,7 @@ public class MainAppointments implements Initializable {
 
         JDBC.openConnection();
         AppointmentDao apptDao = new AppointmentDaoImpl();
-        //apptTableView.setItems(apptDao.orderApptsByWeek());
+        //apptTableView.setItems(apptDao.upcomingApptsWeek(LocalDateTime startOfToday));
     }
 
     public void onActionViewByMonth(ActionEvent actionEvent) {
@@ -48,7 +48,7 @@ public class MainAppointments implements Initializable {
 
         JDBC.openConnection();
         AppointmentDao apptDao = new AppointmentDaoImpl();
-        //apptTableView.setItems(apptDao.orderApptsByMonth());
+        //apptTableView.setItems(apptDao.upcomingApptsMonth(LocalDateTime startOfToday));
     }
 
     public void onActionViewAll(ActionEvent actionEvent) {
@@ -140,7 +140,7 @@ public class MainAppointments implements Initializable {
         System.out.println("Reports Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportCustomerAppointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportsMonthType.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

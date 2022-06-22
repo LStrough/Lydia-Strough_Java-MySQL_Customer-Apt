@@ -1,6 +1,5 @@
 package controller;
 
-import DAO.AppointmentDaoImpl;
 import DAO.CustomerDao;
 import DAO.CustomerDaoImpl;
 import DAO.JDBC;
@@ -115,7 +114,7 @@ public class MainCustomers implements Initializable {
         System.out.println("Reports Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportCustomerAppointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportsMonthType.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

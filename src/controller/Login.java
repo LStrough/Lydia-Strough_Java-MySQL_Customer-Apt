@@ -15,7 +15,7 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static DAO.LoginQuery.loginQuery;
+import static DAO.LoginToDB.loginQuery;
 
 public class Login implements Initializable {
     Stage stage;

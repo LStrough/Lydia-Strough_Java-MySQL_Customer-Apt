@@ -1,31 +1,37 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+public class Report {
+    private String month;
+    private String type;
+    private int count;
 
-public class Report extends Appointment{
-    private LocalDate month;
-
-    public Report(int appointmentId, int customerId, int userId, int contactId, String title, String description,
-                  String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, LocalDate startDate,
-                  LocalDate endDate, LocalTime startTime, LocalTime endTime, LocalDate month) {
-        super(appointmentId, customerId, userId, contactId, title, description, location, type, startDateTime, endDateTime,
-                startDate, endDate, startTime, endTime);
+    public Report(String month, String type, int count) {
         this.month = month;
+        this.type = type;
+        this.count = count;
     }
 
-    public LocalDate getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(LocalDate month) {
-        this.month = LocalDate.from(getStartDate().getMonth());
+    public void setMonth(String month) {
+        this.month = month;
     }
 
-    @Override
-    public String toString() {
-        return (month.format(DateTimeFormatter.ofPattern("MMMM")));
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

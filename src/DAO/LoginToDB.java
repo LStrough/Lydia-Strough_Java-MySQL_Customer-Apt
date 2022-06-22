@@ -4,10 +4,12 @@ import model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import static DAO.JDBC.connection;
 
-public class LoginQuery {
+public class LoginToDB {
    public static User loginQuery(String userName, String password) {
        try {
            String sql = "SELECT * FROM users WHERE User_Name=? AND Password=?";
@@ -28,5 +30,9 @@ public class LoginQuery {
            System.out.println("Error: " + e.getMessage());
        }
        return null;
+   }
+   public LocalDate getLoginLocalDate(){
+       LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
+       return localDate;
    }
 }
