@@ -31,7 +31,7 @@ public class LoginToDB {
        }
        return null;
    }
-   public LocalDate getLoginLocalDate(){
+   public static LocalDate getLoginLocalDate(){
        LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
        return localDate;
    }
