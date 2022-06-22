@@ -1,5 +1,7 @@
 package controller;
 
+import DAO.AppointmentDao;
+import DAO.AppointmentDaoImpl;
 import DAO.JDBC;
 import DAO.LoginToDB;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.stage.Stage;
 import model.User;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -41,7 +44,14 @@ public class Login implements Initializable {
                 scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
-                JDBC.closeConnection();
+
+                JDBC.openConnection();
+                AppointmentDao appointmentDao = new AppointmentDaoImpl();
+
+                LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
+                System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
+                appointmentDao.upcomingApptAlert(loginLDT);
+                //JDBC.closeConnection();
             }
             else if(Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("bundle/language_fr", Locale.getDefault());

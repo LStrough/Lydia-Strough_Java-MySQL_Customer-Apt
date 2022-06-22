@@ -190,8 +190,10 @@ public class MainAppointments implements Initializable {
         AppointmentDao appointmentDao = new AppointmentDaoImpl();
         apptTableView.setItems(appointmentDao.getAllAppointments());
 
+        /*
         LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
         System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
         appointmentDao.upcomingApptAlert(loginLDT);
+         */
     }
 }
