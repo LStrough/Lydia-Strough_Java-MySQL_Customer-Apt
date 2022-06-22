@@ -34,4 +34,9 @@ public class Report {
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return ("Report: " + month + " " + type + " " + Integer.toString(count));
+    }
 }

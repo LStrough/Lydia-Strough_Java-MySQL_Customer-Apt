@@ -25,7 +25,6 @@ public class ReportsContact implements Initializable {
     public TableColumn apptIdCol, titleCol, descriptionCol, locationCol, contactCol, typeCol, startDateCol, endDateCol,
             startTimeCol, endTimeCol, customerIdCol, userIdCol;
     public ComboBox<Contact> contactComboBx;
-   // public Label userTimeZoneLbl;
     public Label totalApptsLbl;
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
@@ -81,8 +80,6 @@ public class ReportsContact implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Reports (Contact): I am Initialized!");
-
-        //userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
 
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));

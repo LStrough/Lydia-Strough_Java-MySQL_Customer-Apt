@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Report;
 
@@ -22,9 +23,7 @@ public class ReportsMonthType implements Initializable {
     Parent scene;
 
     public TableView<Report> reportTableView;
-    public TableColumn monthCol;
-    public TableColumn typeCol;
-    public TableColumn countCol;
+    public TableColumn monthCol, typeCol, countCol;
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button Clicked!");
@@ -70,6 +69,10 @@ public class ReportsMonthType implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Reports (Month & Type): I am Initialized!");
+
+        monthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        countCol.setCellValueFactory(new PropertyValueFactory<>("count"));
 
         JDBC.openConnection();
         ReportDao reportDao = new ReportDaoImpl();
