@@ -72,7 +72,8 @@ public class ReportsContact implements Initializable {
     public void onActionPopulateTable(ActionEvent actionEvent) {
         JDBC.openConnection();
         AppointmentDao apptDao = new AppointmentDaoImpl();
-        //reportTableView.setItems(apptDao.);
+        int contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
+        reportTableView.setItems(apptDao.getApptByContact(contactId));
     }
 
     @Override

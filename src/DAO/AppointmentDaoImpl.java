@@ -207,8 +207,8 @@ public class AppointmentDaoImpl implements AppointmentDao {
             ps.setInt(3, contactId);
             ps.setString(4, title);
             ps.setString(5, description);
-            ps.setString(6, type);
-            ps.setString(7, location);
+            ps.setString(6, location);
+            ps.setString(7, type);
             ps.setTimestamp(8, Timestamp.valueOf(startDateTime));
             ps.setTimestamp(9, Timestamp.valueOf(endDateTime));
             ps.setInt(10, appointmentId);

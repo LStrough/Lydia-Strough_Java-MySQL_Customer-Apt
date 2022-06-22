@@ -143,21 +143,9 @@ public class UpdateAppointment implements Initializable {
                     errorMessage(5);
                 }
             }
-
-            /*
-            if(!formatError) {
-                AppointmentDao appointmentDao = new AppointmentDaoImpl();
-                appointmentDao.updateAppointment(appointmentId, customerId, userId, contactId, title, description,
-                        location, type, startDateTime, endDateTime);
-
-                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
-            }
-             */
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
