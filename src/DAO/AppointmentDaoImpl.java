@@ -26,7 +26,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
             while (result.next()) {
                 int appointmentId = result.getInt("Appointment_ID");
                 int customerId = result.getInt("Customer_ID");
-                ;
                 int userId = result.getInt("User_ID");
                 int contactId = result.getInt("Contact_ID");
                 String title = result.getString("Title");
@@ -62,7 +61,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
             if (result.next()) {
                 appointmentId = result.getInt("Appointment_ID");
                 int customerId = result.getInt("Customer_ID");
-                ;
                 int userId = result.getInt("User_ID");
                 int contactId = result.getInt("Contact_ID");
                 String title = result.getString("Title");
@@ -99,7 +97,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
             while (result.next()) {
                 int appointmentId = result.getInt("Appointment_ID");
                 customerId = result.getInt("Customer_ID");
-                ;
                 int userId = result.getInt("User_ID");
                 int contactId = result.getInt("Contact_ID");
                 String title = result.getString("Title");
@@ -121,6 +118,80 @@ public class AppointmentDaoImpl implements AppointmentDao {
             e.printStackTrace();
         }
         return customerAppts;
+    }
+
+    @Override
+    public ObservableList<Appointment> getApptByContact(int contactId) {
+        ObservableList<Appointment> apptsByContact = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT * FROM appointments WHERE Contact_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, contactId);
+
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                int appointmentId = result.getInt("Appointment_ID");
+                int customerId = result.getInt("Customer_ID");
+                int userId = result.getInt("User_ID");
+                contactId = result.getInt("Contact_ID");
+                String title = result.getString("Title");
+                String description = result.getString("Description");
+                String location = result.getString("Location");
+                String type = result.getString("Type");
+                LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
+                LocalDate startDate = startDateTime.toLocalDate();
+                LocalDate endDate = endDateTime.toLocalDate();
+                LocalTime startTime = startDateTime.toLocalTime();
+                LocalTime endTime = endDateTime.toLocalTime();
+                Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
+                        location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
+                apptsByContact.add(appointment);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return apptsByContact;
+    }
+
+    @Override
+    public ObservableList<Appointment> getApptByCountry(int countryId) {
+        ObservableList<Appointment> apptsByCountry = FXCollections.observableArrayList();
+/*
+        try {
+            String sql = "SELECT * FROM appointments WHERE Country=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, countryId);
+
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                int appointmentId = result.getInt("Appointment_ID");
+                int customerId = result.getInt("Customer_ID");
+                int userId = result.getInt("User_ID");
+                int contactId = result.getInt("Contact_ID");
+                String title = result.getString("Title");
+                String description = result.getString("Description");
+                String location = result.getString("Location");
+                String type = result.getString("Type");
+                LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
+                LocalDate startDate = startDateTime.toLocalDate();
+                LocalDate endDate = endDateTime.toLocalDate();
+                LocalTime startTime = startDateTime.toLocalTime();
+                LocalTime endTime = endDateTime.toLocalTime();
+                Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
+                        location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
+                apptsByCountry.add(appointment);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+ */
+        return apptsByCountry;
     }
 
     @Override
@@ -236,15 +307,13 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public ObservableList<Appointment> orderApptsByMonth() {
-        ObservableList<Appointment> apptsSortedByMonth = FXCollections.observableArrayList();
-        return apptsSortedByMonth;
+    public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
+        return null;
     }
 
     @Override
-    public ObservableList<Appointment> orderApptsByWeek() {
-        ObservableList<Appointment> apptsSortedByWeek = FXCollections.observableArrayList();
-        return apptsSortedByWeek;
+    public ObservableList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin) {
+        return null;
     }
 
     @Override
@@ -307,8 +376,10 @@ public class AppointmentDaoImpl implements AppointmentDao {
         boolean overlap = false;
 
         for(Appointment appt : customerAppts) {
+            //check to see if appt times changed
             if((appt.getAppointmentId() == apptId) && (selStartTime.equals(appt.getStartTime()) && (selEndTime.equals(appt.getEndTime())))) {
                 break;
+             //if appt time DID change, go through overlap check
             }else {
                 checkNewApptForOverlap(customerId, selStartDate, selEndDate, selStartTime, selEndTime);
             }
