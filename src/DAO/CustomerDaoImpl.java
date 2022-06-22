@@ -76,6 +76,38 @@ public class CustomerDaoImpl implements CustomerDao{
     }
 
     @Override
+    public ObservableList<Customer> getCustomersByCountry(int countryId) {
+        ObservableList<Customer> customersByCountry = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM customers, first_level_divisions, countries WHERE\n" +
+                    "customers.Division_ID = first_level_divisions.Division_ID AND \n" +
+                    "first_level_divisions.Country_ID = countries.Country_ID AND countries.Country_ID=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, countryId);
+
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                int customerId = result.getInt("Customer_ID");
+                int divisionId = result.getInt("Division_ID");;
+                countryId = result.getInt("Country_ID");
+                String customerName = result.getString("Customer_Name");
+                String address = result.getString("Address");
+                String postalCode = result.getString("Postal_Code");
+                String phone = result.getString("Phone");
+                String countryName = result.getString("Country");
+                String divisionName = result.getString("Division");
+                Customer customer = new Customer(customerId, divisionId, countryId, customerName, address, postalCode,
+                        phone, countryName, divisionName);
+                customersByCountry.add(customer);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return customersByCountry;
+    }
+
+    @Override
     public int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) {
         int rowsAffected = 0;
         try{

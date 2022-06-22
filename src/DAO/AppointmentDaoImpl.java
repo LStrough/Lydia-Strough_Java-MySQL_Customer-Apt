@@ -157,44 +157,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public ObservableList<Appointment> getApptByCountry(int countryId) {
-        ObservableList<Appointment> apptsByCountry = FXCollections.observableArrayList();
-/*
-        try {
-            String sql = "SELECT * FROM appointments WHERE Country=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, countryId);
-
-            ResultSet result = ps.executeQuery();
-            while (result.next()) {
-                int appointmentId = result.getInt("Appointment_ID");
-                int customerId = result.getInt("Customer_ID");
-                int userId = result.getInt("User_ID");
-                int contactId = result.getInt("Contact_ID");
-                String title = result.getString("Title");
-                String description = result.getString("Description");
-                String location = result.getString("Location");
-                String type = result.getString("Type");
-                LocalDateTime startDateTime = result.getTimestamp("Start").toLocalDateTime();
-                LocalDateTime endDateTime = result.getTimestamp("End").toLocalDateTime();
-                LocalDate startDate = startDateTime.toLocalDate();
-                LocalDate endDate = endDateTime.toLocalDate();
-                LocalTime startTime = startDateTime.toLocalTime();
-                LocalTime endTime = endDateTime.toLocalTime();
-                Appointment appointment = new Appointment(appointmentId, customerId, userId, contactId, title, description,
-                        location, type, startDateTime, endDateTime, startDate, endDate, startTime, endTime);
-                apptsByCountry.add(appointment);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-        }
-
- */
-        return apptsByCountry;
-    }
-
-    @Override
     public int updateAppointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
                                  String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         int rowsAffected = 0;

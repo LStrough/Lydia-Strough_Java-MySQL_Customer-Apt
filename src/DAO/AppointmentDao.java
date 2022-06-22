@@ -12,7 +12,6 @@ public interface AppointmentDao {
     public Appointment getAppointment(int appointmentId);
     public ObservableList<Appointment> getApptByCustomer(int customerId);
     public ObservableList<Appointment> getApptByContact(int contactId);
-    public ObservableList<Appointment> getApptByCountry(int countryId);
     public int updateAppointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
                                  String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
     public int deleteAppointment(int appointmentId, int customerId);

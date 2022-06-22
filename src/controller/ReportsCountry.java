@@ -9,12 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Appointment;
 import model.Country;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -22,11 +21,9 @@ public class ReportsCountry implements Initializable {
     Stage stage;
     Parent scene;
 
-    public TableView<Appointment> reportTableView;
-    public TableColumn apptIdCol, titleCol, descriptionCol, locationCol, contactCol, typeCol, startDateCol, endDateCol,
-            startTimeCol, endTimeCol, customerIdCol, userIdCol;
+    public TableView<Customer> reportTableView;
+    public TableColumn customerIdCol, customerNameCol, addressCol, postalCodeCol, phoneNumCol, countryCol;
     public ComboBox<Country> countryComboBx;
-    public Label userTimeZoneLbl;
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button Clicked!");
@@ -71,28 +68,23 @@ public class ReportsCountry implements Initializable {
 
     public void onActionPopulateTable(ActionEvent actionEvent) {
         JDBC.openConnection();
-        AppointmentDao apptDao = new AppointmentDaoImpl();
-        //reportTableView.setItems(apptDao.);
+        CustomerDao custDao = new CustomerDaoImpl();
+        int countryId = countryComboBx.getSelectionModel().getSelectedItem().getCountryId();
+        reportTableView.setItems(custDao.getCustomersByCountry(countryId));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Reports (Country): I am Initialized!");
 
-        userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
+        //userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
 
-        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        endDateCol.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneNumCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        countryCol.setCellValueFactory(new PropertyValueFactory<>("countryName"));
 
         JDBC.openConnection();
         CountryDao countryDao = new CountryDaoImpl();
