@@ -37,8 +37,6 @@ public class Login implements Initializable {
             User userResult = loginQuery(userName, password);
 
             if (userResult != null){
-                System.out.println(DAO.LoginToDB.getLoginLocalDate());
-
                 stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/MainAppointments.fxml"));
                 stage.setScene(new Scene(scene));

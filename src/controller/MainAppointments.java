@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import java.util.Optional;
@@ -188,5 +189,9 @@ public class MainAppointments implements Initializable {
         JDBC.openConnection();
         AppointmentDao appointmentDao = new AppointmentDaoImpl();
         apptTableView.setItems(appointmentDao.getAllAppointments());
+
+        LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
+        System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
+        appointmentDao.upcomingApptAlert(loginLDT);
     }
 }

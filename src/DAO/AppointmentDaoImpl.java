@@ -269,12 +269,49 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
-        return null;
+    public void upcomingApptAlert(LocalDateTime ldt) {
+        try {
+            ObservableList<Appointment> upcomingAppts = FXCollections.observableArrayList();
+            ZoneId zoneId = ZoneId.systemDefault();
+            LocalDateTime loginLDT = ldt;
+            LocalDateTime apptStart = loginLDT.plusMinutes(15);
+
+            for (Appointment appt : allAppointments) {
+                ZonedDateTime zonedAppt = ZonedDateTime.from(appt.getStartDateTime().atZone(zoneId));
+                if (zonedAppt.isAfter(loginLDT.atZone(zoneId)) && zonedAppt.isBefore(apptStart.atZone(zoneId))) {
+                    upcomingAppts.add(appt);
+                }
+            }
+
+            if (!upcomingAppts.equals(null)) {
+                AppointmentDao apptDao = new AppointmentDaoImpl();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Upcoming Appointments");
+                alert.setHeaderText("The following Appointments are scheduled to begin in the next 15 minutes:");
+
+                for (Appointment upAppt : upcomingAppts) {
+                    alert.setContentText("Appointment: [" + upAppt.getAppointmentId() + "] at " + upAppt.getStartTime() +
+                            "(" + upAppt.getStartDate() + ")\n");
+                }
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Upcoming Appointments");
+                alert.setContentText("There are no appointments scheduled to begin in the next 15 minutes!");
+                alert.showAndWait();
+            }
+        }catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     @Override
     public ObservableList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin) {
+        return null;
+    }
+
+    @Override
+    public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
         return null;
     }
 

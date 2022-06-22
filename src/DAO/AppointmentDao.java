@@ -18,8 +18,9 @@ public interface AppointmentDao {
     public int addAppointment(int customerId, int userId, int contactId, String title, String description,
                               String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime);
     public ObservableList<Appointment> lookUpAppointment(LocalDate date);
-    public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin);
-    public ObservableList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin);
+    public void upcomingApptAlert(LocalDateTime loginLDT);
+    public ObservableList<Appointment> upcomingApptsWeek(LocalDate loginLD);
+    public ObservableList<Appointment> upcomingApptsMonth(LocalDate loginLD);
     public boolean checkApptStartTime(LocalDateTime apptStartTime);
     public boolean checkApptEndTime(LocalDateTime apptEndTime);
     public boolean checkNewApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,

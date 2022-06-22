@@ -4,7 +4,7 @@ import model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import static DAO.JDBC.connection;
@@ -31,8 +31,8 @@ public class LoginToDB {
        }
        return null;
    }
-   public static LocalDate getLoginLocalDate(){
-       LocalDate localDate = LocalDate.now(ZoneId.systemDefault());
-       return localDate;
+   public static LocalDateTime getLoginLDT(){
+       LocalDateTime ldt = LocalDateTime.now(ZoneId.systemDefault());
+       return ldt;
    }
 }
