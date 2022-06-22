@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,21 +34,39 @@ public class Reports implements Initializable {
     public Label totalCustomersLbl;
 
     public void onActionPopulateTypeMonth(ActionEvent actionEvent) {
+        //ReportDao?
+        //typeComboBx.setItems()
+        //monthComboBx.setItems()
     }
 
     public void onActionPopulateCountry(ActionEvent actionEvent) {
+        JDBC.openConnection();
+        CountryDao countryDao = new CountryDaoImpl();
+        countryComboBx.setItems(countryDao.getAllCountries());
     }
 
     public void onActionPopulateContact(ActionEvent actionEvent) {
+        JDBC.openConnection();
+        ContactDao contactDao = new ContactDaoImpl();
+        contactComboBx.setItems(contactDao.getAllContacts());
     }
 
     public void onActionFilterByTypeMonth(ActionEvent actionEvent) {
+        if(typeMonthRadioBtn.isSelected()) { //&& month has a selected item, && type has a selected item?
+            //get selected month & type and use getApptsByMonthAndCountry(month, type)
+        }
     }
 
     public void onActionFilterByCountry(ActionEvent actionEvent) {
+        if(countryRadioBtn.isSelected()){
+            //get selected countryId and use getApptsByCountry(countryId)
+        }
     }
 
     public void onActionFilterByContact(ActionEvent actionEvent) {
+        if(contactRadioBtn.isSelected()){
+            //get selected contactId and use getApptsByContact(contactId)
+        }
     }
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
