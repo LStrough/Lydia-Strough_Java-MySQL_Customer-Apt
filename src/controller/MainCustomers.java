@@ -64,19 +64,26 @@ public class MainCustomers implements Initializable {
     public void onActionUpdateCustomer(ActionEvent actionEvent) throws IOException {
         System.out.println("Update Customer Button Clicked!");
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/UpdateCustomer.fxml"));
-        Parent scene = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/UpdateCustomer.fxml"));
+            Parent scene = loader.load();
 
-        UpdateCustomer updateCustomerController = loader.getController();
+            UpdateCustomer updateCustomerController = loader.getController();
 
-        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
+            Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
 
-        updateCustomerController.updateCustomer(selectedCustomer);
+            updateCustomerController.updateCustomer(selectedCustomer);
 
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(scene));
-        stage.show();
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }catch (RuntimeException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Customer Selected");
+            alert.setContentText("Please select a customer to update!");
+            alert.showAndWait();
+        }
     }
 
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
@@ -114,7 +121,7 @@ public class MainCustomers implements Initializable {
         System.out.println("Reports Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportsMonthType.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportsContact.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

@@ -90,19 +90,26 @@ public class MainAppointments implements Initializable {
     public void onActionUpdateAppt(ActionEvent actionEvent) throws IOException {
         System.out.println("Update Appointment Button Clicked!");
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/UpdateAppointment.fxml"));
-        Parent scene = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/UpdateAppointment.fxml"));
+            Parent scene = loader.load();
 
-        UpdateAppointment updateApptController = loader.getController();
+            UpdateAppointment updateApptController = loader.getController();
 
-        Appointment selectedAppt = apptTableView.getSelectionModel().getSelectedItem();
+            Appointment selectedAppt = apptTableView.getSelectionModel().getSelectedItem();
 
-        updateApptController.updateAppointment(selectedAppt);
+            updateApptController.updateAppointment(selectedAppt);
 
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(scene));
-        stage.show();
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }catch (RuntimeException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("No Appointment Selected");
+            alert.setContentText("Please select an appointment to update!");
+            alert.showAndWait();
+        }
     }
 
     public void onActionDeleteAppt(ActionEvent actionEvent) {
@@ -140,7 +147,7 @@ public class MainAppointments implements Initializable {
         System.out.println("Reports Button Clicked!");
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ReportsMonthType.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ReportsContact.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
