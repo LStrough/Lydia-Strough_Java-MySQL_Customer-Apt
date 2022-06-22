@@ -14,7 +14,6 @@ import model.Contact;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -26,7 +25,8 @@ public class ReportsContact implements Initializable {
     public TableColumn apptIdCol, titleCol, descriptionCol, locationCol, contactCol, typeCol, startDateCol, endDateCol,
             startTimeCol, endTimeCol, customerIdCol, userIdCol;
     public ComboBox<Contact> contactComboBx;
-    public Label userTimeZoneLbl;
+   // public Label userTimeZoneLbl;
+    public Label totalApptsLbl;
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button Clicked!");
@@ -74,13 +74,15 @@ public class ReportsContact implements Initializable {
         AppointmentDao apptDao = new AppointmentDaoImpl();
         int contactId = contactComboBx.getSelectionModel().getSelectedItem().getContactId();
         reportTableView.setItems(apptDao.getApptByContact(contactId));
+
+        totalApptsLbl.setText("Total Appointments: " + apptDao.getApptByContact(contactId).size());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Reports (Contact): I am Initialized!");
 
-        userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
+        //userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
 
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));

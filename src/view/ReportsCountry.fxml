@@ -49,7 +49,7 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <Label fx:id="userTimeZoneLbl" layoutX="904.0" layoutY="439.0" prefHeight="17.0" prefWidth="200.0" text="Total Customers: " />
+                  <Label fx:id="totalCustomersLbl" layoutX="904.0" layoutY="439.0" prefHeight="17.0" prefWidth="200.0" text="Total Customers: " />
                </children>
             </AnchorPane>
             <Label layoutX="68.0" layoutY="30.0" prefHeight="24.0" prefWidth="191.0" text="Reports (Country)">

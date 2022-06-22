@@ -24,6 +24,7 @@ public class ReportsCountry implements Initializable {
     public TableView<Customer> reportTableView;
     public TableColumn customerIdCol, customerNameCol, addressCol, postalCodeCol, phoneNumCol, countryCol;
     public ComboBox<Country> countryComboBx;
+    public Label totalCustomersLbl;
 
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button Clicked!");
@@ -71,13 +72,13 @@ public class ReportsCountry implements Initializable {
         CustomerDao custDao = new CustomerDaoImpl();
         int countryId = countryComboBx.getSelectionModel().getSelectedItem().getCountryId();
         reportTableView.setItems(custDao.getCustomersByCountry(countryId));
+
+        totalCustomersLbl.setText("Total Customers: " + custDao.getCustomersByCountry(countryId).size());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Reports (Country): I am Initialized!");
-
-        //userTimeZoneLbl.setText("Your Time Zone: " + String.valueOf(ZoneId.systemDefault()));
 
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
