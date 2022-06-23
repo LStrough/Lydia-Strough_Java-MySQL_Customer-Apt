@@ -1,7 +1,6 @@
 TITLE: Customer Appointment Management System Application (Software 2 - Advanced Java Concepts, C195 PA)
 
-PURPOSE: Provide users with access to a pre-existing database, and give them the ability to manipulate Customers and their
-Appointments in a user-friendly way.
+PURPOSE: Provide users with access to a pre-existing database, and give them the ability to manipulate Customers and their Appointments in a user-friendly way.
 
 APPLICATION VERSION & DATE: Application Version 1.0, 06/23/2022
 
@@ -9,38 +8,33 @@ AUTHOR: Lydia Strough, WGU#002452624
 
 IDE VERSION: Intellij IDEA Community Edition 2021.1.3 x64, JDK Version 17.0.1, JavaFX Version 11.0.2
 
-DIRECTIONS: Launch program. Enter username and password into Login text fields, then hit enter. Acknowledge upcoming appointments,
- then from the main appointments screen click either "Customers", "Reports", or "Logout" to navigate the application.
+DIRECTIONS: Launch program. Enter username and password into Login text fields, then hit enter. Acknowledge upcoming appointments, then from the main appointments screen, click either "Customers", "Reports", or "Logout" to navigate the application.
 
 Appointments Schedule Menu: Displays current list of customer appointments from the database in a table. The user is able to interact with the database by adding, updating, and deleting appointments.
 -"View All" Radio Button: populates all customer appointments.
 -"View By Month" Radio Button: populates upcoming appointments for the present month.
 -"View By Week" Radio Button: populates upcoming appointments for the next week (including the current day).
 -"Search by Date" Date Picker: populates appointments with selected date.
--Add appointment: click "Add Appointment" button, then fill out appointment information and click save. If appointment information
- is correct, main appointments screen will re-appear, and the new appointment will populate in the appointments table.
--Update appointment: select an appointment to update, then click the "Update Appointment" button. Modify appointment information and click save.
-If appointment information is correct, main appointments screen will re-appear, and the appointment will populate in the appointments table with its changes.
+-Add appointment: click "Add Appointment" button, then fill out appointment information and click save. If appointment information is correct, main appointments screen will re-appear, and the new appointment will populate in the appointments table.
+-Update appointment: select an appointment to update, then click the "Update Appointment" button. Modify appointment information and click save. If appointment information is correct, main appointments screen will re-appear, and the appointment will populate in the appointment table with its changes.
 -Delete appointment: select an appointment to delete, then click the "Delete Appointment" button. A confirmation will appear, then the appointment will delete from the table.
 -"Customers" Button: takes user to Customer Menu.
--"Reports" Button: takes user to Report Menu.
+-"Reports" Button: takes user to Report Menu (Specifically to the "Contact Report" Screen).
 -"Logout" Button: confirms with user if they would like to exit program, then either exits program or stays on the same screen.
 
-Customers Menu: Displays current list of customers from the database in a table. The user is able to interact with the database by adding, updating, and deleting customers and their related appointments.
--"Search Customers" text field: enter a valid customer Id and hit enter, and the customer will be highlighted. Or enter a customer name string and hit enter, and related customers will filter.
--Add customer: click "Add Customer" button, then fill out customer information and click save. If customer information is correct,
-main customer screen will re-appear, and the new customer will populate in the customer table.
--Update customer: select a customer to update, then click the "Update Customer" button. Modify customer information and click save.
-If customer information is correct, main customer screen will re-appear, and the customer will populate in the customer table with its changes.
+Customer Records Menu: Displays current list of customers from the database in a table. The user is able to interact with the database by adding, updating, and deleting customers and their related appointments.
+-"Search Customers" text field: enter a valid customer ID and hit enter - the customer will be highlighted. Or, enter a customer name (string) and hit enter - related customers will filter.
+-Add customer: click "Add Customer" button, then fill out customer information and click save. If customer information is correct, main customer screen will re-appear, and the new customer will populate in the customer table.
+-Update customer: select a customer to update, then click the "Update Customer" button. Modify customer information and click save. If customer information is correct, main customer screen will re-appear, and the customer will populate in the customer table with its changes.
 -Delete customer: select a customer to delete, then click the "Delete Customer" button. A confirmation will appear, then the customer, along with their appointments will delete from the table.
 -"Appointments" Button: takes user to Appointments Menu.
--"Reports" Button: takes user to Report Menu.
+-"Reports" Button: takes user to Report Menu (Specifically to the "Contact Report" Screen).
 -"Logout" Button: confirms with user if they would like to exit program, then either exits program or stays on the same screen.
 
-Reports: 3 different reports can be generated by clicking on the following report buttons: Contact report, Country report, or Month & Type report (depending on what report screen the user is in).
--Contact report: select a contact from the contact combo box and the correlated appointments will populate. The number of appointments will also generate on the screen.
--Country report: select a country from the country combo box and the correlated customers will populate. The number of customers will also generate on the screen.
--Month & type report: total appointments, grouped by month an type will populate in the table, along with the number of each occurrence (count column).
+Reports: 3 different reports can be generated by clicking on the following report buttons: "Contact report", "Country report", or "Month & Type report".
+-Contact report Screen: select a contact from the contact combo box and the correlated appointments will populate. The number of appointments will also generate on the screen.
+-Country report Screen: select a country from the country combo box and the correlated customers will populate. The number of customers will also generate on the screen.
+-Month & type report Screen: total appointments, grouped by month and type will populate in the table, along with the number of each instance (count column).
 -Cancel Button: Returns user to Appointments Menu.
 -"Logout" Button: confirms with user if they would like to exit program, then either exits program or stays on the same screen.
 
