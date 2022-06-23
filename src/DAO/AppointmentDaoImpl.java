@@ -314,7 +314,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public ObservableList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin) {
+    public FilteredList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin) {
         ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
         allAppts = getAllAppointments();
         FilteredList<Appointment> filteredAppts = new FilteredList<>(allAppts);
@@ -322,13 +322,14 @@ public class AppointmentDaoImpl implements AppointmentDao {
         filteredAppts.setPredicate(appointment -> {
             LocalDate apptDate = appointment.getStartDate();
 
-            return apptDate.isAfter(dateAtLogin) && apptDate.isBefore(dateAtLogin.plusDays(7));
+            return ((apptDate.isEqual(dateAtLogin) || apptDate.isAfter(dateAtLogin)) &&
+                    apptDate.isBefore(dateAtLogin.plusDays(7)));
         });
         return filteredAppts;
     }
 
     @Override
-    public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
+    public FilteredList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
         ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
         allAppts = getAllAppointments();
         FilteredList<Appointment> filteredAppts = new FilteredList<>(allAppts);
@@ -336,7 +337,8 @@ public class AppointmentDaoImpl implements AppointmentDao {
         filteredAppts.setPredicate(appointment -> {
             LocalDate apptDate = appointment.getStartDate();
 
-            return apptDate.isAfter(dateAtLogin) && apptDate.getMonth().equals(dateAtLogin.getMonth());
+            return (apptDate.isEqual(dateAtLogin) || apptDate.isAfter(dateAtLogin)) &&
+                    apptDate.getMonth().equals(dateAtLogin.getMonth());
         });
         return filteredAppts;
     }
