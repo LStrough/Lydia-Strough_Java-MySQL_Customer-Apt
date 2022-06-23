@@ -2,6 +2,7 @@ package DAO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.Alert;
 import model.Appointment;
 
@@ -314,34 +315,30 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     @Override
     public ObservableList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin) {
-        ObservableList<Appointment> upcomingApptsWeek = FXCollections.observableArrayList();
-        /*
         ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
-        //AppointmentDao apptDao = new AppointmentDaoImpl();
+        allAppts = getAllAppointments();
+        FilteredList<Appointment> filteredAppts = new FilteredList<>(allAppts);
 
-        .stream()
-                    .filter(a -> (a.getStartDate().isEqual(dateAtLogin) || (a.getStartDate() < (dateAtLogin.plusDays(7)))))
-                    .collect(Collectors.toList(upcomingApptsWeek));
+        filteredAppts.setPredicate(appointment -> {
+            LocalDate apptDate = appointment.getStartDate();
 
-         */
-
-        return upcomingApptsWeek;
+            return apptDate.isAfter(dateAtLogin) && apptDate.isBefore(dateAtLogin.plusDays(7));
+        });
+        return filteredAppts;
     }
 
     @Override
     public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
-        ObservableList<Appointment> upcomingApptsMonth = FXCollections.observableArrayList();
-       /*
         ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
-        LocalDate locMonth = LocalDate.from(dateAtLogin.getMonth());
-        //AppointmentDao apptDao = new AppointmentDaoImpl();
+        allAppts = getAllAppointments();
+        FilteredList<Appointment> filteredAppts = new FilteredList<>(allAppts);
 
-        .stream()
-                .filter(a -> (a.getStartDate().getMonth().isEqual(locMonth)))
-                .collect(Collectors.toList(upcomingApptsMonth));
+        filteredAppts.setPredicate(appointment -> {
+            LocalDate apptDate = appointment.getStartDate();
 
-        */
-        return upcomingApptsMonth;
+            return apptDate.isAfter(dateAtLogin) && apptDate.getMonth().equals(dateAtLogin.getMonth());
+        });
+        return filteredAppts;
     }
 
     @Override
