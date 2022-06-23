@@ -3,7 +3,6 @@ package controller;
 import DAO.AppointmentDao;
 import DAO.AppointmentDaoImpl;
 import DAO.JDBC;
-import DAO.LoginToDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +15,6 @@ import model.User;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
@@ -45,7 +43,7 @@ public class Login implements Initializable {
             String fileName = "login_activity.txt";
 
             FileWriter fileWriter = new FileWriter(fileName, true);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
+            PrintWriter outputFile = new PrintWriter(fileWriter);
 
             if (userResult != null){
                 stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
@@ -57,7 +55,7 @@ public class Login implements Initializable {
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
                 LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
                 appointmentDao.upcomingApptAlert(loginLDT);
-                printWriter.println(userName + " Login was successful at " + loginLDT + " " + ZoneId.systemDefault());
+                outputFile.println(userName + " Login was successful at " + loginLDT + " (" + ZoneId.systemDefault() + ")");
             }
             else if(Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("bundle/language_fr", Locale.getDefault());
@@ -69,15 +67,15 @@ public class Login implements Initializable {
                         " " + rb.getString("try") + rb.getString("again") + "!");
                 alert.showAndWait();
 
-                printWriter.println(userName + " Login was unsuccessful at " + now + " " + ZoneId.systemDefault());
+                outputFile.println(userName + " Login was unsuccessful at " + now + " (" + ZoneId.systemDefault() + ")");
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Invalid Username and/or Password. Please try again!");
                 alert.showAndWait();
 
-                printWriter.println(userName + " Login was unsuccessful at " + now + " " + ZoneId.systemDefault());
-                printWriter.close();
+                outputFile.println(userName + " Login was unsuccessful at " + now + " (" + ZoneId.systemDefault() + ")");
+                outputFile.close();
             }
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
