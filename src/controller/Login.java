@@ -13,7 +13,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.User;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
@@ -38,6 +41,11 @@ public class Login implements Initializable {
             String userName = usernameTxt.getText();
             String password = String.valueOf(passwordTxt.getText());
             User userResult = loginQuery(userName, password);
+            LocalDateTime now = LocalDateTime.now();
+            String fileName = "login_activity.txt";
+
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
 
             if (userResult != null){
                 stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
@@ -49,6 +57,7 @@ public class Login implements Initializable {
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
                 LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
                 appointmentDao.upcomingApptAlert(loginLDT);
+                printWriter.println(userName + " Login was successful at " + loginLDT + " " + ZoneId.systemDefault());
             }
             else if(Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("bundle/language_fr", Locale.getDefault());
@@ -59,11 +68,16 @@ public class Login implements Initializable {
                         " " + rb.getString("Password") + ". " + rb.getString("Please") +
                         " " + rb.getString("try") + rb.getString("again") + "!");
                 alert.showAndWait();
+
+                printWriter.println(userName + " Login was unsuccessful at " + now + " " + ZoneId.systemDefault());
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Invalid Username and/or Password. Please try again!");
                 alert.showAndWait();
+
+                printWriter.println(userName + " Login was unsuccessful at " + now + " " + ZoneId.systemDefault());
+                printWriter.close();
             }
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
