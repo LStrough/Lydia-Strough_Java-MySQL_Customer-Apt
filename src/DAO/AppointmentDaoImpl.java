@@ -191,28 +191,29 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public int deleteAppointment(int appointmentId, int customerId) {
+    public int deleteAppointment(int appointmentId, int customerId, String type) {
         int rowsAffected = 0;
         try {
-            String sql = "DELETE FROM appointments WHERE Appointment_ID=? AND Customer_ID=?";
+            String sql = "DELETE FROM appointments WHERE Appointment_ID=? AND Customer_ID=? AND Type=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, appointmentId);
             ps.setInt(2, customerId);
+            ps.setString(3, type);
             rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Appointment [" + appointmentId + "] was successfully deleted!");
+                System.out.println("Appointment [" + appointmentId + "] " + type + " was successfully deleted!");
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment DELETE");
-                alert.setContentText("Appointment [" + appointmentId + "] was successfully deleted!");
+                alert.setContentText("Appointment [" + appointmentId + "] " + type + " was successfully deleted!");
                 alert.showAndWait();
             } else {
                 System.out.println("Appointment DELETE failed!");
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Appointment DELETE");
-                alert.setContentText("Appointment [" + appointmentId + "] failed to deleted!");
+                alert.setContentText("Appointment [" + appointmentId + "] " + type + " failed to deleted!");
                 alert.showAndWait();
             }
         } catch (Exception e) {

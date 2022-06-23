@@ -120,6 +120,7 @@ public class MainAppointments implements Initializable {
         Appointment selAppt = apptTableView.getSelectionModel().getSelectedItem();
         int appointmentId = selAppt.getAppointmentId();
         int customerId = selAppt.getCustomerId();
+        String type = selAppt.getType();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("The selected \"Appointment\" will be deleted. Do you wish to continue?");
@@ -127,7 +128,7 @@ public class MainAppointments implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if ((result.isPresent() && result.get() == ButtonType.OK)) {
-            System.out.println(apptDao.deleteAppointment(appointmentId, customerId));
+            System.out.println(apptDao.deleteAppointment(appointmentId, customerId, type));
 
             JDBC.openConnection();
             apptTableView.setItems(apptDao.getAllAppointments());
