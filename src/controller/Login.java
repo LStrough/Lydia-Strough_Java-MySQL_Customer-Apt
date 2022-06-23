@@ -48,8 +48,10 @@ public class Login implements Initializable {
                 JDBC.openConnection();
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
                 LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
-                System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
+                //System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
                 appointmentDao.upcomingApptAlert(loginLDT);
+                //LocalDateTime now = LocalDateTime.of(2022, 06, 22, 19, 45);
+                //appointmentDao.upcomingApptAlert(now);
                 //JDBC.closeConnection();
             }
             else if(Locale.getDefault().getLanguage().equals("fr")) {
