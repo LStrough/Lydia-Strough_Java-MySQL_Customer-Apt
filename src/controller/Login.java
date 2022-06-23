@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -55,7 +56,7 @@ public class Login implements Initializable {
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
                 LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
                 appointmentDao.upcomingApptAlert(loginLDT);
-                outputFile.println(userName + " Login was successful at " + loginLDT + " (" + ZoneId.systemDefault() + ")");
+                outputFile.println(userName + " Login was successful at " + now + " (" + ZoneId.systemDefault() + ")");
             }
             else if(Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("bundle/language_fr", Locale.getDefault());
@@ -75,8 +76,8 @@ public class Login implements Initializable {
                 alert.showAndWait();
 
                 outputFile.println(userName + " Login was unsuccessful at " + now + " (" + ZoneId.systemDefault() + ")");
-                outputFile.close();
             }
+            outputFile.close();
         }catch(Exception e){
             System.out.println("Error: " + e.getMessage());
         }
