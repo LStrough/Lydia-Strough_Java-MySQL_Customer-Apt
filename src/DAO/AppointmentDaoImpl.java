@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.*;
+import java.util.stream.Collectors;
 
 import static DAO.JDBC.connection;
 
@@ -318,12 +319,34 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     @Override
     public ObservableList<Appointment> upcomingApptsWeek(LocalDate dateAtLogin) {
-        return null;
+        ObservableList<Appointment> upcomingApptsWeek = FXCollections.observableArrayList();
+        /*
+        ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
+        //AppointmentDao apptDao = new AppointmentDaoImpl();
+
+        .stream()
+                    .filter(a -> (a.getStartDate().isEqual(dateAtLogin) || (a.getStartDate() < (dateAtLogin.plusDays(7)))))
+                    .collect(Collectors.toList(upcomingApptsWeek));
+
+         */
+
+        return upcomingApptsWeek;
     }
 
     @Override
     public ObservableList<Appointment> upcomingApptsMonth(LocalDate dateAtLogin) {
-        return null;
+        ObservableList<Appointment> upcomingApptsMonth = FXCollections.observableArrayList();
+       /*
+        ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
+        LocalDate locMonth = LocalDate.from(dateAtLogin.getMonth());
+        //AppointmentDao apptDao = new AppointmentDaoImpl();
+
+        .stream()
+                .filter(a -> (a.getStartDate().getMonth().isEqual(locMonth)))
+                .collect(Collectors.toList(upcomingApptsMonth));
+
+        */
+        return upcomingApptsMonth;
     }
 
     @Override

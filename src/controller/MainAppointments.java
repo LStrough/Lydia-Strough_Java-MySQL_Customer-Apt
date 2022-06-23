@@ -40,7 +40,7 @@ public class MainAppointments implements Initializable {
 
         JDBC.openConnection();
         AppointmentDao apptDao = new AppointmentDaoImpl();
-        //apptTableView.setItems(apptDao.upcomingApptsWeek(LocalDateTime startOfToday));
+        apptTableView.setItems(apptDao.upcomingApptsWeek(LocalDate.from(DAO.LoginToDB.getLoginLDT())));
     }
 
     public void onActionViewByMonth(ActionEvent actionEvent) {
@@ -48,7 +48,7 @@ public class MainAppointments implements Initializable {
 
         JDBC.openConnection();
         AppointmentDao apptDao = new AppointmentDaoImpl();
-        //apptTableView.setItems(apptDao.upcomingApptsMonth(LocalDateTime startOfToday));
+        apptTableView.setItems(apptDao.upcomingApptsMonth(LocalDate.from(DAO.LoginToDB.getLoginLDT())));
     }
 
     public void onActionViewAll(ActionEvent actionEvent) {
