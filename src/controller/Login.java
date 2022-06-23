@@ -47,7 +47,6 @@ public class Login implements Initializable {
 
                 JDBC.openConnection();
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
-
                 LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
                 System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
                 appointmentDao.upcomingApptAlert(loginLDT);

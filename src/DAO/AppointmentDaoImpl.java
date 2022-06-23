@@ -272,32 +272,35 @@ public class AppointmentDaoImpl implements AppointmentDao {
     public void upcomingApptAlert(LocalDateTime ldt) {
         try {
             ObservableList<Appointment> upcomingAppts = FXCollections.observableArrayList();
-            ZoneId zoneId = ZoneId.systemDefault();
-            LocalDateTime loginLDT = ldt;
-            LocalDateTime apptStart = loginLDT.plusMinutes(15);
+            ObservableList<Appointment> allAppts = FXCollections.observableArrayList();
+            AppointmentDao appointmentDao = new AppointmentDaoImpl();
+            allAppts = appointmentDao.getAllAppointments();
 
-            for (Appointment appt : allAppointments) {
+            ZoneId zoneId = ZoneId.systemDefault();
+            ZonedDateTime loginZDT = ldt.atZone(zoneId);
+            LocalDateTime apptStart = ldt.plusMinutes(15);
+
+            for (Appointment appt : allAppts) {
                 ZonedDateTime zonedAppt = ZonedDateTime.from(appt.getStartDateTime().atZone(zoneId));
-                if (zonedAppt.isAfter(loginLDT.atZone(zoneId)) && zonedAppt.isBefore(apptStart.atZone(zoneId))) {
+                if (zonedAppt.isAfter(loginZDT) && zonedAppt.isBefore(apptStart.atZone(zoneId))) {
                     upcomingAppts.add(appt);
+                    System.out.println("Upcoming appointment: " + appt);
                 }
             }
 
-            if (!upcomingAppts.equals(null)) {
-                AppointmentDao apptDao = new AppointmentDaoImpl();
+            if (upcomingAppts.size() == 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Upcoming Appointments");
+                alert.setContentText("There are no appointments scheduled to begin in the next 15 minutes!");
+                alert.showAndWait();
+            } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Upcoming Appointments");
                 alert.setHeaderText("The following Appointments are scheduled to begin in the next 15 minutes:");
-
                 for (Appointment upAppt : upcomingAppts) {
                     alert.setContentText("Appointment: [" + upAppt.getAppointmentId() + "] at " + upAppt.getStartTime() +
                             "(" + upAppt.getStartDate() + ")\n");
                 }
-                alert.showAndWait();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("No Upcoming Appointments");
-                alert.setContentText("There are no appointments scheduled to begin in the next 15 minutes!");
                 alert.showAndWait();
             }
         }catch (Exception e){
