@@ -299,12 +299,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
                 alert.setTitle("Upcoming Appointments");
                 alert.setHeaderText("The following Appointments are scheduled to begin in the next 15 minutes:");
                 String alertText = "";
-                /*
-                for (Appointment upAppt : upcomingAppts) {
-                    alert.setContentText("Appointment: [" + upAppt.getAppointmentId() + "] at " + upAppt.getStartTime() +
-                            " (" + upAppt.getStartDate() + ")\n");
-                }
-                 */
+
                 for (Appointment upAppt : upcomingAppts) {
                     alertText = ("Appointment: [" + upAppt.getAppointmentId() + "] at " + upAppt.getStartTime() +
                             " (" + upAppt.getStartDate() + ")\n") + alertText;
