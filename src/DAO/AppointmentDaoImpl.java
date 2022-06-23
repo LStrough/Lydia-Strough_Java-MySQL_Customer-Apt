@@ -308,7 +308,6 @@ public class AppointmentDaoImpl implements AppointmentDao {
                     alertText = ("Appointment: [" + upAppt.getAppointmentId() + "] at " + upAppt.getStartTime() +
                             " (" + upAppt.getStartDate() + ")\n") + alertText;
                 }
-
                 alert.setContentText(alertText);
                 alert.showAndWait();
             }

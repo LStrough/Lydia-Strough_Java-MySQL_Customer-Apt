@@ -48,11 +48,7 @@ public class Login implements Initializable {
                 JDBC.openConnection();
                 AppointmentDao appointmentDao = new AppointmentDaoImpl();
                 LocalDateTime loginLDT = DAO.LoginToDB.getLoginLDT();
-                //System.out.println("Login local date: " + DAO.LoginToDB.getLoginLDT());
                 appointmentDao.upcomingApptAlert(loginLDT);
-                //LocalDateTime now = LocalDateTime.of(2022, 06, 22, 19, 45);
-                //appointmentDao.upcomingApptAlert(now);
-                //JDBC.closeConnection();
             }
             else if(Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("bundle/language_fr", Locale.getDefault());
@@ -84,7 +80,7 @@ public class Login implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Login: I am initialized!");
 
-        userTimeZoneLbl.setText(String.valueOf(ZoneId.systemDefault()));                //TimeZone init()
+        userTimeZoneLbl.setText(String.valueOf(ZoneId.systemDefault()));
 
         try {
             if (Locale.getDefault().getLanguage().equals("fr")) {
