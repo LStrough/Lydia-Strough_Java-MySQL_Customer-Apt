@@ -5,14 +5,14 @@ import model.Division;
 
 /**
  * This is the "Division DAO" class.
- * This class acts as an Interface for the "Division DAO Implementation" class
+ * This class acts as an Interface for the "Division DAO Implementation" class.
  *
  * @author Lydia Strough
  */
 public interface DivisionDao {
     /**
      * This is the "get all Divisions" method.
-     * This method accesses the database and returns all divisions. Each division is then added to an observable list "allDivisions".
+     * This method accesses the database and returns all divisions. Each division is then added to an observable list, "allDivisions".
      *
      * @return allDivisions list
      */

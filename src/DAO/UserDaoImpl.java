@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao{
 
     /**
      * This is the "get All Users" method.
-     * This method accesses the database and returns all users. Each user is then added to an observable list "allUsers".
+     * This method accesses the database and returns all users. Each user is then added to an observable list, "allUsers".
      *
      * @return the specific user information
      */

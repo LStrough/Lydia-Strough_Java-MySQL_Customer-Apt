@@ -28,7 +28,7 @@ public class DivisionDaoImpl implements DivisionDao{
 
     /**
      * This is the "get all Divisions" method.
-     * This method accesses the database and returns all divisions. Each division is then added to an observable list "allDivisions".
+     * This method accesses the database and returns all divisions. Each division is then added to an observable list, "allDivisions".
      *
      * @return allDivisions list
      */
