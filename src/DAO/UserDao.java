@@ -4,15 +4,15 @@ import javafx.collections.ObservableList;
 import model.User;
 
 /**
- * This is the User DAO class.
- * This class acts as an Interface for the User DAO Implementation class.
+ * This is the "User DAO" class.
+ * This class acts as an Interface for the "User DAO Implementation" class.
  *
  * @author Lydia Strough
  */
 public interface UserDao {
 
     /**
-     * This is the get All Users method.
+     * This is the "get All Users" method.
      * This method accesses the database and returns all users. Each user is then added to an observable list "allUsers".
      *
      * @return allUsers list
@@ -20,7 +20,7 @@ public interface UserDao {
     public ObservableList<User> getAllUsers();
 
     /**
-     * This is the get User method.
+     * This is the "get User" method.
      * This method searches the database for a specific user by their user ID.
      *
      * @param userId the user ID in question
@@ -29,7 +29,7 @@ public interface UserDao {
     public User getUser(int userId);
 
     /**
-     * This is the update User password method.
+     * This is the "update User password" method.
      * This method searches the database for a specific user by their username and password, and then updates the password.
      *
      * @param userName database user username
@@ -40,7 +40,7 @@ public interface UserDao {
     public int updateUserPass(String userName, String newPassword, String currentPassword);
 
     /**
-     * This is the update User username method.
+     * This is the "update User username" method.
      * This method searches the database for a specific user by their username and password, and then updates the users' username.
      *
      * @param currentUserName database users' current username
@@ -60,7 +60,7 @@ public interface UserDao {
     public int deleteUser(int userId);
 
     /**
-     * This is the add User method.
+     * This is the "add User" method.
      * This method accesses the database and adds a user with the desired user name and password.
      *
      * @param userName the desired user name

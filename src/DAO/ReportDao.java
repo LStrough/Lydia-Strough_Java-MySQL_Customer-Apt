@@ -4,8 +4,8 @@ import javafx.collections.ObservableList;
 import model.Report;
 
 /**
- * This is the Report DAO class.
- * This class acts as an Interface for the Report DAO Implementation class.
+ * This is the "Report DAO" class.
+ * This class acts as an Interface for the "Report DAO Implementation" class.
  *
  * @author Lydia Strough
  */

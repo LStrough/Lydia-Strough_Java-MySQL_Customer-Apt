@@ -9,10 +9,29 @@ import java.sql.ResultSet;
 
 import static DAO.JDBC.connection;
 
+/**
+ * This is the "Division DAO Implementation" class.
+ * This class Implements the "Division DAO" class' method definitions.
+ *
+ * @author Lydia Strough
+ */
 public class DivisionDaoImpl implements DivisionDao{
+    /**
+     * This is the Division "all divisions" list.
+     * */
     ObservableList<Division> allDivisions = FXCollections.observableArrayList();
+    /**
+     * This is the Division "divisions by country" list.
+     * This is a filtered list of "divisions" - each object in this list comes from the same country.
+     * */
     ObservableList<Division> divisionsByCountry = FXCollections.observableArrayList();
 
+    /**
+     * This is the "get all Divisions" method.
+     * This method accesses the database and returns all divisions. Each division is then added to an observable list "allDivisions".
+     *
+     * @return allDivisions list
+     */
     @Override
     public ObservableList<Division> getAllDivisions() {
          try{
@@ -35,6 +54,13 @@ public class DivisionDaoImpl implements DivisionDao{
         return allDivisions;
     }
 
+    /**
+     * This is the "get division" method.
+     * This method searches the database for a specific division based on its unique division ID.
+     *
+     * @param divisionId the division ID in question
+     * @return the specific divisions' information
+     */
     @Override
     public Division getDivision(int divisionId) {
         try{
@@ -59,6 +85,13 @@ public class DivisionDaoImpl implements DivisionDao{
         return null;
     }
 
+    /**
+     * This is the "get divisions by country" method.
+     * This method accesses the database and filters the list of divisions based on their related country ID.
+     *
+     * @param countryId the divisions' country ID
+     * @return the "divisionsByCountry" list
+     */
     @Override
     public ObservableList<Division> getDivisionsByCountry(int countryId) {
          try{
@@ -82,6 +115,16 @@ public class DivisionDaoImpl implements DivisionDao{
         return divisionsByCountry;
     }
 
+    /**
+     * This is the "update division name" method.
+     * <p>This method searches the database for a specific division by their division name and country ID,
+     * and then updates the divisions' division name.</p>
+     *
+     * @param currentDivisionName the division in questions' current division name
+     * @param countryId the division in questions' country ID
+     * @param newDivisionName the division in questions' desired new division name
+     * @return the number of affected database rows
+     */
     @Override
     public int updateDivisionName(String currentDivisionName, int countryId, String newDivisionName) {
         int rowsAffected = 0;
@@ -105,6 +148,16 @@ public class DivisionDaoImpl implements DivisionDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the "update division country ID" method.
+     * <p>This method searched the database for a specific division by their division name and country ID,
+     * and then updates the divisions' country ID. </p>
+     *
+     * @param divisionName the division in questions' division name
+     * @param currentCountryId the division in questions' current country ID
+     * @param newCountryId the division in questions' desired new country ID
+     * @return the number of affected database rows
+     */
     @Override
     public int updateDivisionCountry(String divisionName, int currentCountryId, int newCountryId) {
         int rowsAffected = 0;
@@ -127,6 +180,14 @@ public class DivisionDaoImpl implements DivisionDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the "delete division" method.
+     * This method accesses the database and deletes a division with a specific division name and division ID.
+     *
+     * @param divisionId the division in questions' division ID
+     * @param divisionName the division in questions' division name
+     * @return the number of affected database rows
+     */
     @Override
     public int deleteDivision(int divisionId, String divisionName) {
         int rowsAffected = 0;
@@ -148,6 +209,14 @@ public class DivisionDaoImpl implements DivisionDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the "add division" method.
+     * This method accesses the database and adds a division with the desired division name and country ID.
+     *
+     * @param divisionName the desired divisions' division name
+     * @param countryId the desired divisions' country ID
+     * @return the number of affected database rows
+     */
     @Override
     public int addDivision(String divisionName, int countryId) {
         int rowsAffected = 0;
