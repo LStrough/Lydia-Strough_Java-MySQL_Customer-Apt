@@ -67,6 +67,7 @@ public class CustomerDaoImpl implements CustomerDao{
      *
      * @param customerId the customer in questions' customer ID
      * @return the customer in questions' information
+     * @return no result (null), if no customer with the specific ID exists
      */
     @Override
     public Customer getCustomer(int customerId) {

@@ -52,6 +52,7 @@ public class CountryDaoImpl implements CountryDao{
      *
      * @param countryId the desired countries' unique country ID
      * @return the specific countries' information
+     * @return no result (null), if no country with the specific ID exists
      */
     @Override
     public Country getCountry(int countryId) {

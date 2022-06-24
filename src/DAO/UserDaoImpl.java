@@ -53,6 +53,7 @@ public class UserDaoImpl implements UserDao{
      *
      * @param userId the user ID in question
      * @return the specific user information
+     * @return no result (null), if no user with the specific ID exists
      */
     @Override
     public User getUser(int userId) {

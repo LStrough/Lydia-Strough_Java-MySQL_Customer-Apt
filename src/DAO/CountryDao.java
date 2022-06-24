@@ -24,6 +24,7 @@ public interface CountryDao {
      *
      * @param countryId the desired countries' unique country ID
      * @return the specific countries' information
+     * @return no result (null), if no country with the specific ID exists
      */
     public Country getCountry(int countryId);
 

@@ -24,6 +24,7 @@ public interface DivisionDao {
      *
      * @param divisionId the division ID in question
      * @return the specific divisions' information
+     * @return no result (null), if no division with the specific ID exists
      */
     public Division getDivision(int divisionId);
 

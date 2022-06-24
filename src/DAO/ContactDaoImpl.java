@@ -9,9 +9,24 @@ import java.sql.ResultSet;
 
 import static DAO.JDBC.connection;
 
+/**
+ * This is the "Contact DAO Implementation" class.
+ * This class Implements the "Contact DAO" class' method definitions.
+ *
+ * @author Lydia Strough
+ */
 public class ContactDaoImpl implements ContactDao{
+    /**
+     * This is the "all contacts" list.
+     */
     ObservableList<Contact> allContacts = FXCollections.observableArrayList();
 
+    /**
+     * This is the "get All Contacts" method.
+     * This method accesses the database and returns all contacts. Each contact is then added to an observable list, "allContacts".
+     *
+     * @return allContacts list
+     */
     @Override
     public ObservableList<Contact> getAllContacts() {
         try{
@@ -31,6 +46,14 @@ public class ContactDaoImpl implements ContactDao{
         return allContacts;
     }
 
+    /**
+     * This is the "get contact" method.
+     * This method searches the database for a specific contact by their unique contact ID.
+     *
+     * @param contactId the contact in questions' contact ID
+     * @return the specific contacts' information
+     * @return no result (null), if no contact with the specific ID exists
+     */
     @Override
     public Contact getContact(int contactId) {
           try{
@@ -52,6 +75,15 @@ public class ContactDaoImpl implements ContactDao{
         return null;
     }
 
+    /**
+     * This is the "update contact" method.
+     * This method searches the database for a specific contact by their contact ID and contact name, and then updates the contact name.
+     *
+     * @param contactId the contact in questions' contact ID
+     * @param currentContactName the contact in questions' contact name
+     * @param newContactName the contact in questions' desired new contact name
+     * @return the number of affected database rows
+     */
     @Override
     public int updateContact(int contactId, String currentContactName, String newContactName) {
         int rowsAffected = 0;
@@ -75,6 +107,13 @@ public class ContactDaoImpl implements ContactDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the "delete contact" method.
+     * This method accesses the database and deletes a contact with the specified contact ID.
+     *
+     * @param contactId the contact in questions' unique contact ID
+     * @return the number of affected database rows
+     */
     @Override
     public int deleteContact(int contactId) {
         int rowsAffected = 0;
@@ -95,6 +134,13 @@ public class ContactDaoImpl implements ContactDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the "add contact" method.
+     * This method accesses the database and adds a new contact with the desired contact name.
+     *
+     * @param contactName the desired contact name
+     * @return the number of affected database rows
+     */
     @Override
     public int addContact(String contactName) {
         int rowsAffected = 0;

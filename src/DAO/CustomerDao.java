@@ -24,6 +24,7 @@ public interface CustomerDao {
      *
      * @param customerId the customer in questions' customer ID
      * @return the customer in questions' information
+     * @return no result (null), if no customer with the specific ID exists
      */
     public Customer getCustomer(int customerId);
 
