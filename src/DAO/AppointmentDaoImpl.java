@@ -14,10 +14,28 @@ import java.util.stream.Collectors;
 
 import static DAO.JDBC.connection;
 
+/**
+ * This is the "Appointment DAO Implementation" class.
+ * This class Implements the "Appointment DAO" class' method definitions.
+ *
+ * @author Lydia Strough
+ */
 public class AppointmentDaoImpl implements AppointmentDao {
+    /**
+     * This is the "all appointments" list.
+     */
     ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    /**
+     * This is the appointment object used in the "look up appointment" method.
+     */
     public boolean apptFound;
 
+    /**
+     * This is the "get All Appointments" method.
+     * This method accesses the database and returns all appointments. Each appointment is then added to an observable list, "allAppointments".
+     *
+     * @return allAppointments list
+     */
     @Override
     public ObservableList<Appointment> getAllAppointments() {
         try {
@@ -51,6 +69,14 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return allAppointments;
     }
 
+    /**
+     * This is the "get appointment" method.
+     * This method searches the database for a specific appointment based on its unique appointment ID.
+     *
+     * @param appointmentId the appointment in questions' specific ID
+     * @return the appointment in questions' information
+     * @return no result (null), if no appointment with the specific ID exists
+     */
     @Override
     public Appointment getAppointment(int appointmentId) {
         try {
@@ -86,6 +112,14 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return null;
     }
 
+    /**
+     * This is the "get appointment(s) by customer" method.
+     * <p>This method accesses the database and filters a list of appointments, based on their related customer ID.
+     * If an appointment is associated with the specific customer ID, it is added to a "customer appointments" list.</p>
+     *
+     * @param customerId the customer in questions' specific ID
+     * @return customerAppts list
+     */
     @Override
     public ObservableList<Appointment> getApptByCustomer(int customerId) {
         ObservableList<Appointment> customerAppts = FXCollections.observableArrayList();
@@ -122,6 +156,14 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return customerAppts;
     }
 
+    /**
+     * This is the "get appointment(s) by contact" method.
+     * <p>This method accesses the database and filters a list of appointments, based on their related contact ID.
+     * If an appointment is associated with the specific contact ID, it is added to a "appointments by contact" list.</p>
+     *
+     * @param contactId the contact in questions' specific ID
+     * @return apptsByContact list
+     */
     @Override
     public ObservableList<Appointment> getApptByContact(int contactId) {
         ObservableList<Appointment> apptsByContact = FXCollections.observableArrayList();
@@ -158,6 +200,22 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return apptsByContact;
     }
 
+    /**
+     * This is the "update appointment" method.
+     * This method updates all values of a selected appointment based on its unique appointment ID.
+     *
+     * @param appointmentId the appointment in questions' unique appointment ID
+     * @param customerId the appointment in questions' desired associated customer ID
+     * @param userId the appointment in questions' desired associated user ID
+     * @param contactId the appointment in questions' desired associated contact ID
+     * @param title the appointment in questions' desired appointment title
+     * @param description the appointment in questions' desired appointment description
+     * @param location the appointment in questions' desired appointment location
+     * @param type the appointment in questions' desired appointment type
+     * @param startDateTime the appointment in questions' desired appointment start date and time
+     * @param endDateTime the appointment in questions' desired appointment end date and time
+     * @return the number of affected database rows
+     */
     @Override
     public int updateAppointment(int appointmentId, int customerId, int userId, int contactId, String title, String description,
                                  String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -190,6 +248,16 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the "delete appointment" method.
+     * <p>This method accesses the database and deletes an with a specific appointment ID, customer ID, and appointment type.
+     * If an appointment was successfully (or unsuccessfully) deleted, an alert message populates with the result of the query. </p>
+     *
+     * @param appointmentId the appointment in questions' unique appointment ID
+     * @param customerId the appointment in questions' associated customer ID
+     * @param type the appointment in questions appointment type
+     * @return the number of affected database rows
+     */
     @Override
     public int deleteAppointment(int appointmentId, int customerId, String type) {
         int rowsAffected = 0;
@@ -223,6 +291,23 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the "add appointment" method.
+     * <p>This method accesses the database and adds an appointment to the system with the desired credentials (associated customer ID,
+     * associated user ID, associated contact ID, appointment title, appointment description, appointment location, appointment type,
+     * appointment desired start date and time, and desired appointment end date and time). </p>
+     *
+     * @param customerId associated customer ID
+     * @param userId associated user ID
+     * @param contactId associated contact ID
+     * @param title appointment title
+     * @param description appointment description
+     * @param location appointment location
+     * @param type appointment type
+     * @param startDateTime appointment desired start date and time
+     * @param endDateTime desired appointment end date and time
+     * @return the number of affected database rows
+     */
     @Override
     public int addAppointment(int customerId, int userId, int contactId, String title, String description, String location,
                               String type, LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -254,6 +339,15 @@ public class AppointmentDaoImpl implements AppointmentDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the "look up appointments" method.
+     * <p>This method searches the allAppointments list for a filtered list of appointments that are associated with a
+     * specific (local) start date.</p>
+     *
+     * @param selDate (local) appointment start date in question
+     * @return the allAppointments list, if there are no matching appointments with the specified (local) start date
+     * @return the filteredAppts list of appointments associated with the (local) start date
+     */
     @Override
     public ObservableList<Appointment> lookUpAppointment(LocalDate selDate) {
         ObservableList<Appointment> filteredAppts = FXCollections.observableArrayList();

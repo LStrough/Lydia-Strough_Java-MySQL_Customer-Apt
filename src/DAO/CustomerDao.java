@@ -53,7 +53,8 @@ public interface CustomerDao {
 
     /**
      * This is the "delete customer" method.
-     * This method accesses the database and deletes a customer with a specific customer ID and customer name.
+     * <p>This method accesses the database and deletes a customer with a specific customer ID and customer name.
+     * If the customer was successfully (or unsuccessfully) deleted, an alert message populates with the result of the query. </p>
      *
      * @param customerId the customer in questions' unique customer ID
      * @param customerName the customer in questions' customer name
