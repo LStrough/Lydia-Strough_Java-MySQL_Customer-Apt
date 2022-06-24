@@ -3,31 +3,67 @@ package model;
 import java.time.*;
 
 /**
- *This class is for Customer Appointments.
+ * This class is for Customer Appointments.
  *
  * @author Lydia Strough
  */
 public class Appointment {
     /**
-     * appointment ID, customer ID, database user ID, customer contact ID.
+     * appointment ID.
      * */
-    private int appointmentId, customerId, userId, contactId;
+    private int appointmentId;
     /**
-     * appointment title, appointment description, appointment location, appointment type.
-     * */
-    private String title, description, location, type;
+     * customer ID.
+     */
+    private int customerId;
     /**
-     *appointment (local) start date/time, appointment (local) end date/time.
-     * */
-    private LocalDateTime startDateTime, endDateTime;
+     * database user ID.
+     */
+    private int userId;
     /**
-     *appointment (local) start date, appointment (local) end date.
-     * */
-    private LocalDate startDate, endDate;
+     * customer contact ID.
+     */
+    private int contactId;
     /**
-     *appointment (local) start time, appointment (local) end time.
+     * appointment title.
      * */
-    private LocalTime startTime, endTime;
+    private String title;
+    /**
+     * appointment description.
+     */
+    private String description;
+    /**
+     * appointment location.
+     */
+    private String location;
+    /**
+     * appointment type.
+     */
+    private String type;
+    /**
+     *appointment (local) start date/time.
+     * */
+    private LocalDateTime startDateTime;
+    /**
+     * appointment (local) end date/time.
+     */
+    private LocalDateTime endDateTime;
+    /**
+     *appointment (local) start date.
+     * */
+    private LocalDate startDate;
+    /**
+     * appointment (local) end date.
+     */
+    private LocalDate endDate;
+    /**
+     *appointment (local) start time.
+     * */
+    private LocalTime startTime;
+    /**
+     * appointment (local) end time.
+     */
+    private LocalTime endTime;
 
     /**
      * This is the Appointment constructor.
@@ -265,7 +301,7 @@ public class Appointment {
     /**
      * This is the Appointment toString method.
      *
-     * This method provides default syntax for appointment information (converts hashcode to string, etc.)
+     * This method provides default syntax for appointment information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {

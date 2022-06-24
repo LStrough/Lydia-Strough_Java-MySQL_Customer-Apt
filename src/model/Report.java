@@ -1,7 +1,7 @@
 package model;
 
 /**
- *This class is for Month & Type Reports.
+ * This class is for Month &amp; Type Reports.
  *
  * @author Lydia Strough
  */
@@ -20,7 +20,7 @@ public class Report {
     private int count;
 
     /**
-     * This is the Month & Type Report constructor.
+     * This is the Month &amp; Type Report constructor.
      *
      * @param month appointment month
      * @param type appointment type
@@ -75,9 +75,9 @@ public class Report {
     }
 
     /**
-     * This is the Month & Type Report toString method.
+     * This is the Month &amp; Type Report toString method.
      *
-     * This method provides default syntax for report information (converts hashcode to string, etc.)
+     * This method provides default syntax for report information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {

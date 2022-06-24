@@ -9,13 +9,13 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**
- *This class is for Managing the list of "Business Hour" Times.
+ * This class is for managing "Business Hour" Times as a list.
  *
  * @author Lydia Strough
  */
 public class TimeManager {
     /**
-     * This is the dynamic Business Hours Initialized method.
+     * This is the "dynamic Business Hours Initialized" method.
      * This method is used to create a dynamic list of times (hours) that will convert with the operating systems' local time.
      *
      * @param osZId operating system zone ID (system Default)

@@ -11,12 +11,16 @@ public class User {
      * */
     private int userId;
     /**
-     * database user name, database user password.
+     * database user name.
      * */
-    private String userName, password;
+    private String userName;
+    /**
+     * database user password.
+     */
+    private String password;
 
     /**
-     * This is the Month & Type Report constructor.
+     * This is the database user constructor.
      *
      * @param userId database user ID
      * @param userName database user name
@@ -73,7 +77,7 @@ public class User {
     /**
      * This is the database user toString method.
      *
-     * This method provides default syntax for database user information (converts hashcode to string, etc.)
+     * This method provides default syntax for database user information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {

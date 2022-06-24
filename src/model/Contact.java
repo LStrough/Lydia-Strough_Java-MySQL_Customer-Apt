@@ -1,7 +1,7 @@
 package model;
 
 /**
- *This class is for Customer Contacts.
+ * This class is for Customer Contacts.
  *
  * @author Lydia Strough
  */
@@ -57,7 +57,7 @@ public class Contact {
     /**
      * This is the Customer Contact toString method.
      *
-     * This method provides default syntax for customer contact information (converts hashcode to string, etc.)
+     * This method provides default syntax for customer contact information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {

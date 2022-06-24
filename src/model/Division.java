@@ -1,22 +1,30 @@
 package model;
 
 /**
- *This class is for first level divisions.
+ * This class is for first level divisions.
  *
  * @author Lydia Strough
  */
 public class Division {
     /**
-     * first level division ID, country ID.
+     * first level division ID.
      * */
-    private int divisionId, countryId;
+    private int divisionId;
     /**
-     * first level division name, country name.
+     *  country ID.
+     */
+    private int countryId;
+    /**
+     * first level division name.
      * */
-    private String divisionName, countryName;
+    private String divisionName;
+    /**
+     * country name.
+     */
+    private String countryName;
 
     /**
-     * This is the Month & Type Report constructor.
+     * This is the first level divisions constructor.
      *
      * @param divisionId first level division ID
      * @param countryId country ID
@@ -89,7 +97,7 @@ public class Division {
     /**
      * This is the First Level Divisions toString method.
      *
-     * This method provides default syntax for first level division information (converts hashcode to string, etc.)
+     * This method provides default syntax for first level division information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {

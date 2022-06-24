@@ -20,8 +20,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddAppointment implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
     public ComboBox<Contact> contactComboBx;
@@ -119,6 +119,11 @@ public class AddAppointment implements Initializable {
         }
     }
 
+    /**
+     * Description (method does).
+     * <p>LAMBDA EXPRESSION: what it does. why i did a lambda for this.
+     * @param errorNum
+     */
     public void errorMessage(int errorNum) {
         switch (errorNum) {
             case 1 -> {

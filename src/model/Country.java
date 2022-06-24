@@ -1,7 +1,7 @@
 package model;
 
 /**
- *This class is for Countries.
+ * This class is for Countries.
  *
  * @author Lydia Strough
  */
@@ -57,7 +57,7 @@ public class Country {
     /**
      * This is the Country toString method.
      *
-     * This method provides default syntax for country information (converts hashcode to string, etc.)
+     * This method provides default syntax for country information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {

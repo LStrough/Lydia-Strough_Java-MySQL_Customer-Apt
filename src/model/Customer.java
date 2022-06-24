@@ -1,19 +1,47 @@
 package model;
 
 /**
- *This class is for Customers.
+ * This class is for Customers.
  *
  * @author Lydia Strough
  */
 public class Customer {
     /**
-     * customer ID, first level division ID, country ID.
+     * customer ID.
      * */
-    private int customerId, divisionId, countryId;
+    private int customerId;
     /**
-     * customer name, customer address, customer postal code, customer phone number, customer country name, customer first level division name.
+     * first level division ID.
+     */
+    private int divisionId;
+    /**
+     * country ID.
+     */
+    private int countryId;
+    /**
+     * customer name.
      * */
-    private String customerName, address, postalCode, phone, countryName, divisionName;
+    private String customerName;
+    /**
+     * customer address.
+     */
+    private String address;
+    /**
+     *  customer postal code.
+     */
+    private String postalCode;
+    /**
+     *  customer phone number.
+     */
+    private String phone;
+    /**
+     * customer country name.
+     */
+    private String countryName;
+    /**
+     * customer first level division name.
+     */
+    private String divisionName;
 
     /**
      * This is the Month & Type Report constructor.
@@ -170,7 +198,7 @@ public class Customer {
     /**
      * This is the Customers toString method.
      *
-     * This method provides default syntax for customer information (converts hashcode to string, etc.)
+     * This method provides default syntax for customer information (converts hashcode to string, etc.).
      * */
     @Override
     public String toString() {
