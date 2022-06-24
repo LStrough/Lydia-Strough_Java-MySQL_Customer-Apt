@@ -9,9 +9,24 @@ import java.sql.ResultSet;
 
 import static DAO.JDBC.connection;
 
+/**
+ *This is the User DAO Implementation class.
+ * This class Implements the User DAO class' method definitions.
+ *
+ * @author Lydia Strough
+ */
 public class UserDaoImpl implements UserDao{
+    /**
+     * This is the User "all users" list.
+     * */
     ObservableList<User> allUsers = FXCollections.observableArrayList();
 
+    /**
+     * This is the get All Users method.
+     * This method accesses the database and returns all users. Each user is then added to an observable list "allUsers".
+     *
+     * @return the specific user information
+     */
     @Override
     public ObservableList<User> getAllUsers(){
         try{
@@ -32,6 +47,13 @@ public class UserDaoImpl implements UserDao{
         return allUsers;
     }
 
+    /**
+     * This is the get User method.
+     * This method searches the database for a specific user by their user ID.
+     *
+     * @param userId the user ID in question
+     * @return the specific user information
+     */
     @Override
     public User getUser(int userId) {
         try{
@@ -54,6 +76,15 @@ public class UserDaoImpl implements UserDao{
         return null;
     }
 
+    /**
+     * This is the update User password method.
+     * This method searches the database for a specific user by their username and password, and then updates the password.
+     *
+     * @param userName database user username
+     * @param newPassword new password
+     * @param currentPassword database users' current password
+     * @return the number of affected database rows
+     */
     @Override
     public int updateUserPass(String userName, String newPassword, String currentPassword) {
         int rowsAffected = 0;
@@ -76,6 +107,15 @@ public class UserDaoImpl implements UserDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the update User username method.
+     * This method searches the database for a specific user by their username and password, and then updates the users' username.
+     *
+     * @param currentUserName database users' current username
+     * @param newUserName database users' new desired username
+     * @param password database users' password
+     * @return the number of affected database rows
+     */
     @Override
     public int updateUserName(String currentUserName, String newUserName, String password) {
         int rowsAffected = 0;
@@ -99,6 +139,13 @@ public class UserDaoImpl implements UserDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the "delete User" method.
+     * This method accesses the database and deletes a user with a specific user ID.
+     *
+     * @param userId the user ID in question
+     * @return the number of affected database rows
+     */
     @Override
     public int deleteUser(int userId) {
         int rowsAffected = 0;
@@ -119,6 +166,14 @@ public class UserDaoImpl implements UserDao{
         return rowsAffected;
     }
 
+    /**
+     * This is the add User method.
+     * This method accesses the database and adds a user with the desired user name and password.
+     *
+     * @param userName the desired user name
+     * @param password the desired password
+     * @return the number of affected database rows
+     */
     @Override
     public int addUser(String userName, String password) {
         int rowsAffected = 0;
