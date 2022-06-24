@@ -3,6 +3,12 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * This is the "Java database connectivity (JDBC)" class.
+ * This class contains methods that open and close a connection from the IDE to the database.
+ *
+ * @author Lydia Strough
+ */
 public abstract class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -14,6 +20,10 @@ public abstract class JDBC {
     private static final String password = "Passw0rd!";
     public static Connection connection;
 
+    /**
+     * This is the "open database connection" method.
+     * This method opens a connection between the Java IDE and the mySQL database.
+     */
     public static void openConnection(){
         try {
             Class.forName(driver);
@@ -24,6 +34,10 @@ public abstract class JDBC {
         }
     }
 
+    /**
+     * This is the "close database connection" method.
+     * This method closes the connection between the Java IDE and the mySQL database.
+     */
     public static void closeConnection(){
         try {
             connection.close();
