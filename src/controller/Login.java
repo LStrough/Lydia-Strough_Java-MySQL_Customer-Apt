@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 import static DAO.LoginToDB.loginQuery;
 
 public class Login implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public Label usernameLbl, passwordLbl, timeZoneLbl;
     public TextField usernameTxt;

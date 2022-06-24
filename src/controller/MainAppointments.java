@@ -25,8 +25,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainAppointments implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public ToggleGroup viewByTgl;
     public DatePicker datePicker;

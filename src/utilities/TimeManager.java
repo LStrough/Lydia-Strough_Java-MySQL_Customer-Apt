@@ -16,10 +16,10 @@ import java.time.ZonedDateTime;
 public class TimeManager {
     /**
      * This is the "dynamic Business Hours Initialized" method.
-     * This method is used to create a dynamic list of times (hours) that will convert with the operating systems' local time.
+     * <p>This method is used to create a dynamic list of times (hours) that will convert with the operating systems' local time.</p>
      *
      * @param osZId operating system zone ID (system Default)
-     * @param businessZId specific zone for business hours (UTC)
+     * @param businessZId specific zone for business hours (EST)
      * @param businessHourStart business hour start time (08:00)
      * @param workHours number of work hours
      * @return timeList List of dynamic business hours

@@ -44,7 +44,7 @@ public class Customer {
     private String divisionName;
 
     /**
-     * This is the Month & Type Report constructor.
+     * This is the Month &amp; Type Report constructor.
      *
      * @param customerId customer ID
      * @param divisionId first level division ID

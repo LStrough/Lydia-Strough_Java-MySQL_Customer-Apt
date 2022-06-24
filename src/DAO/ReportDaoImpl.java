@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 /**
- *This is the Report DAO Implementation class.
+ * This is the Report DAO Implementation class.
  * This class Implements the Report DAO class' method definitions.
  *
  * @author Lydia Strough

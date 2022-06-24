@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import model.User;
 
 /**
- *This is the User DAO class.
+ * This is the User DAO class.
  * This class acts as an Interface for the User DAO Implementation class.
  *
  * @author Lydia Strough

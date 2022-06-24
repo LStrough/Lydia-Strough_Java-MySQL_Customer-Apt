@@ -19,8 +19,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReportsMonthType implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public TableView<Report> reportTableView;
     public TableColumn monthCol, typeCol, countCol;

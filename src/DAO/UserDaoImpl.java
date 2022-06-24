@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import static DAO.JDBC.connection;
 
 /**
- *This is the User DAO Implementation class.
+ * This is the User DAO Implementation class.
  * This class Implements the User DAO class' method definitions.
  *
  * @author Lydia Strough

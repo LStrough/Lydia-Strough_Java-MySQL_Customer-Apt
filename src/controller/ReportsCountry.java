@@ -18,8 +18,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReportsCountry implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public TableView<Customer> reportTableView;
     public TableColumn customerIdCol, customerNameCol, addressCol, postalCodeCol, phoneNumCol, countryCol;

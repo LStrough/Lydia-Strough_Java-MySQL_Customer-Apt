@@ -18,8 +18,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddCustomer implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public TextField nameTxt, addressTxt, postalCodeTxt, phoneTxt;
     public ComboBox<Country> countryComboBx;

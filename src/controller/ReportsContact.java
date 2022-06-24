@@ -18,8 +18,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReportsContact implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public TableView<Appointment> reportTableView;
     public TableColumn apptIdCol, titleCol, descriptionCol, locationCol, contactCol, typeCol, startDateCol, endDateCol,

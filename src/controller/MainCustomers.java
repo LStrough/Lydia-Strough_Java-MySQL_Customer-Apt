@@ -21,8 +21,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainCustomers implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     public TextField searchCustomer;
     public TableView<Customer> customerTableView;
