@@ -23,16 +23,57 @@ import java.util.ResourceBundle;
 
 import static DAO.LoginToDB.loginQuery;
 
+/**
+ * This is the "Login" controller.
+ *
+ *<p>This class allows the user to access the program by prompting the user to enter a valid database username and password. </p>
+ *
+ * @author Lydia Strough
+ */
 public class Login implements Initializable {
-    private Stage stage;
-    private Parent scene;
+    Stage stage;
+    Parent scene;
 
-    public Label usernameLbl, passwordLbl, timeZoneLbl;
+    /**
+     * This is the username label
+     */
+    public Label usernameLbl;
+    /**
+     * This is the password label
+     */
+    public Label passwordLbl;
+    /**
+     * This is the time Zone label
+     */
+    public Label timeZoneLbl;
+    /**
+     * This is the username text field
+     */
     public TextField usernameTxt;
+    /**
+     * This is the password text field
+     */
     public PasswordField passwordTxt;
+    /**
+     * This is the (users' default) time zone label
+     */
     public Label userTimeZoneLbl;
-    public Button resetBttn, loginBttn;
+    /**
+     * This is the reset button
+     */
+    public Button resetBttn;
+    /**
+     * This is the login button
+     */
+    public Button loginBttn;
 
+    /**
+     * This is the "Login" method.
+     *
+     * <p></p>
+     *
+     * @param actionEvent the user pushes the login button
+     */
     public void onActionLogIn(ActionEvent actionEvent) {
         System.out.println("Login Button clicked!");
 
@@ -83,12 +124,26 @@ public class Login implements Initializable {
         }
     }
 
+    /**
+     * This is the "reset username and password text field" method.
+     *
+     * <p></p>
+     *
+     * @param actionEvent the user pushes the reset button
+     */
     public void onActionResetUserPass(ActionEvent actionEvent) {
         System.out.println("Reset Button clicked!");
         usernameTxt.setText("");
         passwordTxt.setText("");
     }
 
+    /**
+     * This is the "Login" controller initialize method.
+     *
+     * <p>This is the first method called when the screen populates.</p>
+     *
+     * <p></p>
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Login: I am initialized!");
