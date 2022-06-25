@@ -127,7 +127,7 @@ public class Login implements Initializable {
     /**
      * This is the "reset username and password text field" method.
      *
-     * <p></p>
+     * <p>This method "clears" the username and password text fields. </p>
      *
      * @param actionEvent the user pushes the reset button
      */
@@ -142,7 +142,11 @@ public class Login implements Initializable {
      *
      * <p>This is the first method called when the screen populates.</p>
      *
-     * <p></p>
+     * <p>The userTimeZoneLbl text is set to display the operating systems default zone ID.</p>
+     *
+     * <p>If the operating systems default language is set to french, then the french language resource bundle is called from the bundle package.
+     * Upon the screens initialization, all text displayed on the screen is translated to french. However, if the operating systems language
+     * is set to anything but french, then all text displayed will be displayed in english. </p>
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
