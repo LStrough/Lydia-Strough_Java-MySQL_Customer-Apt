@@ -20,25 +20,152 @@ import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This is the "Update Appointment" controller.
+ *
+ *<p>This class allows the user to update a pre-selected appointment to the database. The user can modify the appointment
+ *  title, description, location, type, associated customer ID, user ID, and contact ID. Finally, the user can modify the
+ *  appointment start and end date, as well as the appointment start and end time.</p>
+ *
+ * @author Lydia Strough
+ */
 public class UpdateAppointment implements Initializable {
     private Stage stage;
     private Parent scene;
 
-    public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
+    /**
+     * This is the appointment title text field.
+     */
+    public TextField titleTxt;
+    /**
+     * This is the appointment description text field.
+     */
+    public TextField descriptionTxt;
+    /**
+     * This is the appointment location text field.
+     */
+    public TextField locationTxt;
+    /**
+     * This is the appointment type text field.
+     */
+    public TextField typeTxt;
+    /**
+     * This is the contact combo box.
+     */
     public ComboBox<Contact> contactComboBx;
+    /**
+     * This is the customer combo box.
+     */
     public ComboBox<Customer> customerComboBx;
+    /**
+     * This is the user combo box.
+     */
     public ComboBox<User> userComboBx;
-    public DatePicker startDatePicker, endDatePicker;
-    public ComboBox<LocalTime> startTimeComboBx, endTimeComboBx;
-    public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
-
+    /**
+     * This is the appointment start date date picker.
+     */
+    public DatePicker startDatePicker;
+    /**
+     * This is the appointment end date date picker.
+     */
+    public DatePicker endDatePicker;
+    /**
+     * This is the appointment start time combo box.
+     */
+    public ComboBox<LocalTime> startTimeComboBx;
+    /**
+     * This is the appointment end time combo box.
+     */
+    public ComboBox<LocalTime> endTimeComboBx;
+    /**
+     * This is the appointment title error message label.
+     */
+    public Label titleE;
+    /**
+     * This is the appointment description error message label.
+     */
+    public Label descriptionE;
+    /**
+     * This is the appointment location error message label.
+     */
+    public Label locationE;
+    /**
+     * This is the appointment type error message label.
+     */
+    public Label typeE;
+    /**
+     * This is the appointment associated contact error message label.
+     */
+    public Label contactE;
+    /**
+     * This is the appointment associated customer error message label.
+     */
+    public Label customerE;
+    /**
+     * This is the appointment associated user error message label.
+     */
+    public Label userE;
+    /**
+     * This is the appointment being updated.
+     */
     Appointment selAppt = null;
-    public int customerId, userId, contactId;
-    public String title, description, location, type;
-    public LocalDate startDate, endDate;
-    public LocalTime startTime, endTime;
-    public LocalDateTime startDateTime, endDateTime;
+    /**
+     * desired associated customer ID
+     */
+    public int customerId;
+    /**
+     * desired associated user ID
+     */
+    public int userId;
+    /**
+     * desired associated contact ID
+     */
+    public int contactId;
+    /**
+     * desired appointment title
+     */
+    public String title;
+    /**
+     * desired appointment description
+     */
+    public String description;
+    /**
+     * desired appointment location
+     */
+    public String location;
+    /**
+     * desired appointment type
+     */
+    public String type;
+    /**
+     * desired appointment (local) start date
+     */
+    public LocalDate startDate;
+    /**
+     * desired appointment (local) end date
+     */
+    public LocalDate endDate;
+    /**
+     * appointment (local) start time
+     */
+    public LocalTime startTime;
+    /**
+     * desired appointment (local) end time
+     */
+    public LocalTime endTime;
+    /**
+     * desired appointment (local) start date and time
+     */
+    public LocalDateTime startDateTime;
+    /**
+     * desired appointment (local) end date and time
+     */
+    public LocalDateTime endDateTime;
 
+    /**
+     *
+     * @param selectedAppt
+     */
     public void updateAppointment(Appointment selectedAppt) {
         JDBC.openConnection();
         ContactDao contactDao = new ContactDaoImpl();
@@ -84,6 +211,10 @@ public class UpdateAppointment implements Initializable {
         endTimeComboBx.getSelectionModel().select(selAppt.getEndTime());
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
 
@@ -149,6 +280,15 @@ public class UpdateAppointment implements Initializable {
         }
     }
 
+    /**
+     * This is the "Return to Main" method.
+     *
+     * <p>A confirmation dialog box populates: "All changes will be forgotten, do you wish to continue?".
+     *  If the user hits the OK button, the scene shifts to the Main Appointments Menu. If cancel is selected, the user
+     *  stays in the Update Appointment page.</p>
+     *
+     * @param actionEvent cancel button is pushed
+     * */
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button clicked!");
 
@@ -166,6 +306,14 @@ public class UpdateAppointment implements Initializable {
         }
     }
 
+    /**
+     * This is the "error message" method.
+     * <p>LAMBDA EXPRESSION: When this method is called, it either populates an error message in a label or an alert dialogue box.</p>
+     * <p>WHY I CHOSE TO USE A LAMBDA IN THIS SCENARIO: This was a simple and effective way to generate unique error messages. The lambda
+     * function also helped to cut down on the amount of code needed for the method as the case number associated with the "->"
+     * symbol directly returned the associated error message.</p>
+     * @param errorNum error message case number
+     */
     public void errorMessage(int errorNum) {
         switch (errorNum) {
             case 1 -> {
@@ -202,6 +350,9 @@ public class UpdateAppointment implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Update Appointment: I am initialized!");
