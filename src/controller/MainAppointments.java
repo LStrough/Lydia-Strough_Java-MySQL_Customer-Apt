@@ -103,6 +103,10 @@ public class MainAppointments implements Initializable {
     public Label userTimeZoneLbl;
 
     /**
+     * This is the "view appointments by the upcoming week" method.
+     *
+     * <p>This method opens the database connections and then calls the "upcomingApptsWeek" method from the AppointmentDao class,
+     * and then populates the filtered appointments list into the apptTableView.</p>
      *
      * @param actionEvent the "view by week" radio button is clicked
      */
@@ -115,6 +119,10 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "view appointments for the rest of the month" method.
+     *
+     * <p>This method opens the database connections and then calls the "upcomingApptsMonth" method from the AppointmentDao class,
+     * and then populates the filtered appointments list into the apptTableView.</p>
      *
      * @param actionEvent the "view by month" radio button is clicked
      */
@@ -127,6 +135,10 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "view all appointments" method.
+     *
+     * <p> This method opens the database connections and then calls the "getAllAppointments" method from the AppointmentDao class,
+     * and then populates the all appointments list into the apptTableView.</p>
      *
      * @param actionEvent the "view all" radio button is clicked
      */
@@ -139,6 +151,18 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "search appointments by start date" method.
+     *
+     * <p>This method populates the apptTableView with appointment results based on their start date.</p>
+     *
+     * <p> The database connections is opened and the "getAllAppointments" method is called from the AppointmentDao class.
+     * The apptTableView is then set to the all appointments list. A local start date is selected, using the date picker, and selDate
+     * is assigned the value.</p>
+     *
+     * <p> A new observable list called appts is created and assigned the result of the "lookUpAppointment" method.
+     * The selDate value is used as a parameter in this method. The apptTableView populates the appointment results of this method.</p>
+     *
+     * <p>If the method returns null, an alert dialogue box with the following error message populates: "No item was found."</p>
      *
      * @param actionEvent a date is selected, using the "search appointments by date" date picker
      */
@@ -162,6 +186,9 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "Add Appointment" method.
+     *
+     * <p>The scene shifts from the Main Appointments Menu screen, to the Add Appointment form. </p>
      *
      * @param actionEvent the add appointment button is clicked
      * @throws IOException
@@ -233,6 +260,9 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "Customer" method.
+     *
+     * <p>The scene shifts from the Main Appointments Menu screen, to the Main Customers Menu. </p>
      *
      * @param actionEvent the customers button is clicked
      * @throws IOException
@@ -247,6 +277,9 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "Reports" method.
+     *
+     * <p>The scene shifts from the Main Appointments Menu screen, to the Contact Report screen.</p>
      *
      * @param actionEvent the reports button is clicked
      * @throws IOException
@@ -261,6 +294,11 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "Logout" method.
+     *
+     * <p>A confirmation dialog box populates: "Do you wish to Exit the program?".
+     * If the user hits the OK button, the program ends. If cancel is selected, the user
+     * stays in the Main Appointments Menu.</p>
      *
      * @param actionEvent the logout button is clicked
      */
