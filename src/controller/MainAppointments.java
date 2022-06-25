@@ -35,8 +35,8 @@ import java.util.ResourceBundle;
  * @author Lydia Strough
  */
 public class MainAppointments implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
     /**
      * This is the "view by" toggle group
      */

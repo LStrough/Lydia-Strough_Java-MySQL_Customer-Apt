@@ -29,8 +29,8 @@ import java.util.ResourceBundle;
  * @author Lydia Strough
  */
 public class AddAppointment implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     /**
      * This is the appointment title text field.

@@ -31,8 +31,8 @@ import static DAO.LoginToDB.loginQuery;
  * @author Lydia Strough
  */
 public class Login implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     /**
      * This is the username label

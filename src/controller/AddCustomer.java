@@ -26,8 +26,8 @@ import java.util.ResourceBundle;
  * @author Lydia Strough
  */
 public class AddCustomer implements Initializable {
-    Stage stage;
-    Parent scene;
+    private Stage stage;
+    private Parent scene;
 
     /**
      * This is the customer name text field.
