@@ -72,9 +72,21 @@ public class MainCustomers implements Initializable {
     public Label userTimeZoneLbl;
 
     /**
+     * This is the "Search Customer" method.
      *
-     * @param actionEvent
-     */
+     * <p>This method populates the customerTableView with customer results based on customer ID or customer name.</p>
+     *
+     * <p> The database connection is opened and the "getAllCustomers" method is called from the CustomerDao class. The customerTableView
+     * is set to the all Customers list. Text is gathered from search bar and converted into a string. Customer ID is assigned the text.
+     * The "lookupCustomer" method is called, utilizing customer ID as the parameter. The customerTableView highlights a
+     * result or returns null.</p>
+     *
+     * <p>If null is returned, the text is assigned to customerName and the "lookupCustomer" method is called again using customerName.
+     * If a match (or a similar results) is found, the table filters based on the text. If no match is found, an error message:
+     * "No item was found." populates in an alert dialogue box.</p>
+     *
+     * @param actionEvent text is entered into search customer bar, then enter is pressed
+     * */
     public void onActionSearchCustomer(ActionEvent actionEvent) {
         JDBC.openConnection();
         CustomerDao customerDao = new CustomerDaoImpl();
@@ -153,9 +165,23 @@ public class MainCustomers implements Initializable {
     }
 
     /**
+     * This is the "Delete Customer" method.
      *
-     * @param actionEvent
-     */
+     * <p>The user selects a row in the customer table view and it is assigned to selectedCustomer. </p>
+     *
+     * <p>The database connection is opened, the "getCustomerId" method is then called and the value of the selected
+     * customer ID is assigned to the customerId variable. The "getCustomerName" method is then called and the customer name
+     * is assigned to the customerName variable. </p>
+     *
+     * <p>An alert dialog box populates and the following message displays: "The selected \"Customer\" and their corresponding "Appointment(s)"
+     * will be deleted. Do you wish to continue?" If the user selects the OK button, the "deleteCustomer" method is called
+     * from the CustomerDao class and the selected customer ID and customer name are utilized as parameters.</p>
+     *
+     * <p>The result of the "deleteCustomer" method will then populate in an alert dialogue box and the customerTableView will
+     * then re-populate with an up to date list of customers. </p>
+     *
+     * @param actionEvent the delete customer button clicked
+     * */
     public void onActionDeleteCustomer(ActionEvent actionEvent) {
         System.out.println("Delete Customer Button Clicked!");
 
@@ -236,8 +262,22 @@ public class MainCustomers implements Initializable {
     }
 
     /**
+     * This is the initialize method.
      *
-     */
+     * <p>This is the first method to run when the Main Customers page is populated.</p>
+     *
+     * <p>The userTimeZoneLbl label text is set to "Your Time Zone: " + the string value of ZoneId.systemDefault().</p>
+     *
+     * <p>customerIdCol is assigned with the customerId value.</p>
+     * <p>customerNameCol is assigned with the customerName value.</p>
+     * <p>addressCol is assigned with the address value.</p>
+     * <p>postalCodeCol is assigned with the postalCode value.</p>
+     * <p>phoneNumCol is assigned with the phone value.</p>
+     * <p>stateProvinceCol is assigned with the divisionName value.</p>
+     *
+     *  <p>The database connection is opened, and the customerTableView calls the "getAllCustomers" method from the CustomerDao
+     *  class and assigns all customers to its rows.</p>
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Customer Records: I am initialized!");
