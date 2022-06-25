@@ -163,8 +163,12 @@ public class UpdateAppointment implements Initializable {
     public LocalDateTime endDateTime;
 
     /**
+     * This is the "update Appointment" method.
      *
-     * @param selectedAppt
+     * <p>This method populates the update appointment text fields, combo boxes, and date pickers with the selected appointments'
+     * associated values. </p>
+     *
+     * @param selectedAppt the appointment in questions
      */
     public void updateAppointment(Appointment selectedAppt) {
         JDBC.openConnection();
@@ -212,8 +216,30 @@ public class UpdateAppointment implements Initializable {
     }
 
     /**
+     * This is the "Update Appointment" method.
      *
-     * @param actionEvent
+     * <p>User modifies text fields, combo boxes, and date pickers with desired values. The save method then checks to see if each
+     *text field is blank. If the text fields are blank, the "errorMessage" method is called to populate each correlated text fields'
+     * error message label with an error prompt.</p>
+     *
+     * <p>If none of the text fields are blank, the selected appointment start date and time is checked to see if it is within
+     * business hours. If it is, then the selected appointment end date and time is checked. If either of these tests fail, then the "errorMessage"
+     * method is called again, which populates an alert dialogue box, prompting the user to select a different time.</p>
+     *
+     * <p>If both start and end times are within business hours, then the program checks to see if the selected start time is before
+     * the selected end time. If it is not, then the "errorMessage" method is called again, populating another alert dialogue box with
+     * another error message.</p>
+     *
+     * <p>If the selected start time is before if selected end time, then the "checkUpdatedApptForOverlap" method is called to check and see
+     * if the selected appointments' times and dates have been changed. If they have, then the method continues to check the dates and times
+     * to see if there are other appointments associated with the selected customer ID that would overlap with this appointment.
+     * If there is an overlap between appointments, then the "errorMessage" method is called again, and another alert dialogue box
+     * is populated with another error message.</p>
+     *
+     * <p>If the appointments credentials do not overlap with any other appointments associated with the selected customer ID, then
+     * the add appointment method is called, and the appointment is added to the database. The Main Appointments Menu re-populates.</p>
+     *
+     * @param actionEvent save button is pushed
      */
     public void onActionUpdateAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
@@ -351,7 +377,23 @@ public class UpdateAppointment implements Initializable {
     }
 
     /**
+     * This is the "UpdateAppointment" controller initialize method.
      *
+     * <p>This is the first method called when the screen populates.</p>
+     *
+     * <p>This method assigns values to variables that are used as parameters for the "dynamicBusinessHoursInit" method
+     * (osZId is assigned to the systems default zone ID; businessZId is assigned to EST; startTime is set to the local time of 08:00;
+     * and the number of work hours displayed is assigned to the number 13.). </p>
+     *
+     * <p>The database connection is opened, and the "getAllContacts" method is called from the ContactDao class. The contact combo box is
+     * populated with the "allContacts" list. The "getAllCustomers" method is then called from the CustomerDao class and the
+     * customer combo box is populated with the "allCustomers" list. The "getAllUsers" method is then called from the UserDao
+     * class, and the "allUsers" list is populated in the user combo box. </p>
+     *
+     * <p>The appointment start time combo box is populated with the first 13 "business hours" (from 08:00 EST, on). These business hours are
+     * converted from EST to the operating systems local zoned times. This is done because the "dynamicBusinessHoursInit"
+     * method was called from the TimeManager class. The same process was done to the appointment end time combo box - the
+     * only difference being that the end time combo boxes' start time was assigned to 09:00.</p>
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
