@@ -216,7 +216,7 @@ public class UpdateAppointment implements Initializable {
     }
 
     /**
-     * This is the "Update Appointment" method.
+     * This is the "Update (Save) Appointment" method.
      *
      * <p>User modifies text fields, combo boxes, and date pickers with desired values. The save method then checks to see if each
      *text field is blank. If the text fields are blank, the "errorMessage" method is called to populate each correlated text fields'
@@ -237,7 +237,7 @@ public class UpdateAppointment implements Initializable {
      * is populated with another error message.</p>
      *
      * <p>If the appointments credentials do not overlap with any other appointments associated with the selected customer ID, then
-     * the add appointment method is called, and the appointment is added to the database. The Main Appointments Menu re-populates.</p>
+     * the update appointment method is called, and the appointment is updated in the database. The Main Appointments Menu re-populates.</p>
      *
      * @param actionEvent save button is pushed
      */
