@@ -122,7 +122,7 @@ public class AddAppointment implements Initializable {
     /**
      * Description (method does).
      * <p>LAMBDA EXPRESSION: what it does. why i did a lambda for this.
-     * @param errorNum
+     * @param errorNum blah
      */
     public void errorMessage(int errorNum) {
         switch (errorNum) {

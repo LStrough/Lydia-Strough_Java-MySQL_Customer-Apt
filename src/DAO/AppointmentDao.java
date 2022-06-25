@@ -109,66 +109,116 @@ public interface AppointmentDao {
      * specific (local) start date.</p>
      *
      * @param date (local) appointment start date in question
-     * @return the allAppointments list, if there are no matching appointments with the specified (local) start date
-     * @return the filteredAppts list of appointments associated with the (local) start date
+     * @return <p>the allAppointments list, if there are no matching appointments with the specified (local) start date;
+     * Or the filteredAppts list of appointments associated with the (local) start date</p>
      */
     public ObservableList<Appointment> lookUpAppointment(LocalDate date);
 
     /**
+     * This is the "upcoming appointment alert" method.
+     * <p>This method populates an alert message after the user initially logs in with a either: a list of upcoming appointments,
+     * or a message stating the fact that there are no appointments scheduled to take place in the next 15 minutes. </p>
      *
-     * @param loginLDT
+     * <p>The method filters through all appointments stored in the database using the (local) date and time at login.
+     * If an appointment meets the credentials it is then added to the "upcoming appointments" list, which is displayed in the alert box.
+     * If the "upcoming appointments" list is empty, the other message populates (no upcoming appointments) instead.</p>
+     *
+     * @param loginLDT the operating systems local date and time at the users initial log in
      */
     public void upcomingApptAlert(LocalDateTime loginLDT);
 
     /**
+     * This is the "upcoming appointments for the next week" method.
+     * <p>LAMBDA EXPRESSION: This method searches the all appointments list for a filtered list of appointments that will be occurring over
+     * the next 7 days (including the date of the initial login). If an appointment in the database matched the credentials,
+     * the lambda expression added the appointment to the filtered list, "filteredAppts."</p>
      *
-     * @param loginLD
-     * @return
+     * <p>WHY I CHOSE TO USE A LAMBDA IN THIS SCENARIO: Using a lambda function required less code in this scenario compared to manually appending
+     * each appointment to a filtered appointments list. </p>
+     *
+     * @param loginLD the operating systems local date at the users initial log in
+     * @return filteredAppts list
      */
     public ObservableList<Appointment> upcomingApptsWeek(LocalDate loginLD);
 
     /**
+     * This is the "upcoming appointments for the rest of the month" method.
+     * <p>LAMBDA EXPRESSION: This method searches the all appointments list for a filtered list of appointments that will be occurring
+     * throughout the remaining of the current month (including the date of the initial login). If an appointment in the database matched the credentials,
+     * the lambda expression added the appointment to the filtered list, "filteredAppts."</p>
      *
-     * @param loginLD
-     * @return
+     * <p>WHY I CHOSE TO USE A LAMBDA IN THIS SCENARIO: Using a lambda function required less code in this scenario compared to manually appending
+     * each appointment to a filtered appointments list. </p>
+     *
+     * @param loginLD the operating systems local date at the users initial log in
+     * @return filteredAppts list
      */
     public ObservableList<Appointment> upcomingApptsMonth(LocalDate loginLD);
 
     /**
-     *
-     * @param apptStartTime
-     * @return
+     * This is the "check appointment start time" method.
+     * <p>This method checks a desired appointment start time to see if the selected time is within "business hours" (0800 - 2200 EST).
+     * The method takes the desired start time and converts it from local time to EST and checks to see if it is within business hours.
+     * The method also checks to see if the time occurs before "closing" time. If the time is within business hours, and meets the other credentials,
+     * the method returns true.</p>
+     * @param apptStartTime the desired appointment start time that is in question
+     * @return true, if the desired time meets the credentials
      */
     public boolean checkApptStartTime(LocalDateTime apptStartTime);
 
     /**
-     *
-     * @param apptEndTime
-     * @return
+     * This is the "check appointment end time" method.
+     * <p>This method checks a desired appointment end time to see if the selected time is within "business hours" (0800 - 2200 EST).
+     * The method takes the desired start time and converts it from local time to EST and checks to see if it is within business hours.
+     * The method also checks to see if the time occurs after "opening" time. If the time is within business hours, and meets the other credentials,
+     * the method returns true.</p>
+     * @param apptEndTime the desired appointment end time that is in question
+     * @return true, if the desired time meets the credentials
      */
     public boolean checkApptEndTime(LocalDateTime apptEndTime);
 
     /**
+     * This is the "check new customer appointment for appointment overlap" method.
+     * <p>This method calls the "getApptByCustomer" method and searches this list of customer appointments to see if there
+     * will be any appointment conflict. This method filters the customer appointments list and checks a number of requirements to see if there is any overlap.</p>
      *
-     * @param customerId
-     * @param selStartDate
-     * @param selEndDate
-     * @param selStartTime
-     * @param selEndTime
-     * @return
+     * The checks include:
+     * <p>-whether or not the appointments start or end on the same day</p>
+     * <p>-whether or not the appointments start at the same time</p>
+     * <p>-whether or not any of the current customers' appointments occur within the new appointments selected start and end times</p>
+     * <p>-whether or not the new appointment starts before the old appointments starts, and simultaneously, does the new
+     * appointment end after the old appointment starts.</p>
+     *
+     *<p>If any of these checks come back true, then an overlap DOES occur with the selected appointment date and times</p>
+     *
+     * @param customerId the appointment in questions' associated customer ID
+     * @param selStartDate the appointment in questions' desired start date
+     * @param selEndDate the appointment in questions' desired end date
+     * @param selStartTime the appointment in questions' desired start time
+     * @param selEndTime the appointment in questions' desired end time
+     * @return true, if there is any appointment overlap
+     * @return false, if there is no appointment overlap
      */
     public boolean checkNewApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,
                                           LocalTime selEndTime);
 
     /**
+     * This is the "check (modified) customer appointment for appointment overlap" method.
+     * <p>This method calls the "getApptByCustomer" method and searches this list of customer appointments to see if there is an
+     * appointment in the database with a matching appointment ID, appointment start and end date, as well as appointment start and end time.
+     * If there IS an appointment with these matching credentials, then there will be no appointment overlap, because the times/dates have not changed.
+     * </p>
+     * <p>However, if there is no match, then the "checkNewApptForOverlap" method is called and the updated appointment date and times will be checked for
+     * appointment overlap. If there is no overlap, the method returns false. If there is overlap, the method returns true.</p>
      *
-     * @param customerId
-     * @param selStartDate
-     * @param selEndDate
-     * @param selStartTime
-     * @param selEndTime
-     * @param apptId
-     * @return
+     * @param customerId the appointment in questions' associated customer ID
+     * @param selStartDate the appointment in questions' desired start date
+     * @param selEndDate the appointment in questions' desired end date
+     * @param selStartTime the appointment in questions' desired start time
+     * @param selEndTime the appointment in questions' desired end time
+     * @param apptId the appointment in questions' unique appointment ID
+     * @return true, if there is any appointment overlap
+     * @return false, if there is no appointment overlap
      */
     public boolean checkUpdatedApptForOverlap(int customerId, LocalDate selStartDate, LocalDate selEndDate, LocalTime selStartTime,
                                               LocalTime selEndTime, int apptId);
