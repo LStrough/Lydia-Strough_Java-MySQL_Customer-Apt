@@ -19,24 +19,171 @@ import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This is the "Add Appointment" controller.
+ *
+ *<p>This class allows the user to add an appointment to the database. The user gives the appointment a title, description, location, and type,
+ * and selects an associated customer ID, user ID, and contact ID. Finally, the user selects an appointment start and end date,
+ * as well as an appointment start and end time.</p>
+ *
+ * @author Lydia Strough
+ */
 public class AddAppointment implements Initializable {
-    private Stage stage;
-    private Parent scene;
+    Stage stage;
+    Parent scene;
 
-    public TextField titleTxt, descriptionTxt, locationTxt, typeTxt;
+    /**
+     * This is the appointment title text field.
+     */
+    public TextField titleTxt;
+    /**
+     * This is the appointment description text field.
+     */
+    public TextField descriptionTxt;
+    /**
+     * This is the appointment location text field.
+     */
+    public TextField locationTxt;
+    /**
+     * This is the appointment type text field.
+     */
+    public TextField typeTxt;
+    /**
+     * This is the contact combo box.
+     */
     public ComboBox<Contact> contactComboBx;
+    /**
+     * This is the customer combo box.
+     */
     public ComboBox<Customer> customerComboBx;
+    /**
+     * This is the user combo box.
+     */
     public ComboBox<User> userComboBx;
-    public DatePicker startDatePicker, endDatePicker;
-    public ComboBox<LocalTime> startTimeComboBx, endTimeComboBx;
-    public Label titleE, descriptionE, locationE, typeE, contactE, customerE, userE;
+    /**
+     * This is the appointment start date date picker.
+     */
+    public DatePicker startDatePicker;
+    /**
+     * This is the appointment end date date picker.
+     */
+    public DatePicker endDatePicker;
+    /**
+     * This is the appointment start time combo box.
+     */
+    public ComboBox<LocalTime> startTimeComboBx;
+    /**
+     * This is the appointment end time combo box.
+     */
+    public ComboBox<LocalTime> endTimeComboBx;
 
-    public int customerId, userId, contactId;
-    public String title, description, location, type;
-    public LocalDate startDate, endDate;
-    public LocalTime startTime, endTime;
-    public LocalDateTime startDateTime, endDateTime;
+    /**
+     * This is the appointment title error message label.
+     */
+    public Label titleE;
+    /**
+     * This is the appointment description error message label.
+     */
+    public Label descriptionE;
+    /**
+     * This is the appointment location error message label.
+     */
+    public Label locationE;
+    /**
+     * This is the appointment type error message label.
+     */
+    public Label typeE;
+    /**
+     * This is the appointment associated contact error message label.
+     */
+    public Label contactE;
+    /**
+     * This is the appointment associated customer error message label.
+     */
+    public Label customerE;
+    /**
+     * This is the appointment associated user error message label.
+     */
+    public Label userE;
 
+    /**
+     * associated customer ID
+     */
+    public int customerId;
+    /**
+     * associated user ID
+     */
+    public int userId;
+    /**
+     * associated contact ID
+     */
+    public int contactId;
+    /**
+     * appointment title
+     */
+    public String title;
+    /**
+     * appointment description
+     */
+    public String description;
+    /**
+     * appointment location
+     */
+    public String location;
+    /**
+     * appointment type
+     */
+    public String type;
+    /**
+     * appointment (local) start date
+     */
+    public LocalDate startDate;
+    /**
+     * appointment (local) end date
+     */
+    public LocalDate endDate;
+    /**
+     * appointment (local) start time
+     */
+    public LocalTime startTime;
+    /**
+     * appointment (local) end time
+     */
+    public LocalTime endTime;
+    /**
+     * appointment (local) start date and time
+     */
+    public LocalDateTime startDateTime;
+    /**
+     * appointment (local) end date and time
+     */
+    public LocalDateTime endDateTime;
+
+    /**
+     * This is the "Save Appointment" method.
+     *
+     * <p>User modifies text fields, combo boxes, and date pickers with desired values. The save method then checks to see if each
+     *text field is blank. If the text fields are blank, the "errorMessage" method is called to populate each correlated text fields'
+     * error message label with an error prompt.</p>
+     *
+     * <p>If none of the text fields are blank, the selected appointment start date and time is checked to see if it is within
+     * business hours. If it is, then the selected appointment end date and time is checked. If either of these tests fail, then the "errorMessage"
+     * method is called again, which populates an alert dialogue box, prompting the user to select a different time.</p>
+     *
+     * <p>If both start and end times are within business hours, then the program checks to see if the selected start time is before
+     * the selected end time. If it is not, then the "errorMessage" method is called again, populating another alert dialogue box with
+     * another error message.</p>
+     *
+     * <p>If the selected start time is before if selected end time, then the "checkNewApptForOverlap" method is called to check and see
+     * if there are any other appointments associated with the selected customer ID that would overlap with this appointment.
+     * If there is an overlap between appointments, then the "errorMessage" method is called again, and another alert dialogue box
+     * is populated with another error message.</p>
+     *
+     * <p>If the appointments credentials do not overlap with any other appointments associated with the selected customer ID, then
+     * the add appointment method is called, and the appointment is added to the database. The Main Appointments Menu re-populates.</p>
+     *
+     * @param actionEvent save button is pushed
+     */
     public void onActionSaveAppt(ActionEvent actionEvent) {
         System.out.println("Save Button clicked!");
 
@@ -101,6 +248,15 @@ public class AddAppointment implements Initializable {
         }
     }
 
+    /**
+     * This is the "Return to Main" method.
+     *
+     * <p>A confirmation dialog box populates: "All changes will be forgotten, do you wish to continue?".
+     *  If the user hits the OK button, the scene shifts to the Main Appointments Menu. If cancel is selected, the user
+     *  stays in the Add Appointment page.</p>
+     *
+     * @param actionEvent cancel button is pushed
+     * */
     public void onActionReturnToMain(ActionEvent actionEvent) throws IOException {
         System.out.println("Cancel Button clicked!");
 
@@ -120,9 +276,12 @@ public class AddAppointment implements Initializable {
     }
 
     /**
-     * Description (method does).
-     * <p>LAMBDA EXPRESSION: what it does. why i did a lambda for this.
-     * @param errorNum blah
+     * This is the "error message" method.
+     * <p>LAMBDA EXPRESSION: When this method is called, it either populates an error message in a label or an alert dialogue box.</p>
+     * <p>WHY I CHOSE TO USE A LAMBDA IN THIS SCENARIO: This was a simple and effective way to generate unique error messages. The lambda
+     * function also helped to cut down on the amount of code needed for the method as the case number associated with the "->"
+     * symbol directly returned the associated error message.</p>
+     * @param errorNum error message case number
      */
     public void errorMessage(int errorNum) {
         switch (errorNum) {
@@ -160,6 +319,17 @@ public class AddAppointment implements Initializable {
         }
     }
 
+    /**
+     * This is the "AddAppointment" controller initialize method.
+     *
+     * <p>This is the first method called when the screen populates.</p>
+     *
+     * <p>The contact combo box is populated with the "allContacts" list, and the first item in the combo box is selected.</p>
+     *
+     * <p>This method assigns values to variables that are used as parameters for the
+     * "dynamicBusinessHoursInit" method. </p>
+     *
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Add Appointment: I am initialized!");
