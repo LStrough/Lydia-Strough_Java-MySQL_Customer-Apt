@@ -24,17 +24,88 @@ import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This is the "Main Appointments" Menu controller.
+ *
+ * <p>This is the first page to populate after the user logs in to the program/database. This page displays a list of the databases'
+ * current list of appointments, and gives the user the ability to search appointments by date, as well as the ability to add, modify (update),
+ * and delete customer appointments from the database. The user can also filter upcoming appointments by week and month. This page also
+ * offers the user the ability to navigate the rest of the program. The user can also exit the program from this page.</p>
+ *
+ * @author Lydia Strough
+ */
 public class MainAppointments implements Initializable {
-    private Stage stage;
-    private Parent scene;
-
+    Stage stage;
+    Parent scene;
+    /**
+     * This is the "view by" toggle group
+     */
     public ToggleGroup viewByTgl;
+    /**
+     * This is the "search appointment by date" date picker
+     */
     public DatePicker datePicker;
+    /**
+     * This is the appointment table
+     */
     public TableView<Appointment> apptTableView;
-    public TableColumn apptIdCol, titleCol, descriptionCol, locationCol, contactCol, typeCol, startDateCol, endDateCol,
-            startTimeCol, endTimeCol, customerIdCol, userIdCol;
+    /**
+     * This is the appointment ID column
+     */
+    public TableColumn apptIdCol;
+    /**
+     * This is the appointment title column
+     */
+    public TableColumn titleCol;
+    /**
+     * This is the appointment description column
+     */
+    public TableColumn descriptionCol;
+    /**
+     * This is the appointment location column
+     */
+    public TableColumn locationCol;
+    /**
+     * This is the appointment associated contact column
+     */
+    public TableColumn contactCol;
+    /**
+     * This is the appointment type column
+     */
+    public TableColumn typeCol;
+    /**
+     * This is the appointment start date column
+     */
+    public TableColumn startDateCol;
+    /**
+     * This is the appointment end date column
+     */
+    public TableColumn endDateCol;
+    /**
+     * This is the appointment start time column
+     */
+    public TableColumn startTimeCol;
+    /**
+     * This is the appointment end time column
+     */
+    public TableColumn endTimeCol;
+    /**
+     * This is the appointment customer ID column
+     */
+    public TableColumn customerIdCol;
+    /**
+     * This is the appointments' associated user ID column
+     */
+    public TableColumn userIdCol;
+    /**
+     * This is the (systems default) time zone label
+     */
     public Label userTimeZoneLbl;
 
+    /**
+     *
+     * @param actionEvent the "view by week" radio button is clicked
+     */
     public void onActionViewByWeek(ActionEvent actionEvent) {
         System.out.println("View by Week Radio Button Clicked!");
 
@@ -43,6 +114,10 @@ public class MainAppointments implements Initializable {
         apptTableView.setItems(apptDao.upcomingApptsWeek(LocalDate.from(DAO.LoginToDB.getLoginLDT())));
     }
 
+    /**
+     *
+     * @param actionEvent the "view by month" radio button is clicked
+     */
     public void onActionViewByMonth(ActionEvent actionEvent) {
         System.out.println("View by Month Radio Button Clicked!");
 
@@ -51,6 +126,10 @@ public class MainAppointments implements Initializable {
         apptTableView.setItems(apptDao.upcomingApptsMonth(LocalDate.from(DAO.LoginToDB.getLoginLDT())));
     }
 
+    /**
+     *
+     * @param actionEvent the "view all" radio button is clicked
+     */
     public void onActionViewAll(ActionEvent actionEvent) {
         System.out.println("View All Radio Button Clicked!");
 
@@ -59,6 +138,10 @@ public class MainAppointments implements Initializable {
         apptTableView.setItems(appointmentDao.getAllAppointments());
     }
 
+    /**
+     *
+     * @param actionEvent a date is selected, using the "search appointments by date" date picker
+     */
     public void onActionSearchApptByDate(ActionEvent actionEvent) {
         JDBC.openConnection();
         AppointmentDao appointmentDao = new AppointmentDaoImpl();
@@ -78,6 +161,11 @@ public class MainAppointments implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param actionEvent the add appointment button is clicked
+     * @throws IOException
+     */
     public void onActionAddAppt(ActionEvent actionEvent) throws IOException {
         System.out.println("Add Appointment Button Clicked!");
 
@@ -87,6 +175,11 @@ public class MainAppointments implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param actionEvent the update appointment button is clicked
+     * @throws IOException
+     */
     public void onActionUpdateAppt(ActionEvent actionEvent) throws IOException {
         System.out.println("Update Appointment Button Clicked!");
 
@@ -112,6 +205,10 @@ public class MainAppointments implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param actionEvent the delete appointment button is clicked
+     */
     public void onActionDeleteAppt(ActionEvent actionEvent) {
         System.out.println("Delete Appointment Button Clicked!");
 
@@ -135,6 +232,11 @@ public class MainAppointments implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param actionEvent the customers button is clicked
+     * @throws IOException
+     */
     public void onActionCustomers(ActionEvent actionEvent) throws IOException {
         System.out.println("Customers Button Clicked!");
 
@@ -144,6 +246,11 @@ public class MainAppointments implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param actionEvent the reports button is clicked
+     * @throws IOException
+     */
     public void onActionReports(ActionEvent actionEvent) throws IOException {
         System.out.println("Reports Button Clicked!");
 
@@ -153,6 +260,10 @@ public class MainAppointments implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param actionEvent the logout button is clicked
+     */
     public void onActionLogout(ActionEvent actionEvent) {
         System.out.println("Logout Button Clicked!");
 
@@ -167,6 +278,29 @@ public class MainAppointments implements Initializable {
         }
     }
 
+    /**
+     * This is the initialize method.
+     *
+     * <p>This is the first method to run when the Main Appointments page is populated.</p>
+     *
+     * <p>The userTimeZoneLbl label text is set to "Your Time Zone: " + the string value of ZoneId.systemDefault().</p>
+     *
+     * <p>apptIdCol is assigned with the appointment ID value.</p>
+     * <p>titleCol is assigned with the title value.</p>
+     * <p>descriptionCol is assigned with the description value.</p>
+     * <p>locationCol is assigned with the description value.</p>
+     * <p>contactCol is assigned with the contact ID value.</p>
+     * <p>typeCol is assigned with the type value.</p>
+     * <p>startDateCol is assigned with the startDate value.</p>
+     * <p>endDateCol is assigned with the endDate value.</p>
+     * <p>startTimeCol is assigned with the startTime value.</p>
+     * <p>endTimeCol is assigned with the endTimeCol value.</p>
+     * <p>customerIdCol is assigned with the customerId value.</p>
+     * <p>userIdCol is assigned with the userId value.</p>
+     *
+     *  <p>The database connection is opened, and the apptTableView calls the "getAllAppointments" method from the AppointmentDao
+     *  class and assigns all appointments to its rows.</p>
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Appointment Schedule (Main Menu): I am initialized!");
