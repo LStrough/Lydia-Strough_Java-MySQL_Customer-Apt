@@ -70,7 +70,36 @@ public class Login implements Initializable {
     /**
      * This is the "Login" method.
      *
-     * <p></p>
+     * <p>The username variable is assigned to the string entered (or not) into the username text field. The password variable is
+     * assigned to the string entered (or not) into the password text field. The "loginQuery" method is then called, using both of these variables
+     * as its parameters. The "loginQuery" method validates the users username and password and then returns a user object
+     * if one is found.</p>
+     *
+     * <p>Simultaneously, the "now" variable is assigned with the operating systems current local date and time. A file is also
+     * created (if it does not exist), called "login_activity.txt". A new fileWriter and printWriter is created and appends a message to the
+     * "login_activity.txt" file when credentials are met. </p>
+     *
+     * <p>If the user credentials were validated by the "loginQuery" method, then the Main Appointments Menu populates on the screen.
+     * The database connection is opened, and the "getLoginLDT" method is called, gathering the current local date and time of the
+     * system upon the users' successful login. The variable, loginLDT, is assigned this value. Then the "upcomingApptAlert" method is called
+     * from the AppointmentDao class. The loginLDT variable is passed as a parameter, and the method checks to see if
+     * there are any upcoming appointments. If there are any appointments occurring within 15 minutes of the current local date
+     *  and time, an alert message will populate with a list of these appointments as the user enters the Main Appointments menu.
+     *  However, if there are no upcoming appointments, then a different alert message will populate saying that "There are no appointments
+     *  scheduled to begin within the next 15 minutes!"</p>
+     *
+     * <p>As the user attempts to login to the database/program, the "login_activity.txt" records the users login attempt results.
+     *  If the user successfully logs in to the program/database, the text: "userName + " Login was successful at " + now + " (" + ZoneId.systemDefault() + ")"
+     *  is recorded on a new line in the "login_activity.txt" file (replacing the userName, now, and systemDefault zone ID with the unique values
+     *  depending on the username string entered, as well as the zone ID and local date and time at login.</p>
+     *
+     *  <p>If the "loginQuery" method returns no user result, then an alert combo box will populate with the following message:
+     *  "Invalid Username and/or Password. Please try again!". The following text will also be recorded in the "login_activity.txt" file
+     *  upon the users failed login (replacing variables with the user/operating systems specific credentials):
+     *  userName + " Login was unsuccessful at " + now + " (" + ZoneId.systemDefault() + ")".</p>
+     *
+     *  <p>Also, if the operating systems' default language is set to french, all alert messages and labels will be displayed in french
+     *  (the "login_activity.txt" messages, however, will continue to write in english, regardless of the selected language.)</p>
      *
      * @param actionEvent the user pushes the login button
      */
