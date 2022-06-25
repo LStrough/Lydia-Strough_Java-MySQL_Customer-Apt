@@ -107,39 +107,39 @@ public class AddAppointment implements Initializable {
     public Label userE;
 
     /**
-     * associated customer ID
+     * desired associated customer ID
      */
     public int customerId;
     /**
-     * associated user ID
+     * desired associated user ID
      */
     public int userId;
     /**
-     * associated contact ID
+     * desired associated contact ID
      */
     public int contactId;
     /**
-     * appointment title
+     * desired appointment title
      */
     public String title;
     /**
-     * appointment description
+     * desired appointment description
      */
     public String description;
     /**
-     * appointment location
+     * desired appointment location
      */
     public String location;
     /**
-     * appointment type
+     * desired appointment type
      */
     public String type;
     /**
-     * appointment (local) start date
+     * desired appointment (local) start date
      */
     public LocalDate startDate;
     /**
-     * appointment (local) end date
+     * desired appointment (local) end date
      */
     public LocalDate endDate;
     /**
@@ -147,15 +147,15 @@ public class AddAppointment implements Initializable {
      */
     public LocalTime startTime;
     /**
-     * appointment (local) end time
+     * desired appointment (local) end time
      */
     public LocalTime endTime;
     /**
-     * appointment (local) start date and time
+     * desired appointment (local) start date and time
      */
     public LocalDateTime startDateTime;
     /**
-     * appointment (local) end date and time
+     * desired appointment (local) end date and time
      */
     public LocalDateTime endDateTime;
 
@@ -329,7 +329,7 @@ public class AddAppointment implements Initializable {
      * and the number of work hours displayed is assigned to the number 13.). </p>
      *
      * <p>The database connection is opened, and the "getAllContacts" method is called from the ContactDao class. The contact combo box is
-     * populated with the "allContacts" list, and the first item in the combo box is selected. The "getAllCustomers" method is then called
+     * populated with the "allContacts" list, and the first item in the contact combo box is selected. The "getAllCustomers" method is then called
      * from the CustomerDao class. The customer combo box is populated with the "allCustomers" list, and the first item in the customer combo box is
      * selected as well. The "getAllUsers" method is then called from the UserDao class, and the "allUsers" list is populated in
      * the user combo box. The first item in the user combo box is selected.</p>
