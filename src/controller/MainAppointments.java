@@ -203,6 +203,13 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "Update Appointment" method.
+     *
+     * <p>The scene is shifted from the Main Appointments Menu to the Update Appointment form.</p>
+     *
+     * <p>The user is expected to select an appointment from the apptTableView. If the user fails to do so,
+     * a runtime exception is created, and an alert dialogue box populates with the following error message:
+     * "Please select an appointment to update!".</p>
      *
      * @param actionEvent the update appointment button is clicked
      * @throws IOException
@@ -233,6 +240,21 @@ public class MainAppointments implements Initializable {
     }
 
     /**
+     * This is the "delete appointment" method.
+     *
+     * <p>*The user is expected to select an appointment from the apptTableView to delete. The database connection is opened,
+     * then the "getAppointmentId" method is called and assigns the value of the selected appointments appointment ID to
+     * the appointmentId variable. The "getCustomerId" method is then called and the value of the selected appointments associated
+     * customer ID is assigned to the customerId variable. The "getType" method is then called and the appointment type is
+     * assigned to the type variable. </p>
+     *
+     * <p>An alert dialogue box with a confirmation message then populates with the following confirmation message:
+     * "The selected "Appointment" will be deleted. Do you wish to continue?". If the user selects the OK button, the
+     * "deleteAppointment" method is called from the AppointmentDao class, with the appointmentId, customerId, and type
+     * variables used as the method parameters.</p>
+     *
+     * <p>If result of the "deleteAppointment" method is populated in another alert dialogue box, and the apptTableView
+     * is re-populated with an updated list of database appointments.</p>
      *
      * @param actionEvent the delete appointment button is clicked
      */
