@@ -31,6 +31,9 @@ public class ReportsCountry implements Initializable {
     private Stage stage;
     private Parent scene;
 
+    /**
+     * This is the country report table
+     */
     public TableView<Customer> reportTableView;
     /**
      * This is the customer ID column
@@ -165,7 +168,7 @@ public class ReportsCountry implements Initializable {
     /**
      * This is the initialize method.
      *
-     * <p>This is the first method to run when the Main Customers page is populated.</p>
+     * <p>This is the first method to run when the Country Report page is populated.</p>
      *
      * <p>customerIdCol is assigned with the customerId value.</p>
      * <p>customerNameCol is assigned with the customerName value.</p>
