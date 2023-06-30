@@ -1,6 +1,6 @@
-TITLE: Customer Appointment Management System Application (Software 2 - Advanced Java Concepts, C195 PA)
+TITLE: Customer Appointment Management System (Software 2 - Advanced Java Concepts, C195 PA)
 
-PURPOSE: Provide users with access to a pre-existing database, and gives them the ability to manipulate customers and their appointments in a user-friendly way.
+PURPOSE: Effective appointment management system where users access a pre-existing database with their login credentials. Provides users with the ability to manipulate customer information and their appointments and create reports in a user-friendly way. Application Programming Interface (API) developed in IntelliJ and written in Java and MySQL.
 
 APPLICATION VERSION & DATE: Application Version 1.0, 06/23/2022
 
